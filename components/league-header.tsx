@@ -1,32 +1,27 @@
-import Link from 'next/link'
-import { MapPinIcon } from 'lucide-react'
-import type { League, Season } from '@/lib/api'
+import { Suspense } from 'react'
+import type { Division, League, Season } from '@/lib/api'
 import { seasonDates } from '@/lib/format'
-import { CourtLines } from '@/components/court-lines'
+import { DivisionSelect } from '@/components/division-select'
+import { LeagueTabs } from '@/components/league-tabs'
 import { SeasonSwitcher } from '@/components/season-switcher'
 import { StatusPill } from '@/components/status-pill'
 
-export function LeagueHeader({ league, season, seasons }: { league: League; season?: Season; seasons: Season[] }) {
-  const dates = season && seasonDates(season.startDate, season.endDate)
+// One header row: league title, season, status and division on the left; section tabs on the right.
+export function LeagueHeader({ league, season, seasons, divisions = [], defaultDivision = null }: { league: League; season?: Season; seasons: Season[]; divisions?: Division[]; defaultDivision?: string | null }) {
+  const details = [league.location, `Run by ${league.organization}`, season && seasonDates(season.startDate, season.endDate)].filter(Boolean).join(' · ')
   return (
-    <section className="relative overflow-hidden border-b border-line bg-orange-wash/70">
-      <CourtLines className="opacity-30" />
-      <div className="relative mx-auto max-w-6xl px-4 pt-6 pb-7 sm:px-6 sm:pt-8 sm:pb-9">
-        <nav aria-label="Breadcrumb" className="text-sm">
-          <ol className="flex flex-wrap items-center gap-1.5 text-muted">
-            <li><Link href="/" className="font-medium text-orange-ink hover:underline">Leagues</Link></li>
-            <li aria-hidden="true">/</li>
-            <li aria-current="page" className="text-ink">{league.name}</li>
-          </ol>
-        </nav>
-        <h1 className="mt-3 text-[2rem] leading-[1.1] font-bold text-ink sm:text-5xl">{league.name}</h1>
-        <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-3">
+    <section className="mx-auto max-w-6xl px-4 pt-4 sm:px-6 sm:pt-6">
+      <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:justify-between">
+        <div className="min-w-0">
+        <div className="flex min-w-0 flex-wrap items-center gap-x-2.5 gap-y-3">
+          <h1 className="mr-1.5 text-[1.75rem] leading-tight font-extrabold tracking-[-0.03em] text-ink">{league.name}</h1>
           {season && <SeasonSwitcher league={league.slug} season={season.slug} seasons={seasons} />}
           {season && <StatusPill status={season.status} />}
-          {league.location && <span className="inline-flex items-center gap-1.5 text-[0.9375rem] text-ink"><MapPinIcon aria-hidden="true" className="size-4 text-orange-ink" />{league.location}</span>}
-          <span className="text-[0.9375rem] text-muted">Run by {league.organization}</span>
+          {season && <Suspense fallback={null}><DivisionSelect divisions={divisions} defaultDivision={defaultDivision} /></Suspense>}
         </div>
-        {dates && <p className="mt-3 text-sm text-muted">{dates}</p>}
+        {details && <p className="mt-2 text-sm text-muted">{details}</p>}
+        </div>
+        {season && <div className="min-w-0 shrink-0"><Suspense fallback={<div className="h-11" />}><LeagueTabs league={league.slug} season={season.slug} /></Suspense></div>}
       </div>
     </section>
   )

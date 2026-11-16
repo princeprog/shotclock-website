@@ -1,0 +1,53 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Calendar</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>*{box-sizing:border-box;margin:0;padding:0}
+body{width:1440px;height:900px;overflow:hidden;background:#fff;color:#1f2328;font:15px/1.45 'DM Sans',sans-serif;font-variant-numeric:tabular-nums}
+.top{display:flex;align-items:center;gap:20px;height:60px;padding:0 28px;border-bottom:1px solid #eceef1}
+.brand{display:flex;gap:10px;align-items:center;font-weight:700;font-size:18px}
+.search{margin-left:auto;width:320px;height:38px;border:1px solid #d8dce1;border-radius:10px;padding:9px 12px;color:#6b7280}
+.btn{height:38px;padding:9px 14px;border:1px solid #1f2328;border-radius:10px;font-weight:600}
+.shell{display:grid;grid-template-columns:300px 1fr 360px;height:840px}
+.l{border-right:1px solid #eceef1;padding:22px}
+.l h1{font-size:22px;font-weight:700;letter-spacing:-.02em}.l p{color:#6b7280;font-size:14px}
+.selx{margin-top:14px;border:1px solid #d8dce1;border-radius:10px;padding:8px 12px;font-weight:600;display:flex;justify-content:space-between}
+.mon{margin-top:20px;display:flex;justify-content:space-between;font-weight:700}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:10px;text-align:center;font-size:14px}
+.cal b{font-size:12px;color:#9ca3af;font-weight:600}
+.cal span{height:34px;line-height:34px;border-radius:8px;position:relative}
+.cal .has::after{content:"";position:absolute;left:50%;bottom:4px;width:5px;height:5px;margin-left:-2.5px;border-radius:50%;background:#e67145}
+.cal .today{outline:1px solid #1f2328}
+.cal .sel{background:#e67145;color:#1f2328;font-weight:700}.cal .sel::after{background:#1f2328}
+.lbl{margin-top:22px;font-size:12px;color:#6b7280;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.chk{display:flex;align-items:center;gap:10px;margin-top:10px;font-weight:600}.chk i{width:16px;height:16px;border-radius:4px;background:#1f2328}.chk i.o{background:#fff;border:1.5px solid #9ca3af}
+.m{padding:22px 28px;overflow:hidden}
+.mh{display:flex;align-items:center;gap:12px}
+.mh h2{font-size:24px;font-weight:700;letter-spacing:-.02em}
+.tabs{margin-left:auto;display:flex;border:1px solid #d8dce1;border-radius:10px;overflow:hidden}.tabs span{padding:7px 14px;font-weight:600;color:#4b5563}.tabs .on{background:#1f2328;color:#fff}
+.nav{display:flex;gap:22px;margin-top:14px;border-bottom:1px solid #eceef1}.nav a{padding:10px 0;font-weight:600;color:#6b7280}.nav a.on{color:#1f2328;box-shadow:inset 0 -2px 0 #e67145}
+.day{margin-top:18px}.day h3{font-size:14px;color:#6b7280;font-weight:700;margin-bottom:8px}
+.ev{display:grid;grid-template-columns:96px 1fr 190px;gap:16px;align-items:center;padding:14px 16px;border:1px solid #eceef1;border-radius:12px;margin-bottom:8px}
+.ev .tm{font-weight:700;font-size:17px}.ev .tm small{display:block;font-weight:500;color:#6b7280;font-size:13px}
+.ev p{font-weight:600}.ev p span{color:#9ca3af;font-weight:500;padding:0 6px}
+.ev .v{color:#6b7280;font-size:14px;text-align:right}
+.ev.fol{background:#fff6f0;border-color:#f4c2a5}
+.ev .sc{font-weight:700}
+.r{border-left:1px solid #eceef1;padding:22px}
+.r h3{font-size:16px;font-weight:700;margin-bottom:8px;display:flex;justify-content:space-between}.r h3 a{font-size:14px;color:#b4472a}
+table{width:100%;border-collapse:collapse}td,th{padding:9px 8px;text-align:right;border-top:1px solid #f1f2f4}th{font-size:12px;color:#6b7280;text-transform:uppercase;letter-spacing:.05em;border:0}td:nth-child(2),th:nth-child(2){text-align:left}td:first-child{color:#9ca3af;text-align:left}.b{font-weight:700}.fol td{background:#fff6f0}
+</style></head><body>
+<div class="top"><div class="brand"><svg width="30" height="30" viewBox="0 0 64 64"><rect width="64" height="64" rx="18" fill="#E67145"/><circle cx="32" cy="35" r="20" fill="none" stroke="#181310" stroke-width="3.5"/><path d="M12.5 35h39M32 15.5v39M18.5 21.5c7.5 5.5 10.5 17.5 0 27M45.5 21.5c-7.5 5.5-10.5 17.5 0 27" stroke="#181310" stroke-width="2.5" fill="none"/></svg>Shotclock</div><span style="font-weight:600;color:#4b5563">Leagues</span><div class="search">Search leagues or teams</div><div class="btn">For organizers</div></div>
+<div class="shell"><aside class="l"><h1>Metro Hoops League</h1><p>Quezon City · Active season</p><div class="selx">Summer 2026 <span>▾</span></div>
+<div class="mon"><span>November 2026</span><span style="color:#9ca3af">‹ ›</span></div>
+<div class="cal"><b>S</b><b>M</b><b>T</b><b>W</b><b>T</b><b>F</b><b>S</b><span class="">1</span><span class="">2</span><span class="">3</span><span class="">4</span><span class="has">5</span><span class="">6</span><span class="">7</span><span class="">8</span><span class="">9</span><span class="">10</span><span class="">11</span><span class="has">12</span><span class="">13</span><span class="">14</span><span class="">15</span><span class="today ">16</span><span class="">17</span><span class="">18</span><span class="sel has">19</span><span class="">20</span><span class="has">21</span><span class="">22</span><span class="">23</span><span class="">24</span><span class="">25</span><span class="has">26</span><span class="">27</span><span class="has">28</span><span class="">29</span><span class="">30</span></div>
+<div class="lbl">Show</div><div class="chk"><i></i>Open division</div><div class="chk"><i class="o"></i>18U division</div><div class="chk"><i></i>Only Riverside Hawks ★</div></aside>
+<main class="m"><div class="mh"><h2>Thursday, November 19</h2><div class="tabs"><span>Day</span><span class="on">Agenda</span><span>Month</span></div></div>
+<div class="nav"><a class="on">Schedule</a><a>Results</a><a>Standings</a><a>Stats</a><a>Teams</a></div>
+<div class="day"><h3>THU, NOV 19 · 3 GAMES</h3>
+<div class="ev"><div class="tm">5:16 PM<small>Final</small></div><p>Eastside Kings <b class="sc">123</b><span>–</span><b class="sc">119</b> Harbor Blaze</p><div class="v">Northgate Sports Center</div></div>
+<div class="ev"><div class="tm">6:46 PM<small>Round 5</small></div><p>Northgate Lions<span>vs</span>Westfield Rockets</p><div class="v">Bayview Gym</div></div>
+<div class="ev fol"><div class="tm">8:16 PM<small>Your team</small></div><p>Riverside Hawks ★<span>vs</span>Southside Bulls</p><div class="v">Northgate Sports Center</div></div></div>
+<div class="day"><h3>SAT, NOV 21 · 2 GAMES</h3>
+<div class="ev"><div class="tm">10:00 AM<small>Round 5</small></div><p>Eastside Kings<span>vs</span>Westfield Rockets</p><div class="v">Bayview Gym</div></div>
+<div class="ev"><div class="tm">11:30 AM<small>Round 5</small></div><p>Harbor Blaze<span>vs</span>Northgate Lions</p><div class="v">Northgate Sports Center</div></div></div></main>
+<aside class="r"><h3>Open standings <a>Full table</a></h3><table><tr><th>#</th><th>Team</th><th>W</th><th>L</th><th>Diff</th></tr>
+<tr><td>1</td><td>Southside Bulls</td><td class="b">4</td><td>0</td><td>+40</td></tr><tr><td>2</td><td>Eastside Kings</td><td class="b">4</td><td>1</td><td>+9</td></tr><tr><td>3</td><td>Westfield Rockets</td><td class="b">2</td><td>2</td><td>+27</td></tr><tr><td>4</td><td>Northgate Lions</td><td class="b">2</td><td>2</td><td>−1</td></tr><tr class="fol"><td>5</td><td class="b">Riverside Hawks ★</td><td class="b">1</td><td>3</td><td>−26</td></tr><tr><td>6</td><td>Harbor Blaze</td><td class="b">0</td><td>5</td><td>−49</td></tr></table></aside></div></body></html>

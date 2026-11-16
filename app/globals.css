@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme inline {
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter-tight), ui-sans-serif, system-ui, sans-serif;
   --color-ground: var(--ground);
   --color-surface: var(--surface);
   --color-wash: var(--wash);
@@ -22,25 +22,25 @@
 }
 
 :root {
-  /* Warm paper ground, white surfaces, near-black ink from the Shotclock mark. */
-  --ground: #faf8f5;
+  /* Bento: cool grey ground, white tiles, near-black ink, one Shotclock-orange tile per page. */
+  --ground: #eef0f3;
   --surface: #ffffff;
-  --wash: #f4efe9;
-  --ink: #181310;
-  --muted: #655c55;
-  --line: #e8e1d9;
-  --line-strong: #d4cac0;
-  /* Shotclock orange fills carry ink text; orange-ink is the darker orange used for text and links (AA on white and ground). */
+  --wash: #f5f6f8;
+  --ink: #111111;
+  --muted: #5b6068;
+  --line: #eceef1;
+  --line-strong: #d5d9df;
+  /* Orange fills carry ink text; orange-ink is the AA-safe orange for text and links. */
   --orange: #e67145;
   --orange-hover: #dc6538;
   --orange-ink: #b4472a;
   --orange-wash: #fdeee5;
-  --badge: #efe8e1;
+  --badge: #eef0f3;
   --win: #1d6a35;
-  --win-wash: #e3f2e6;
+  --win-wash: #dcfce7;
   --loss: #9c2c1f;
   --loss-wash: #fbe8e4;
-  --follow: #fff2e9;
+  --follow: #fff4ee;
   color-scheme: light;
 }
 
@@ -54,7 +54,6 @@
     background: var(--ground);
     color: var(--ink);
     font-family: var(--font-sans);
-    font-feature-settings: "cv11", "ss01";
     caret-color: var(--orange-ink);
   }
   ::selection {
@@ -62,7 +61,7 @@
     color: var(--ink);
   }
   h1, h2, h3 {
-    letter-spacing: -0.025em;
+    letter-spacing: -0.02em;
     text-wrap: balance;
   }
   a {
@@ -81,7 +80,12 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* Horizontal rails (tabs, division chips) scroll without a visible bar on touch screens. */
+/* The one container: a white, rounded, borderless tile on the grey ground. */
+@utility tile {
+  background: var(--surface);
+  border-radius: 18px;
+}
+
 @utility scroll-rail {
   overflow-x: auto;
   scrollbar-width: none;
@@ -90,7 +94,7 @@
   }
 }
 
-/* FollowStyles adds rules that tint elements whose data-team matches a followed team. */
+/* FollowStyles adds rules that tint elements whose data-team (or data-team-away) matches a followed team. */
 [data-team] {
   transition: background-color 240ms cubic-bezier(0.16, 1, 0.3, 1);
 }

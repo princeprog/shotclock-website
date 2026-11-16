@@ -1,0 +1,61 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Arena</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1440px;height:900px;overflow:hidden;background:#fff;color:#0a0a0a;font:15px/1.45 Barlow,sans-serif;font-variant-numeric:tabular-nums}
+.wrap{width:1200px;margin:0 auto}
+.top{background:#0a0a0a;color:#fff}
+.top .wrap{display:flex;align-items:center;gap:24px;height:56px}
+.brand{display:flex;gap:10px;align-items:center;font-weight:700;font-size:18px}
+.top nav span{color:#d4d4d4;font-weight:600}
+.search{margin-left:auto;width:300px;height:36px;border-radius:6px;background:#1f1f1f;color:#a3a3a3;padding:8px 12px}
+.btn{height:36px;padding:8px 14px;border:1px solid #525252;border-radius:6px;font-weight:600}
+.head .wrap{display:flex;align-items:end;gap:18px;padding:26px 0 18px}
+h1{font:700 42px/1 'Barlow Semi Condensed';letter-spacing:-.01em}
+.sel{border:1px solid #d4d4d4;border-radius:6px;padding:7px 12px;font-weight:600}
+.pill{background:#dcfce7;color:#166534;border-radius:99px;padding:3px 12px;font-weight:700;font-size:13px}
+.loc{color:#525252}
+.tabs{border-bottom:1px solid #e5e5e5}
+.tabs .wrap{display:flex;gap:28px}
+.tabs a{padding:12px 0;font-weight:600;color:#737373}.tabs a.on{color:#0a0a0a;box-shadow:inset 0 -3px 0 #e67145}
+.tabs .div{margin-left:auto;display:flex;gap:8px;align-items:center}
+.tabs .div span{border:1px solid #d4d4d4;border-radius:99px;padding:4px 14px;font-weight:600;font-size:14px}.tabs .div .on{background:#0a0a0a;color:#fff;border-color:#0a0a0a}
+.days{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-top:22px}
+.d{border:1px solid #e5e5e5;border-radius:8px;padding:10px 12px}
+.d b{display:block;font:700 26px/1 'Barlow Semi Condensed'}.d span{font-size:13px;color:#737373;font-weight:600;text-transform:uppercase}
+.d small{display:block;margin-top:6px;font-size:13px;color:#525252}
+.d.on{background:#0a0a0a;color:#fff;border-color:#0a0a0a}.d.on span,.d.on small{color:#d4d4d4}
+.d.none{color:#a3a3a3}
+.grid{display:grid;grid-template-columns:1fr 380px;gap:28px;margin-top:22px}
+h2{font:700 20px 'Barlow Semi Condensed';margin-bottom:10px}
+.g{display:grid;grid-template-columns:120px 1fr 92px;gap:18px;align-items:center;border:1px solid #e5e5e5;border-radius:10px;padding:14px 16px;margin-bottom:10px}
+.t{font:700 30px/1 'Barlow Semi Condensed'}.t small{display:block;font:600 13px Barlow;color:#737373;margin-top:4px}
+.m p{font-weight:600;font-size:17px;display:flex;align-items:center;gap:8px}.m p+p{margin-top:4px}
+.mono{display:inline-flex;width:28px;height:28px;border-radius:50%;background:#f0f0f0;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+.ct{background:#0a0a0a;color:#fff;border-radius:8px;text-align:center;padding:8px 4px}
+.ct small{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;color:#a3a3a3}.ct b{font:700 32px/1 'Barlow Semi Condensed'}
+.ct.alt{background:#e67145;color:#0a0a0a}.ct.alt small{color:#0a0a0a}
+.venue{font-size:13px;color:#525252;margin-top:4px}
+.fol{background:#fff4ee;border-color:#f6c7ae}
+table{width:100%;border-collapse:collapse}
+td,th{padding:9px 10px;text-align:right;border-bottom:1px solid #f0f0f0}
+th{font-size:12px;color:#737373;text-transform:uppercase;letter-spacing:.05em}
+td:nth-child(2),th:nth-child(2){text-align:left}td:first-child{color:#a3a3a3;text-align:left}
+.b{font-weight:700}tr.fol td{background:#fff4ee}
+</style></head><body>
+<div class="top"><div class="wrap"><div class="brand"><svg width="30" height="30" viewBox="0 0 64 64"><rect width="64" height="64" rx="18" fill="#E67145"/><circle cx="32" cy="35" r="20" fill="none" stroke="#181310" stroke-width="3.5"/><path d="M12.5 35h39M32 15.5v39M18.5 21.5c7.5 5.5 10.5 17.5 0 27M45.5 21.5c-7.5 5.5-10.5 17.5 0 27" stroke="#181310" stroke-width="2.5" fill="none"/></svg>Shotclock</div><nav><span>Leagues</span></nav><div class="search">Search leagues or teams</div><div class="btn">For organizers</div></div></div>
+<div class="head"><div class="wrap"><h1>Metro Hoops League</h1><span class="sel">Summer 2026 ▾</span><span class="pill">Active</span><span class="loc">Quezon City</span></div></div>
+<div class="tabs"><div class="wrap"><a>Overview</a><a class="on">Schedule</a><a>Standings</a><a>Stats</a><a>Teams</a><div class="div"><span class="on">Open</span><span>18U</span></div></div></div>
+<main class="wrap"><div class="days">
+<div class="d none"><span>Mon</span><b>16</b><small>No games</small></div><div class="d none"><span>Tue</span><b>17</b><small>No games</small></div><div class="d none"><span>Wed</span><b>18</b><small>No games</small></div>
+<div class="d on"><span>Thu</span><b>19</b><small>3 games</small></div><div class="d none"><span>Fri</span><b>20</b><small>No games</small></div><div class="d"><span>Sat</span><b>21</b><small>2 games</small></div><div class="d none"><span>Sun</span><b>22</b><small>No games</small></div></div>
+<div class="grid"><section><h2>Thursday, November 19</h2>
+<div class="g"><div class="t">5:16<small>PM · Final</small></div><div class="m"><p><span class="mono">EK</span>Eastside Kings <b style="margin-left:auto">123</b></p><p style="color:#737373"><span class="mono">HB</span>Harbor Blaze <span style="margin-left:auto">119</span></p><div class="venue">Northgate Sports Center</div></div><div class="ct"><small>ROUND</small><b>5</b></div></div>
+<div class="g"><div class="t">6:46<small>PM</small></div><div class="m"><p><span class="mono">NL</span>Northgate Lions</p><p><span class="mono">WR</span>Westfield Rockets</p><div class="venue">Bayview Gym, Court 2, 14 Bayview St</div></div><div class="ct"><small>ROUND</small><b>5</b></div></div>
+<div class="g fol"><div class="t">8:16<small>PM · Your team</small></div><div class="m"><p><span class="mono">RH</span>Riverside Hawks ★</p><p><span class="mono">SB</span>Southside Bulls</p><div class="venue">Northgate Sports Center</div></div><div class="ct alt"><small>ROUND</small><b>5</b></div></div></section>
+<section><h2>Open standings</h2><table><tr><th>#</th><th>Team</th><th>W</th><th>L</th><th>Diff</th></tr><tr><td>1</td><td>Southside Bulls</td><td class="b">4</td><td>0</td><td>+40</td></tr>
+<tr><td>2</td><td>Eastside Kings</td><td class="b">4</td><td>1</td><td>+9</td></tr>
+<tr><td>3</td><td>Westfield Rockets</td><td class="b">2</td><td>2</td><td>+27</td></tr>
+<tr><td>4</td><td>Northgate Lions</td><td class="b">2</td><td>2</td><td>−1</td></tr>
+<tr class="fol"><td>5</td><td class="b">Riverside Hawks ★</td><td class="b">1</td><td>3</td><td>−26</td></tr>
+<tr><td>6</td><td>Harbor Blaze</td><td class="b">0</td><td>5</td><td>−49</td></tr></table></section></div></main></body></html>

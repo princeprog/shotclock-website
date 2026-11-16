@@ -1,11 +1,10 @@
 export default function Loading() {
   return (
-    <div role="status" aria-label="Loading" className="animate-pulse space-y-6">
-      <div className="h-9 w-56 rounded-full bg-wash" />
-      <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_25rem]">
-        <div className="h-52 rounded-2xl bg-wash" />
-        <div className="h-72 rounded-xl bg-wash" />
-      </div>
+    <div role="status" aria-label="Loading" className="grid animate-pulse gap-3.5 lg:grid-cols-4">
+      <div className="h-48 rounded-[18px] bg-orange-wash lg:col-span-2" />
+      <div className="tile h-48 lg:col-span-2" />
+      <div className="tile h-44 lg:col-span-2" />
+      <div className="tile h-80 lg:col-span-2" />
     </div>
   )
 }

@@ -1,0 +1,104 @@
+{
+  "title": "Choose the public website's design",
+  "question": "Round 3, still clean and standard: three more ways to organise the page. Pick one, or steer another round.",
+  "options": [
+    {
+      "id": "grounded-bento",
+      "kind": "grounded",
+      "label": "Bento",
+      "lineage": "modern product sites built from bento-grid tiles",
+      "thesis": "The overview as a tidy grid of tiles: next game, latest result, coming up, standings and leaders at a glance.",
+      "palette": [
+        "#eef0f3",
+        "#ffffff",
+        "#111111",
+        "#e67145"
+      ],
+      "materials": [
+        "rounded tiles",
+        "one orange feature tile",
+        "Inter Tight"
+      ],
+      "viewport": "Light grey ground, header row with season, division and tabs, then a five-tile grid led by an orange next-game tile.",
+      "risk": "Tiles stack into a long list on phones; tile sizes must stay consistent across pages.",
+      "html": ".impeccable/mocks/decision/grounded-bento.html",
+      "comp": ".impeccable/mocks/decision/grounded-bento.png"
+    },
+    {
+      "id": "grounded-focus",
+      "kind": "grounded",
+      "label": "Focus",
+      "lineage": "calm single-column reading sites and mobile apps",
+      "thesis": "One centred column: league, next game, results and standings in reading order, identical on phone and desktop.",
+      "palette": [
+        "#ffffff",
+        "#141414",
+        "#e67145",
+        "#f4f4f4"
+      ],
+      "materials": [
+        "single 720px column",
+        "soft orange next-game panel",
+        "Onest"
+      ],
+      "viewport": "Breadcrumb, large league title, tabs, division switch, next-game panel, then recent results and a short standings list.",
+      "risk": "Leaves wide screens mostly empty; full tables live on their own tabs.",
+      "html": ".impeccable/mocks/decision/grounded-focus.html",
+      "comp": ".impeccable/mocks/decision/grounded-focus.png"
+    },
+    {
+      "id": "grounded-statshub",
+      "kind": "grounded",
+      "label": "Stats Hub",
+      "lineage": "reference sites such as Basketball-Reference, modernised",
+      "thesis": "Data first: a dense, sortable standings table with every column, quick facts and an on-this-page index.",
+      "palette": [
+        "#f7f7f5",
+        "#1a1a1a",
+        "#ffffff",
+        "#e67145"
+      ],
+      "materials": [
+        "dark slim top bar",
+        "zebra tables",
+        "IBM Plex Sans"
+      ],
+      "viewport": "Slim dark bar, league header with quick facts, sub-tabs, a left on-this-page index, the full standings table, then results and upcoming tables.",
+      "risk": "Dense for casual visitors on phones; best for fans who want every number.",
+      "html": ".impeccable/mocks/decision/grounded-statshub.html",
+      "comp": ".impeccable/mocks/decision/grounded-statshub.png"
+    }
+  ],
+  "reroll": {
+    "registers": [
+      "safer",
+      "bolder"
+    ]
+  },
+  "buildPath": {
+    "value": "comp",
+    "toggle": true
+  },
+  "canon": true,
+  "canonCard": {
+    "kind": "canon",
+    "label": "The category standard",
+    "thesis": "A pro-league site as NBA.com, EuroLeague or the PBA site would ship it, done with full care.",
+    "palette": [
+      "#f3f4f6",
+      "#0f172a",
+      "#ffffff",
+      "#e67145"
+    ],
+    "materials": [
+      "scores strip",
+      "navy top bar",
+      "soft white cards"
+    ],
+    "viewport": "Scores strip across the top, navy navigation, league header with tabs, next game and results beside standings.",
+    "risk": "Looks like every league site by design; least Shotclock-specific.",
+    "html": ".impeccable/mocks/decision/canon.html",
+    "comp": ".impeccable/mocks/decision/canon.png"
+  },
+  "steer": true
+}

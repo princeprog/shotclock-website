@@ -1,0 +1,69 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Federation</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{width:1440px;height:900px;overflow:hidden;background:#f5f6f8;color:#111827;font:15px/1.45 Archivo,sans-serif;font-variant-numeric:tabular-nums}
+.top{height:56px;background:#fff;border-bottom:1px solid #e5e7eb;display:flex;align-items:center;gap:20px;padding:0 24px}
+.brand{display:flex;gap:10px;align-items:center;font-weight:800;font-size:18px}
+.search{margin-left:auto;width:320px;height:36px;border:1px solid #d1d5db;border-radius:8px;padding:8px 12px;color:#6b7280}
+.btn{height:36px;padding:8px 14px;border:1px solid #111827;border-radius:8px;font-weight:600}
+.shell{display:grid;grid-template-columns:268px 1fr;height:844px}
+aside{background:#fff;border-right:1px solid #e5e7eb;padding:22px 18px}
+.ln{font-weight:800;font-size:19px;line-height:1.2}
+.sub{color:#6b7280;font-size:13px;margin-top:4px}
+.sel{margin-top:14px;border:1px solid #d1d5db;border-radius:8px;padding:8px 12px;font-weight:600;display:flex;justify-content:space-between}
+.nav{margin-top:18px;display:grid;gap:2px}
+.nav a{padding:9px 12px;border-radius:8px;color:#374151;font-weight:500}
+.nav a.on{background:#111827;color:#fff;font-weight:600}
+.lbl{margin-top:22px;font-size:12px;font-weight:700;color:#6b7280;letter-spacing:.06em;text-transform:uppercase}
+.div{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;margin-top:4px;font-weight:600}
+.div i{width:14px;height:14px;border-radius:3px}
+.div.on{background:#fff4ee}
+main{padding:26px 32px;overflow:hidden}
+.ph{display:flex;align-items:end;gap:14px;padding-bottom:16px;border-bottom:4px solid #e67145}
+h1{font-size:30px;font-weight:800;letter-spacing:-.02em}
+.tag{background:#e67145;color:#111827;font-weight:700;font-size:13px;border-radius:6px;padding:3px 10px}
+.pill{margin-left:auto;background:#dcfce7;color:#166534;font-weight:700;font-size:13px;border-radius:99px;padding:3px 12px}
+.grid{display:grid;grid-template-columns:1fr 400px;gap:24px;margin-top:22px}
+.card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden}
+.ch{display:flex;justify-content:space-between;padding:14px 18px;border-bottom:1px solid #eef0f3;font-weight:700}
+.ch a{color:#b4472a;font-weight:600;font-size:14px}
+.next{display:grid;grid-template-columns:150px 1fr}
+.blk{background:#e67145;color:#111827;padding:18px}
+.blk b{display:block;font-size:34px;font-weight:800;line-height:1}
+.blk span{font-weight:600}
+.mt{padding:16px 20px}
+.mt p{font-size:20px;font-weight:700}.mt p em{font-style:normal;color:#9ca3af;font-weight:500;padding:0 6px}
+.mt small{display:block;color:#4b5563;margin-top:6px;font-size:14px}
+.row{display:grid;grid-template-columns:110px 1fr 84px 130px;padding:12px 18px;border-top:1px solid #f0f2f5;align-items:center}
+.row .w{font-weight:700}.row .s{text-align:right;font-weight:700}.row .v{color:#6b7280;text-align:right;font-size:14px}
+.mono{display:inline-flex;width:26px;height:26px;border-radius:50%;background:#f1f2f4;align-items:center;justify-content:center;font-size:11px;font-weight:700;margin-right:8px}
+table{width:100%;border-collapse:collapse}
+td,th{padding:10px 18px;text-align:right}
+th{font-size:12px;color:#6b7280;font-weight:700;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid #eef0f3}
+td:nth-child(2),th:nth-child(2){text-align:left}td:first-child,th:first-child{text-align:left;color:#9ca3af;width:30px}
+tr+tr td{border-top:1px solid #f3f4f6}
+.b{font-weight:700}.fol td{background:#fff4ee}
+</style></head><body>
+<div class="top"><div class="brand"><svg width="30" height="30" viewBox="0 0 64 64"><rect width="64" height="64" rx="18" fill="#E67145"/><circle cx="32" cy="35" r="20" fill="none" stroke="#181310" stroke-width="3.5"/><path d="M12.5 35h39M32 15.5v39M18.5 21.5c7.5 5.5 10.5 17.5 0 27M45.5 21.5c-7.5 5.5-10.5 17.5 0 27" stroke="#181310" stroke-width="2.5" fill="none"/></svg>Shotclock</div><span style="font-weight:600;color:#374151">Leagues</span><div class="search">Search leagues or teams</div><div class="btn">For organizers</div></div>
+<div class="shell"><aside><div class="ln">Metro Hoops League</div><div class="sub">Quezon City · Metro Hoops Association</div>
+<div class="sel">Summer 2026 <span>▾</span></div>
+<nav class="nav"><a class="on">Overview</a><a>Schedule</a><a>Standings</a><a>Team stats</a><a>Teams</a></nav>
+<div class="lbl">Divisions</div><div class="div on"><i style="background:#e67145"></i>Open <span style="margin-left:auto;color:#6b7280;font-weight:500">6 teams</span></div>
+<div class="div"><i style="background:#2f6fde"></i>18U <span style="margin-left:auto;color:#6b7280;font-weight:500">4 teams</span></div></aside>
+<main><div class="ph"><h1>Open division</h1><span class="tag">Open</span><span class="pill">Active season</span></div>
+<div class="grid"><div style="display:grid;gap:22px;align-content:start">
+<section class="card"><div class="ch">Next game for Riverside Hawks ★<a>Full schedule →</a></div>
+<div class="next"><div class="blk"><span>Thu</span><b>Nov 19</b><span>8:16 PM</span></div><div class="mt"><p><span class="mono">RH</span>Riverside Hawks<em>vs</em><span class="mono">SB</span>Southside Bulls</p><small>Northgate Sports Center, Northgate Ave · Round 5</small></div></div></section>
+<section class="card"><div class="ch">Recent results<a>All results →</a></div>
+<div class="row"><span>Thu, Nov 19</span><span class="w">Eastside Kings <span style="color:#9ca3af;font-weight:400">vs</span> Harbor Blaze</span><span class="s">123–119</span><span class="v">Northgate S.C.</span></div>
+<div class="row"><span>Thu, Nov 12</span><span class="w">Southside Bulls <span style="color:#9ca3af;font-weight:400">vs</span> Westfield Rockets</span><span class="s">87–85</span><span class="v">Bayview Gym</span></div>
+<div class="row" style="background:#fff4ee"><span>Thu, Nov 12</span><span class="w">Riverside Hawks ★ <span style="color:#9ca3af;font-weight:400">vs</span> Harbor Blaze</span><span class="s">61–53</span><span class="v">Northgate S.C.</span></div>
+<div class="row"><span>Thu, Nov 12</span><span class="w">Eastside Kings <span style="color:#9ca3af;font-weight:400">vs</span> Northgate Lions</span><span class="s">74–69</span><span class="v">Bayview Gym</span></div></section></div>
+<section class="card"><div class="ch">Standings<a>Full table →</a></div><table><tr><th>#</th><th>Team</th><th>W</th><th>L</th><th>Diff</th></tr><tr><td>1</td><td>Southside Bulls</td><td class="b">4</td><td>0</td><td>+40</td></tr>
+<tr><td>2</td><td>Eastside Kings</td><td class="b">4</td><td>1</td><td>+9</td></tr>
+<tr><td>3</td><td>Westfield Rockets</td><td class="b">2</td><td>2</td><td>+27</td></tr>
+<tr><td>4</td><td>Northgate Lions</td><td class="b">2</td><td>2</td><td>−1</td></tr>
+<tr class="fol"><td>5</td><td class="b">Riverside Hawks ★</td><td class="b">1</td><td>3</td><td>−26</td></tr>
+<tr><td>6</td><td>Harbor Blaze</td><td class="b">0</td><td>5</td><td>−49</td></tr></table></section>
+</div></main></div></body></html>

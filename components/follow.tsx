@@ -33,14 +33,20 @@ function followedIds() {
   } catch { return '' }
 }
 
-// Tints and stars every element marked with a followed team's data-team, site-wide.
+// Tints every element marked with a followed team (data-team or data-team-away) and reveals its star marks, site-wide.
 export function FollowStyles() {
   const ids = useSyncExternalStore(subscribe, followedIds, () => '')
   if (!ids) return null
   const teams = ids.split(',')
-  const css = `${teams.map((id) => `[data-team="${id}"]`).join(',')}{background-color:var(--follow)}`
-    + `${teams.map((id) => `[data-team="${id}"] .follow-mark`).join(',')}{display:inline-flex}`
+  const css = `${teams.map((id) => `[data-team="${id}"],[data-team-away="${id}"]`).join(',')}{background-color:var(--follow)}`
+    + `${teams.map((id) => `.follow-mark[data-mark="${id}"]`).join(',')}{display:inline-flex}`
   return <style>{css}</style>
+}
+
+// Every followed team across leagues, for pages that list several leagues (the directory).
+export function useFollowedTeams() {
+  const ids = useSyncExternalStore(subscribe, followedIds, () => '')
+  return useMemo(() => (ids ? ids.split(',') : []), [ids])
 }
 
 export function FollowProvider({ league, children }: { league: string; children: ReactNode }) {

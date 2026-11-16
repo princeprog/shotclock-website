@@ -38,7 +38,8 @@ Every schedule, score and standing comes directly from the organizer's own Shotc
 ## Brand Commitments
 
 - Shotclock name and ball mark (orange #E67145 rounded square, near-black #181310 linework, cream #FFF5E9 hand).
-- Approved direction (user, 2026-11-16): a conventional, polished website in a light theme with one Shotclock-orange accent, Inter, faint court-line drawings instead of photos, and round two-letter team monogram badges.
+- Approved direction (user, 2026-11-16, replacing the first light theme with court-line headers): "Bento", a clean standard website on a cool grey ground with white rounded tiles, near-black ink, Inter Tight, one Shotclock-orange tile for the next game per page, and round two-letter team monogram badges. No photos.
+- Standing preference (user, 2026-11-16, repeated twice): a standard website design that is clean and professional. Creativity belongs in details, never in themed costumes (scoreboards, programmes, broadcast graphics or transit maps were declined).
 
 ## Evidence on Hand
 

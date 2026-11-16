@@ -17,8 +17,8 @@ export function ScrollTable({ children }: { children: ReactNode }) {
   }, [])
   return (
     <div className="relative">
-      <div ref={ref} className="overflow-x-auto rounded-xl border border-line bg-surface">{children}</div>
-      <div aria-hidden="true" className={`pointer-events-none absolute inset-y-px right-px w-10 rounded-r-xl bg-gradient-to-l from-surface to-transparent transition-opacity duration-200 ${more ? 'opacity-100' : 'opacity-0'}`} />
+      <div ref={ref} className="overflow-x-auto">{children}</div>
+      <div aria-hidden="true" className={`pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-surface to-transparent transition-opacity duration-200 ${more ? 'opacity-100' : 'opacity-0'}`} />
     </div>
   )
 }

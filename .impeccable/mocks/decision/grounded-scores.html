@@ -1,0 +1,47 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Scores App</title>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>*{box-sizing:border-box;margin:0;padding:0}
+body{width:1440px;height:900px;overflow:hidden;background:#fafafa;color:#0a0a0a;font:15px/1.45 Geist,sans-serif;font-variant-numeric:tabular-nums}
+.wrap{width:1120px;margin:0 auto}
+.top{background:#fff;border-bottom:1px solid #ececec}.top .wrap{display:flex;align-items:center;gap:20px;height:60px}
+.brand{display:flex;gap:10px;align-items:center;font-weight:700;font-size:18px}
+.search{margin-left:auto;width:300px;height:38px;border-radius:999px;background:#f2f2f2;padding:9px 16px;color:#737373}
+.btn{height:38px;padding:9px 16px;border-radius:999px;background:#0a0a0a;color:#fff;font-weight:600}
+.head .wrap{display:flex;align-items:center;gap:14px;padding:24px 0 6px}
+h1{font-size:28px;font-weight:700;letter-spacing:-.02em}
+.sel{border:1px solid #e5e5e5;border-radius:999px;padding:6px 14px;font-weight:600;background:#fff}
+.pill{background:#e7f6ec;color:#166534;border-radius:999px;padding:3px 12px;font-weight:600;font-size:13px}
+.seg{margin-left:auto;display:flex;background:#efefef;border-radius:999px;padding:4px}.seg span{padding:6px 16px;border-radius:999px;font-weight:600;color:#525252}.seg .on{background:#fff;color:#0a0a0a;box-shadow:0 1px 3px rgb(0 0 0/.1)}
+.tabs .wrap{display:flex;gap:6px;padding:12px 0 18px}.tabs span{padding:7px 14px;border-radius:999px;font-weight:600;color:#525252}.tabs .on{background:#0a0a0a;color:#fff}
+.grid{display:grid;grid-template-columns:1fr 360px;gap:22px}
+h2{font-size:15px;font-weight:700;color:#525252;margin:4px 0 10px}
+.games{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.g{background:#fff;border:1px solid #ececec;border-radius:16px;padding:14px 16px}
+.g small{display:flex;justify-content:space-between;color:#737373;font-weight:600;font-size:13px}
+.t{display:flex;align-items:center;gap:10px;margin-top:10px;font-size:16px}
+.t i{font-style:normal;width:30px;height:30px;border-radius:50%;background:#f2f2f2;display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+.t b{margin-left:auto;font-size:26px;font-weight:700;letter-spacing:-.02em}
+.t.lose{color:#a3a3a3}.t.lose b{font-weight:500}
+.g.fol{border-color:#f3b796;background:#fffaf6}
+.up{color:#0a0a0a!important}
+.card{background:#fff;border:1px solid #ececec;border-radius:16px;overflow:hidden}
+.ch{padding:14px 16px;font-weight:700;display:flex;justify-content:space-between}.ch a{color:#b4472a;font-weight:600;font-size:14px}
+table{width:100%;border-collapse:collapse}td,th{padding:10px 14px;text-align:right;border-top:1px solid #f1f1f1}th{font-size:12px;color:#737373;text-transform:uppercase;letter-spacing:.05em;border:0}td:nth-child(2),th:nth-child(2){text-align:left}td:first-child{color:#a3a3a3;text-align:left}.b{font-weight:700}.fol td{background:#fff4ee}</style></head><body>
+<div class="top"><div class="wrap"><div class="brand"><svg width="30" height="30" viewBox="0 0 64 64"><rect width="64" height="64" rx="18" fill="#E67145"/><circle cx="32" cy="35" r="20" fill="none" stroke="#181310" stroke-width="3.5"/><path d="M12.5 35h39M32 15.5v39M18.5 21.5c7.5 5.5 10.5 17.5 0 27M45.5 21.5c-7.5 5.5-10.5 17.5 0 27" stroke="#181310" stroke-width="2.5" fill="none"/></svg>Shotclock</div><span style="font-weight:600;color:#525252">Leagues</span><div class="search">Search leagues or teams</div><div class="btn">For organizers</div></div></div>
+<div class="head"><div class="wrap"><h1>Metro Hoops League</h1><span class="sel">Summer 2026 ▾</span><span class="pill">Active</span><div class="seg"><span class="on">Open</span><span>18U</span></div></div></div>
+<div class="tabs"><div class="wrap"><span class="on">Scores</span><span>Schedule</span><span>Standings</span><span>Stats</span><span>Teams</span></div></div>
+<main class="wrap"><div class="grid"><section>
+<h2>Thursday, Nov 19</h2><div class="games">
+<div class="g"><small><span>Final</span><span>Northgate S.C.</span></small><div class="t"><i>EK</i>Eastside Kings<b>123</b></div><div class="t lose"><i>HB</i>Harbor Blaze<b>119</b></div></div>
+<div class="g fol"><small><span class="up">8:16 PM · Your team</span><span>Northgate S.C.</span></small><div class="t"><i>RH</i>Riverside Hawks ★<b style="font-size:15px;color:#737373">1–3</b></div><div class="t"><i>SB</i>Southside Bulls<b style="font-size:15px;color:#737373">4–0</b></div></div>
+<div class="g"><small><span class="up">6:46 PM</span><span>Bayview Gym</span></small><div class="t"><i>NL</i>Northgate Lions<b style="font-size:15px;color:#737373">2–2</b></div><div class="t"><i>WR</i>Westfield Rockets<b style="font-size:15px;color:#737373">2–2</b></div></div></div>
+<h2 style="margin-top:20px">Thursday, Nov 12</h2><div class="games">
+<div class="g"><small><span>Final</span><span>Bayview Gym</span></small><div class="t"><i>SB</i>Southside Bulls<b>87</b></div><div class="t lose"><i>WR</i>Westfield Rockets<b>85</b></div></div>
+<div class="g fol"><small><span>Final</span><span>Northgate S.C.</span></small><div class="t"><i>RH</i>Riverside Hawks ★<b>61</b></div><div class="t lose"><i>HB</i>Harbor Blaze<b>53</b></div></div></div></section>
+<section class="card"><div class="ch">Standings<a>Full table</a></div><table><tr><th>#</th><th>Team</th><th>W</th><th>L</th><th>Diff</th></tr><tr><td>1</td><td>Southside Bulls</td><td class="b">4</td><td>0</td><td>+40</td></tr>
+<tr><td>2</td><td>Eastside Kings</td><td class="b">4</td><td>1</td><td>+9</td></tr>
+<tr><td>3</td><td>Westfield Rockets</td><td class="b">2</td><td>2</td><td>+27</td></tr>
+<tr><td>4</td><td>Northgate Lions</td><td class="b">2</td><td>2</td><td>−1</td></tr>
+<tr class="fol"><td>5</td><td class="b">Riverside Hawks ★</td><td class="b">1</td><td>3</td><td>−26</td></tr>
+<tr><td>6</td><td>Harbor Blaze</td><td class="b">0</td><td>5</td><td>−49</td></tr></table></section>
+</div></main></body></html>

@@ -1,13 +1,13 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter_Tight } from 'next/font/google'
 import { connection } from 'next/server'
 import './globals.css'
 import { SiteFooter } from '@/components/site-footer'
-import { FollowStyles } from '@/components/follow'
 import { SiteHeader } from '@/components/site-header'
+import { FollowStyles } from '@/components/follow'
 import { siteUrl } from '@/lib/site'
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
+const interTight = Inter_Tight({ subsets: ['latin'], variable: '--font-inter-tight' })
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -19,13 +19,13 @@ export const metadata: Metadata = {
   },
 }
 
-export const viewport: Viewport = { themeColor: '#faf8f5' }
+export const viewport: Viewport = { themeColor: '#eef0f3' }
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   // Render per request so every page carries the proxy's CSP nonce; API data is still cached.
   await connection()
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={interTight.variable}>
       <body className="flex min-h-dvh flex-col antialiased">
         <FollowStyles />
         <a href="#content" className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-lg focus:bg-surface focus:px-4 focus:py-2 focus:font-semibold">Skip to content</a>

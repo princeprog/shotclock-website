@@ -18,11 +18,11 @@ export default async function LeaguePage({ params }: Props) {
   const { league, seasons, defaultSeason } = await getLeague(slug)
   if (defaultSeason) redirect(seasonHref(league.slug, defaultSeason))
   return (
-    <main>
+    <>
       <LeagueHeader league={league} seasons={seasons} />
-      <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+      <main className="mx-auto max-w-6xl px-4 py-5 sm:px-6">
         <EmptyState title="Season coming soon">{league.name} hasn’t started a season yet. Schedules and standings will appear here once it does.</EmptyState>
-      </div>
-    </main>
+      </main>
+    </>
   )
 }
