@@ -1,0 +1,630 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-16T09:37:40Z",
+  "title": "Design System: Shotclock leagues",
+  "extensions": {
+    "colorMeta": {
+      "orange": {
+        "role": "primary",
+        "displayName": "Shotclock Orange",
+        "canonical": "#e67145",
+        "oklch": "oklch(67.8% 0.157 40.6)",
+        "purpose": "Fill only: active chip, primary and active Follow buttons, star fill, court lines. Always carries ink text.",
+        "tonalRamp": [
+          "#1c0300",
+          "#431100",
+          "#6f2200",
+          "#9f3600",
+          "#c75528",
+          "#ee784c",
+          "#fead90",
+          "#ffe9e1"
+        ]
+      },
+      "orange-hover": {
+        "role": "primary",
+        "displayName": "Orange Pressed",
+        "canonical": "#dc6538",
+        "oklch": "oklch(64.5% 0.161 40.3)",
+        "purpose": "Hover state of orange fills.",
+        "tonalRamp": [
+          "#1c0200",
+          "#431000",
+          "#6e2402",
+          "#9d3808",
+          "#c95425",
+          "#ef764a",
+          "#fdae92",
+          "#ffe9e2"
+        ]
+      },
+      "orange-ink": {
+        "role": "primary",
+        "displayName": "Orange Ink",
+        "canonical": "#b4472a",
+        "oklch": "oklch(54.0% 0.148 35.8)",
+        "purpose": "All orange text: links, active tab, next-game heading, playoff stage, icons, focus ring.",
+        "tonalRamp": [
+          "#1b0300",
+          "#440e02",
+          "#721e05",
+          "#a03416",
+          "#c55639",
+          "#eb795b",
+          "#fcae98",
+          "#fee9e3"
+        ]
+      },
+      "orange-wash": {
+        "role": "primary",
+        "displayName": "Orange Wash",
+        "canonical": "#fdeee5",
+        "oklch": "oklch(95.9% 0.020 53.3)",
+        "purpose": "Next-game card; header bands at 70% over the ground; text selection.",
+        "tonalRamp": [
+          "#0e0a09",
+          "#29231f",
+          "#473d38",
+          "#675b53",
+          "#877a72",
+          "#a99b93",
+          "#cec1b9",
+          "#f1eeeb"
+        ]
+      },
+      "ground": {
+        "role": "neutral",
+        "displayName": "Warm Paper",
+        "canonical": "#faf8f5",
+        "oklch": "oklch(98.0% 0.005 78.3)",
+        "purpose": "Page ground and browser theme color.",
+        "tonalRamp": [
+          "#0b0b0a",
+          "#252423",
+          "#413f3e",
+          "#5f5d5b",
+          "#7f7d7a",
+          "#a09e9b",
+          "#c5c4c1",
+          "#efeeed"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "White",
+        "canonical": "#ffffff",
+        "oklch": "oklch(100.0% 0.000 89.9)",
+        "purpose": "Every content surface: header, tabs bar, panels, tables, cards, inputs, footer.",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#242424",
+          "#404040",
+          "#5d5d5d",
+          "#7d7d7d",
+          "#9e9e9e",
+          "#c4c4c4",
+          "#eeeeee"
+        ]
+      },
+      "wash": {
+        "role": "neutral",
+        "displayName": "Linen",
+        "canonical": "#f4efe9",
+        "oklch": "oklch(95.4% 0.010 72.7)",
+        "purpose": "Table heads, Final and Completed pills, icon-button hover, loading skeletons.",
+        "tonalRamp": [
+          "#0c0b0a",
+          "#262421",
+          "#423f3b",
+          "#615d58",
+          "#817c77",
+          "#a29e98",
+          "#c8c3be",
+          "#efeeed"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#181310",
+        "oklch": "oklch(19.2% 0.010 52.8)",
+        "purpose": "Headings, body, scores, text on orange fills.",
+        "tonalRamp": [
+          "#0c0b0a",
+          "#262321",
+          "#433f3c",
+          "#625c58",
+          "#827c78",
+          "#a49d99",
+          "#c9c3bf",
+          "#f0eeed"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted Walnut",
+        "canonical": "#655c55",
+        "oklch": "oklch(48.1% 0.016 60.3)",
+        "purpose": "Secondary text, losing sides, metadata, placeholders, column heads, inactive tabs.",
+        "tonalRamp": [
+          "#0d0b09",
+          "#272320",
+          "#453e39",
+          "#655c55",
+          "#857b74",
+          "#a69c95",
+          "#cbc2bb",
+          "#f0eeec"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "#e8e1d9",
+        "oklch": "oklch(91.3% 0.013 71.3)",
+        "purpose": "Panel borders and row dividers.",
+        "tonalRamp": [
+          "#0c0b09",
+          "#262320",
+          "#433f3a",
+          "#625d56",
+          "#827c75",
+          "#a49d96",
+          "#c9c3bc",
+          "#f0eeec"
+        ]
+      },
+      "line-strong": {
+        "role": "neutral",
+        "displayName": "Seam",
+        "canonical": "#d4cac0",
+        "oklch": "oklch(84.4% 0.018 67.6)",
+        "purpose": "Control borders, dashed empty-state borders, scrollbar thumb.",
+        "tonalRamp": [
+          "#0d0b09",
+          "#27231f",
+          "#453e38",
+          "#655c53",
+          "#857b72",
+          "#a69d93",
+          "#cbc2b9",
+          "#f0eeeb"
+        ]
+      },
+      "badge": {
+        "role": "neutral",
+        "displayName": "Badge Clay",
+        "canonical": "#efe8e1",
+        "oklch": "oklch(93.5% 0.012 67.7)",
+        "purpose": "Team monogram badge fill.",
+        "tonalRamp": [
+          "#0c0b09",
+          "#262320",
+          "#433f3a",
+          "#625c56",
+          "#827c76",
+          "#a49d97",
+          "#c9c3bd",
+          "#f0eeec"
+        ]
+      },
+      "win": {
+        "role": "semantic",
+        "displayName": "Win Green",
+        "canonical": "#1d6a35",
+        "oklch": "oklch(46.4% 0.112 149.7)",
+        "purpose": "W squares, winning streaks, Active pill text. Outcomes only.",
+        "tonalRamp": [
+          "#010f04",
+          "#062c12",
+          "#0f4d23",
+          "#236f39",
+          "#469058",
+          "#68b278",
+          "#94d7a1",
+          "#e2f4e5"
+        ]
+      },
+      "win-wash": {
+        "role": "semantic",
+        "displayName": "Win Wash",
+        "canonical": "#e3f2e6",
+        "oklch": "oklch(94.7% 0.022 151.6)",
+        "purpose": "Background behind Win Green.",
+        "tonalRamp": [
+          "#090c0a",
+          "#202621",
+          "#39433b",
+          "#556157",
+          "#748177",
+          "#95a398",
+          "#bbc8be",
+          "#ecf0ed"
+        ]
+      },
+      "loss": {
+        "role": "semantic",
+        "displayName": "Loss Red",
+        "canonical": "#9c2c1f",
+        "oklch": "oklch(46.5% 0.150 30.2)",
+        "purpose": "L squares, losing streaks, Forfeit note. Outcomes only.",
+        "tonalRamp": [
+          "#1c0201",
+          "#450d07",
+          "#731b12",
+          "#a13124",
+          "#c75444",
+          "#ed7664",
+          "#feac9e",
+          "#ffe9e5"
+        ]
+      },
+      "loss-wash": {
+        "role": "semantic",
+        "displayName": "Loss Wash",
+        "canonical": "#fbe8e4",
+        "oklch": "oklch(94.5% 0.022 31.8)",
+        "purpose": "Background behind Loss Red.",
+        "tonalRamp": [
+          "#0e0a09",
+          "#2a2220",
+          "#493c3a",
+          "#695956",
+          "#8a7975",
+          "#ab9a96",
+          "#d0c0bc",
+          "#f2edec"
+        ]
+      },
+      "follow": {
+        "role": "semantic",
+        "displayName": "Follow Tint",
+        "canonical": "#fff2e9",
+        "oklch": "oklch(96.9% 0.018 57.2)",
+        "purpose": "Followed team's rows, game lines and cards only, applied by FollowStyles.",
+        "tonalRamp": [
+          "#0d0b09",
+          "#28231f",
+          "#463e38",
+          "#665b54",
+          "#867b73",
+          "#a89c94",
+          "#cdc2ba",
+          "#f1eeeb"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Directory hero heading only. 2.5rem on phones, 3.75rem from 640px."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "League name in the league header band. 2rem on phones, 3rem from 640px."
+      },
+      "title-large": {
+        "displayName": "Title Large",
+        "purpose": "Team name on a team page. 1.5rem on phones, 2rem from 640px."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Section headings and page subheadings. 1.25rem on phones, 1.375rem from 640px."
+      },
+      "team-name": {
+        "displayName": "Team Name",
+        "purpose": "The two teams in the next-game card. 1.125rem on phones, 1.25rem from 640px."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Paragraphs, empty-state messages, game scores. Notes cap at 70ch."
+      },
+      "body-ui": {
+        "displayName": "Body UI",
+        "purpose": "Table cells, header metadata, tabs from 640px, card titles, next-game details."
+      },
+      "small": {
+        "displayName": "Small",
+        "purpose": "Game times, venues, breadcrumbs, buttons, chips, secondary metadata."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Uppercase table column heads only."
+      },
+      "wordmark": {
+        "displayName": "Wordmark",
+        "purpose": "\"Shotclock\" beside the mark in the site header."
+      }
+    },
+    "shadows": [
+      {
+        "name": "search-lift",
+        "value": "0 2px 10px rgb(24 19 16 / 0.06)",
+        "purpose": "Directory hero search input only."
+      }
+    ],
+    "surfaces": [
+      {
+        "name": "header-glass",
+        "value": "background: rgb(255 255 255 / 0.95); backdrop-filter: blur(4px); border-bottom: 1px solid #e8e1d9",
+        "purpose": "Sticky site header."
+      },
+      {
+        "name": "header-band",
+        "value": "background: rgb(253 238 229 / 0.7) over #faf8f5; border-bottom: 1px solid #e8e1d9",
+        "purpose": "League and directory header bands behind court lines."
+      },
+      {
+        "name": "focus-ring",
+        "value": "outline: 2px solid #b4472a; outline-offset: 2px",
+        "purpose": "Every focusable element except text fields and selects, which shift their border to #b4472a."
+      },
+      {
+        "name": "court-lines",
+        "value": "stroke #e67145, 2px, opacity 0.3, mask-image: linear-gradient(to right, transparent 5%, black 60%); hidden below 640px",
+        "purpose": "Header-band illustration. The directory variant masks with radial-gradient(ellipse at center, transparent 30%, black 80%)."
+      },
+      {
+        "name": "table-edge-fade",
+        "value": "40px linear-gradient(to left, #ffffff, transparent) at the right edge, opacity 0 to 1 over 200ms",
+        "purpose": "ScrollTable: visible only while more columns are hidden."
+      }
+    ],
+    "motion": [
+      {
+        "name": "follow-tint",
+        "value": "background-color 240ms cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Tint arriving on followed-team elements."
+      },
+      {
+        "name": "press",
+        "value": "transform scale(0.95), 200ms ease-out",
+        "purpose": "Follow button active state."
+      },
+      {
+        "name": "star-pop",
+        "value": "transform scale(1.1), 300ms ease-out",
+        "purpose": "Follow button star when following."
+      },
+      {
+        "name": "color-hover",
+        "value": "150ms cubic-bezier(0.4, 0, 0.2, 1)",
+        "purpose": "Color, border and background hover changes on tabs, chips, buttons."
+      },
+      {
+        "name": "edge-fade",
+        "value": "opacity 200ms",
+        "purpose": "ScrollTable right-edge fade."
+      },
+      {
+        "name": "arrow-nudge",
+        "value": "translateX(2px) on card hover",
+        "purpose": "League card \"View league\" arrow."
+      },
+      {
+        "name": "skeleton-pulse",
+        "value": "Tailwind animate-pulse",
+        "purpose": "Loading placeholders in linen."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      }
+    ],
+    "layout": {
+      "container": "72rem",
+      "gutter": "16px phones, 24px from 640px",
+      "siteHeader": "64px sticky",
+      "seasonTabs": "48px sticky at top 64px",
+      "overviewRail": "25rem standings rail from 1024px, 32px gap",
+      "gameRowGrid": "7.5rem time | teams | up to 13rem venue and status, from 640px"
+    },
+    "direction": {
+      "mode": "Operate",
+      "buildPath": "code-led",
+      "authority": "user-pinned",
+      "pinnedOn": "2026-11-16",
+      "form": "conventional, polished sports website",
+      "seed": "seed:7c5efc9606dd78ab",
+      "seedNote": "Rolled and recorded after the user pinned the direction; it did not choose the design.",
+      "signature": "follow-your-team",
+      "bans": [
+        "photos",
+        "league or team logos",
+        "gradients as decoration",
+        "eyebrows or kickers",
+        "live-game states",
+        "player data"
+      ]
+    }
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Shotclock orange fill with ink text for the one main action on a screen (Search, Find your league).",
+      "html": "<button class=\"ds-btn-primary\" type=\"button\">Find your league</button>",
+      "css": ".ds-btn-primary { font-family: Inter, ui-sans-serif, system-ui, sans-serif; font-feature-settings: \"cv11\", \"ss01\"; display: inline-flex; align-items: center; height: 44px; padding: 0 20px; border: 0; border-radius: 8px; background: var(--orange, #e67145); color: var(--ink, #181310); font-size: 1rem; font-weight: 600; cursor: pointer; transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1); } .ds-btn-primary:hover { background: #dc6538; } .ds-btn-primary:focus-visible { outline: 2px solid var(--orange-ink, #b4472a); outline-offset: 2px; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "White outlined button for secondary actions (For organizers, Previous, Next).",
+      "html": "<a class=\"ds-btn-secondary\" href=\"#\">For organizers</a>",
+      "css": ".ds-btn-secondary { font-family: Inter, ui-sans-serif, system-ui, sans-serif; font-feature-settings: \"cv11\", \"ss01\"; display: inline-flex; align-items: center; height: 40px; padding: 0 14px; border: 1px solid var(--line-strong, #d4cac0); border-radius: 8px; background: var(--surface, #ffffff); color: var(--ink, #181310); font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: border-color 150ms cubic-bezier(0.4, 0, 0.2, 1); } .ds-btn-secondary:hover { border-color: var(--ink, #181310); } .ds-btn-secondary:focus-visible { outline: 2px solid var(--orange-ink, #b4472a); outline-offset: 2px; }"
+    },
+    {
+      "name": "Follow Button",
+      "kind": "button",
+      "refersTo": "follow-button-active",
+      "description": "Toggles the followed team for this league; outlined at rest, orange with an ink star when following.",
+      "html": "<div class=\"ds-follow-pair\"><button class=\"ds-follow\" type=\"button\" aria-pressed=\"false\"><svg viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z\"/></svg>Follow team</button><button class=\"ds-follow\" type=\"button\" aria-pressed=\"true\"><svg viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" fill=\"var(--ink, #181310)\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z\"/></svg>Following</button></div>",
+      "css": ".ds-follow-pair { display: flex; gap: 8px; } .ds-follow { font-family: Inter, ui-sans-serif, system-ui, sans-serif; font-feature-settings: \"cv11\", \"ss01\"; display: inline-flex; align-items: center; gap: 6px; height: 40px; padding: 0 14px; border: 1px solid var(--line-strong, #d4cac0); border-radius: 8px; background: var(--surface, #ffffff); color: var(--ink, #181310); font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: background-color 200ms ease-out, color 200ms ease-out, transform 200ms ease-out; } .ds-follow:hover { border-color: var(--ink, #181310); } .ds-follow:active { transform: scale(0.95); } .ds-follow svg { transition: transform 300ms ease-out; } .ds-follow[aria-pressed=\"true\"] { background: var(--orange, #e67145); border-color: transparent; } .ds-follow[aria-pressed=\"true\"]:hover { background: #dc6538; } .ds-follow[aria-pressed=\"true\"] svg { transform: scale(1.1); } .ds-follow:focus-visible { outline: 2px solid var(--orange-ink, #b4472a); outline-offset: 2px; }"
+    },
+    {
+      "name": "Search Field",
+      "kind": "input",
+      "refersTo": "input-search",
+      "description": "Header search: white field with a muted leading icon; focus shifts the border to orange-ink.",
+      "html": "<label class=\"ds-search\"><span class=\"ds-search-icon\"><svg viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"11\" cy=\"11\" r=\"8\"/><path d=\"m21 21-4.34-4.34\"/></svg></span><input type=\"search\" placeholder=\"Search leagues or teams\" aria-label=\"Search leagues or teams\"></label>",
+      "css": ".ds-search { position: relative; display: block; max-width: 20rem; } .ds-search-icon { position: absolute; top: 50%; left: 12px; transform: translateY(-50%); display: flex; color: var(--muted, #655c55); pointer-events: none; } .ds-search input { font-family: Inter, ui-sans-serif, system-ui, sans-serif; font-feature-settings: \"cv11\", \"ss01\"; width: 100%; height: 40px; padding: 0 12px 0 36px; border: 1px solid var(--line-strong, #d4cac0); border-radius: 8px; background: var(--surface, #ffffff); color: var(--ink, #181310); font-size: 0.875rem; } .ds-search input::placeholder { color: var(--muted, #655c55); } .ds-search input:focus { outline: none; border-color: var(--orange-ink, #b4472a); }"
+    },
+    {
+      "name": "Season Tabs",
+      "kind": "nav",
+      "refersTo": "season-tab-active",
+      "description": "Sticky 48px tab bar for a season; the active tab is orange-ink with a rounded 2px underline.",
+      "html": "<nav class=\"ds-tabs\" aria-label=\"Season\"><a href=\"#\" aria-current=\"page\">Overview</a><a href=\"#\">Schedule</a><a href=\"#\">Standings</a><a href=\"#\">Stats</a><a href=\"#\">Teams</a></nav>",
+      "css": ".ds-tabs { font-family: Inter, ui-sans-serif, system-ui, sans-serif; font-feature-settings: \"cv11\", \"ss01\"; display: flex; gap: 8px; background: var(--surface, #ffffff); border-bottom: 1px solid var(--line, #e8e1d9); padding: 0 12px; } .ds-tabs a { position: relative; display: inline-flex; align-items: center; height: 48px; padding: 0 12px; color: var(--muted, #655c55); font-size: 0.9375rem; font-weight: 600; text-decoration: none; transition: color 150ms cubic-bezier(0.4, 0, 0.2, 1); } .ds-tabs a:hover { color: var(--ink, #181310); } .ds-tabs a[aria-current=\"page\"] { color: var(--orange-ink, #b4472a); } .ds-tabs a[aria-current=\"page\"]::after { content: \"\"; position: absolute; left: 12px; right: 12px; bottom: 0; height: 2px; border-radius: 9999px; background: var(--orange-ink, #b4472a); } .ds-tabs a:focus-visible { outline: 2px solid var(--orange-ink, #b4472a); outline-offset: 2px; }"
+    },
+    {
+      "name": "Division Chips",
+      "kind": "chip",
+      "refersTo": "division-chip-active",
+      "description": "Round chips that switch divisions; the active chip is filled Shotclock orange with ink text.",
+      "html": "<nav class=\"ds-chips\" aria-label=\"Divisions\"><a href=\"#\" aria-current=\"page\">Open</a><a href=\"#\">18U</a><a href=\"#\">Women</a></nav>",
+      "css": ".ds-chips { font-family: Inter, ui-sans-serif, system-ui, sans-serif; font-feature-settings: \"cv11\", \"ss01\"; display: flex; gap: 8px; } .ds-chips a { display: inline-flex; align-items: center; height: 36px; padding: 0 16px; border: 1px solid var(--line-strong, #d4cac0); border-radius: 9999px; background: var(--surface, #ffffff); color: var(--ink, #181310); font-size: 0.875rem; font-weight: 600; text-decoration: none; white-space: nowrap; transition: border-color 150ms cubic-bezier(0.4, 0, 0.2, 1), background-color 150ms cubic-bezier(0.4, 0, 0.2, 1); } .ds-chips a:hover { border-color: var(--ink, #181310); } .ds-chips a[aria-current=\"page\"] { background: var(--orange, #e67145); border-color: var(--orange, #e67145); } .ds-chips a:focus-visible { outline: 2px solid var(--orange-ink, #b4472a); outline-offset: 2px; }"
+    },
+    {
+      "name": "Next-Game Card",
+      "kind": "card",
+      "refersTo": "next-game-card",
+      "description": "The first thing on a season overview: both teams, date, tip-off and venue on orange wash.",
+      "html": "<section class=\"ds-next\"><h2>Next game for Riverside Hawks</h2><div class=\"ds-next-teams\"><span class=\"ds-next-team\"><span class=\"ds-badge\">RH</span>Riverside Hawks <svg viewBox=\"0 0 24 24\" width=\"14\" height=\"14\" fill=\"var(--orange, #e67145)\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z\"/></svg></span><span class=\"ds-next-vs\">vs</span><span class=\"ds-next-team\"><span class=\"ds-badge\">SB</span>Southside Bulls</span></div><dl class=\"ds-next-meta\"><div><dt class=\"ds-sr\">Date</dt><dd>Thu, Nov 19</dd></div><div><dt class=\"ds-sr\">Tip-off</dt><dd>8:16 PM</dd></div><div><dt class=\"ds-sr\">Venue</dt><dd><svg viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0\"/><circle cx=\"12\" cy=\"10\" r=\"3\"/></svg>Northgate Sports Center<span class=\"ds-muted\">, Northgate Ave</span></dd></div></dl></section>",
+      "css": ".ds-next { font-family: Inter, ui-sans-serif, system-ui, sans-serif; font-feature-settings: \"cv11\", \"ss01\"; max-width: 40rem; padding: 24px; border: 1px solid rgb(230 113 69 / 0.5); border-radius: 16px; background: var(--orange-wash, #fdeee5); color: var(--ink, #181310); } .ds-next h2 { margin: 0; font-size: 1.25rem; font-weight: 700; letter-spacing: -0.025em; color: var(--orange-ink, #b4472a); } .ds-next-teams { display: grid; grid-template-columns: minmax(0,1fr) auto minmax(0,1fr); align-items: center; gap: 16px; margin-top: 16px; } .ds-next-team { display: flex; align-items: center; gap: 12px; font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; } .ds-next-team svg { color: var(--orange-ink, #b4472a); } .ds-next-vs { font-size: 0.875rem; font-weight: 500; color: var(--muted, #655c55); } .ds-badge { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 9999px; background: var(--badge, #efe8e1); color: var(--ink, #181310); font-size: 0.75rem; font-weight: 600; letter-spacing: -0.02em; flex-shrink: 0; } .ds-next-meta { display: flex; flex-wrap: wrap; gap: 8px 24px; margin: 20px 0 0; padding-top: 16px; border-top: 1px solid rgb(230 113 69 / 0.3); font-size: 0.9375rem; font-variant-numeric: tabular-nums; } .ds-next-meta dd { margin: 0; display: flex; align-items: center; gap: 8px; } .ds-next-meta svg { color: var(--orange-ink, #b4472a); } .ds-muted { color: var(--muted, #655c55); } .ds-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }"
+    },
+    {
+      "name": "Game Row with Follow Tint",
+      "kind": "custom",
+      "refersTo": "game-row",
+      "description": "A final game in a list panel: winner bold, loser muted, Final pill; the followed team's line carries the follow tint and star.",
+      "html": "<ul class=\"ds-games\"><li class=\"ds-game\"><p class=\"ds-game-when\">Thu, Nov 12<span>6:46 PM</span></p><div class=\"ds-game-teams\"><div class=\"ds-line ds-followed\"><span class=\"ds-badge-sm\">RH</span><span class=\"ds-name ds-won\">Riverside Hawks</span><svg viewBox=\"0 0 24 24\" width=\"14\" height=\"14\" fill=\"var(--orange, #e67145)\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z\"/></svg><span class=\"ds-score ds-won\">61</span></div><div class=\"ds-line\"><span class=\"ds-badge-sm\">HB</span><span class=\"ds-name ds-lost\">Harbor Blaze</span><span class=\"ds-score ds-lost\">53</span></div></div><div class=\"ds-game-where\"><span>Northgate Sports Center</span><span class=\"ds-final\">Final</span></div></li></ul>",
+      "css": ".ds-games { font-family: Inter, ui-sans-serif, system-ui, sans-serif; font-feature-settings: \"cv11\", \"ss01\"; list-style: none; margin: 0; padding: 0; max-width: 42rem; overflow: hidden; border: 1px solid var(--line, #e8e1d9); border-radius: 12px; background: var(--surface, #ffffff); color: var(--ink, #181310); } .ds-game { display: grid; grid-template-columns: 7.5rem minmax(0,1fr) minmax(0,13rem); gap: 8px 24px; align-items: center; padding: 14px 20px; } .ds-game-when { margin: 0; font-size: 0.875rem; font-weight: 500; font-variant-numeric: tabular-nums; } .ds-game-when span { display: block; font-weight: 400; color: var(--muted, #655c55); } .ds-line { display: flex; align-items: center; gap: 10px; margin: 0 -8px; padding: 4px 8px; border-radius: 6px; transition: background-color 240ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-followed { background: var(--follow, #fff2e9); } .ds-line svg { color: var(--orange-ink, #b4472a); flex-shrink: 0; } .ds-badge-sm { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 9999px; background: var(--badge, #efe8e1); color: var(--ink, #181310); font-size: 0.6875rem; font-weight: 600; flex-shrink: 0; } .ds-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; } .ds-score { margin-left: auto; padding-left: 12px; font-size: 1rem; font-variant-numeric: tabular-nums; } .ds-won { font-weight: 700; color: var(--ink, #181310); } .ds-name.ds-won { font-weight: 600; } .ds-lost { color: var(--muted, #655c55); } .ds-game-where { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; font-size: 0.875rem; color: var(--muted, #655c55); text-align: right; } .ds-final { padding: 2px 8px; border-radius: 9999px; background: var(--wash, #f4efe9); color: var(--ink, #181310); font-size: 0.75rem; font-weight: 600; }"
+    },
+    {
+      "name": "Standings Table",
+      "kind": "custom",
+      "refersTo": "table-head",
+      "description": "Linen head with uppercase column labels, tabular right-aligned numbers, form guide squares, and the follow tint on the followed row.",
+      "html": "<div class=\"ds-table-wrap\"><table class=\"ds-table\"><thead><tr><th>#</th><th class=\"ds-left\">Team</th><th>W</th><th>L</th><th>Diff</th><th>Strk</th><th class=\"ds-left\">Last 5</th></tr></thead><tbody><tr><td class=\"ds-rank\">1</td><th class=\"ds-left\" scope=\"row\"><span class=\"ds-team\"><span class=\"ds-badge-sm\">SB</span>Southside Bulls</span></th><td class=\"ds-strong\">4</td><td>0</td><td>+40</td><td class=\"ds-win\">W4</td><td class=\"ds-left\"><span class=\"ds-form\"><span class=\"ds-w\">W</span><span class=\"ds-w\">W</span><span class=\"ds-w\">W</span><span class=\"ds-w\">W</span></span></td></tr><tr class=\"ds-followed-row\"><td class=\"ds-rank\">5</td><th class=\"ds-left\" scope=\"row\"><span class=\"ds-team\"><span class=\"ds-badge-sm\">RH</span>Riverside Hawks <svg viewBox=\"0 0 24 24\" width=\"14\" height=\"14\" fill=\"var(--orange, #e67145)\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z\"/></svg></span></th><td class=\"ds-strong\">1</td><td>3</td><td>−26</td><td class=\"ds-loss\">L2</td><td class=\"ds-left\"><span class=\"ds-form\"><span class=\"ds-l\">L</span><span class=\"ds-l\">L</span><span class=\"ds-w\">W</span><span class=\"ds-l\">L</span></span></td></tr></tbody></table></div>",
+      "css": ".ds-table-wrap { overflow-x: auto; border: 1px solid var(--line, #e8e1d9); border-radius: 12px; background: var(--surface, #ffffff); max-width: 42rem; } .ds-table { font-family: Inter, ui-sans-serif, system-ui, sans-serif; font-feature-settings: \"cv11\", \"ss01\"; width: 100%; border-collapse: collapse; font-size: 0.9375rem; font-variant-numeric: tabular-nums; color: var(--ink, #181310); } .ds-table thead { background: var(--wash, #f4efe9); border-bottom: 1px solid var(--line, #e8e1d9); } .ds-table thead th { padding: 10px 12px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted, #655c55); text-align: right; } .ds-table tbody tr { background: var(--surface, #ffffff); border-top: 1px solid var(--line, #e8e1d9); transition: background-color 240ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-table td, .ds-table tbody th { padding: 10px 12px; text-align: right; font-weight: 400; } .ds-table .ds-left { text-align: left; } .ds-table th:first-child, .ds-table td:first-child { padding-left: 16px; } .ds-table .ds-rank { color: var(--muted, #655c55); text-align: left; } .ds-team { display: flex; align-items: center; gap: 10px; font-weight: 500; } .ds-team svg { color: var(--orange-ink, #b4472a); } .ds-badge-sm { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 9999px; background: var(--badge, #efe8e1); color: var(--ink, #181310); font-size: 0.6875rem; font-weight: 600; } .ds-strong { font-weight: 600; } .ds-win { color: var(--win, #1d6a35); font-weight: 600; } .ds-loss { color: var(--loss, #9c2c1f); font-weight: 600; } .ds-form { display: inline-flex; gap: 4px; } .ds-form span { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 4px; font-size: 0.6875rem; font-weight: 700; } .ds-w { background: var(--win-wash, #e3f2e6); color: var(--win, #1d6a35); } .ds-l { background: var(--loss-wash, #fbe8e4); color: var(--loss, #9c2c1f); } .ds-table tbody tr.ds-followed-row { background: var(--follow, #fff2e9); }"
+    },
+    {
+      "name": "Badges and Pills",
+      "kind": "custom",
+      "refersTo": "team-badge-md",
+      "description": "Round two-letter team monograms in three sizes, the Active and Completed season pills, and the Final pill.",
+      "html": "<div class=\"ds-pills\"><span class=\"ds-mono ds-mono-sm\">RH</span><span class=\"ds-mono ds-mono-md\">RH</span><span class=\"ds-mono ds-mono-lg\">RH</span><span class=\"ds-pill ds-pill-active\">Active</span><span class=\"ds-pill ds-pill-done\">Completed</span><span class=\"ds-pill-final\">Final</span></div>",
+      "css": ".ds-pills { font-family: Inter, ui-sans-serif, system-ui, sans-serif; font-feature-settings: \"cv11\", \"ss01\"; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; } .ds-mono { display: inline-flex; align-items: center; justify-content: center; border-radius: 9999px; background: var(--badge, #efe8e1); color: var(--ink, #181310); font-weight: 600; letter-spacing: -0.02em; } .ds-mono-sm { width: 28px; height: 28px; font-size: 0.6875rem; } .ds-mono-md { width: 36px; height: 36px; font-size: 0.75rem; } .ds-mono-lg { width: 56px; height: 56px; font-size: 1rem; } .ds-pill { display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; } .ds-pill-active { background: var(--win-wash, #e3f2e6); color: var(--win, #1d6a35); } .ds-pill-done { background: var(--wash, #f4efe9); color: var(--muted, #655c55); } .ds-pill-final { padding: 2px 8px; border-radius: 9999px; background: var(--wash, #f4efe9); color: var(--ink, #181310); font-size: 0.75rem; font-weight: 600; }"
+    },
+    {
+      "name": "Empty State",
+      "kind": "card",
+      "refersTo": "empty-state",
+      "description": "Dashed panel marking where content will appear, with a plain sentence saying when.",
+      "html": "<div class=\"ds-empty\"><h2>No results yet</h2><p>Final scores appear here once they’re recorded.</p></div>",
+      "css": ".ds-empty { font-family: Inter, ui-sans-serif, system-ui, sans-serif; font-feature-settings: \"cv11\", \"ss01\"; max-width: 42rem; padding: 48px 24px; border: 1px dashed var(--line-strong, #d4cac0); border-radius: 12px; background: var(--surface, #ffffff); text-align: center; } .ds-empty h2 { margin: 0; font-size: 1.125rem; font-weight: 600; letter-spacing: -0.025em; color: var(--ink, #181310); } .ds-empty p { max-width: 28rem; margin: 8px auto 0; color: var(--muted, #655c55); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Scorer's Table",
+    "overview": "Shotclock leagues is a conventional, polished sports website built for looking things up: when and where the next game is, who won, and where a team ranks. The system behaves like the scorer's table at a community gym. Everything on it is a recorded fact, set plainly on warm paper, with one orange taken from the Shotclock ball mark and a near-black ink taken from the same mark's linework.\n\nDensity is comfortable. Game lists and tables sit in white panels with warm hairline borders on a slightly warmer ground, rows keep generous vertical padding, and every number is tabular so scores, records and percentages line up in columns. Orange is spent in a few fixed places: header bands, the next-game card, the active division chip, the active tab, links and the follow star. Green and red appear only where an outcome is being reported.\n\nOne move makes the site personal: follow-your-team. A visitor follows one team per league, and from then on that team's rows and game lines carry a warm tint and a small filled star on every page, the league directory included. Faint orange court linework in the header bands is the only illustration. There are no photos, no league or team logos and no decorative gradients.",
+    "keyCharacteristics": [
+      "Warm light theme: paper ground, white panels, near-black ink.",
+      "One brand orange; filled shapes carry ink text, and a darker orange-ink carries orange text and links.",
+      "Inter throughout, tight balanced headings, tabular numerals everywhere numbers stack.",
+      "Comfortable table density with hairline dividers and flat surfaces.",
+      "Follow-your-team tint and star as the single signature move.",
+      "Faint court-line drawings in header bands from 640px up; none on phones."
+    ],
+    "rules": [
+      {
+        "name": "The Ink-On-Orange Rule",
+        "body": "Shotclock orange (#e67145) is a fill, never a text color: it measures 3.08:1 on white. Orange fills always carry ink text (5.98:1). Any orange word, link or icon uses orange-ink (#b4472a).",
+        "section": "colors"
+      },
+      {
+        "name": "The Outcome-Only Rule",
+        "body": "Win green and loss red mean a result and nothing else: the Active season pill, W/L squares, streaks, the Forfeit note. Never use them for buttons, alerts or decoration.",
+        "section": "colors"
+      },
+      {
+        "name": "The Reserved Tint Rule",
+        "body": "The follow tint (#fff2e9) means \"your team\" and is applied only by FollowStyles to elements carrying that team's data-team attribute. No other surface may use it.",
+        "section": "colors"
+      },
+      {
+        "name": "The Tabular Scoreboard Rule",
+        "body": "Every number that can sit above another number (scores, records, ranks, percentages, times, counts) uses tabular numerals. Tables get them by default; elsewhere apply the tabular utility.",
+        "section": "typography"
+      },
+      {
+        "name": "The Tight Heading Rule",
+        "body": "Headings h1 to h3 are bold Inter at -0.025em tracking with balanced wrapping. Body text keeps normal tracking.",
+        "section": "typography"
+      },
+      {
+        "name": "The No Sideways Page Rule",
+        "body": "The page never scrolls sideways on a phone. Wide content scrolls inside its own container: tables inside ScrollTable, tabs, division chips and the upcoming-games rail inside scroll rails with hidden bars.",
+        "section": "layout"
+      },
+      {
+        "name": "The Flat Paper Rule",
+        "body": "Surfaces are flat. Depth comes from the step between ground, white panels and wash table heads, plus 1px hairlines. The hero search field is the only element with a shadow.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Size-Scaled Corner Rule",
+        "body": "Corners grow with the container: 6px for rows and inline highlights, 8px for controls, 12px for list panels, tables and team cards, 16px for feature cards. Chips, pills and badges are fully round.",
+        "section": "shapes"
+      },
+      {
+        "name": "The Dashed Means Empty Rule",
+        "body": "A dashed border marks a place where content will appear later. Filled content always sits in solid-bordered panels.",
+        "section": "shapes"
+      },
+      {
+        "name": "The Not-Color-Alone Rule",
+        "body": "The follow tint always comes with the filled star and its screen-reader label \"Followed team\". A tint without the star is a bug.",
+        "section": "components"
+      },
+      {
+        "name": "The Faint Court Rule",
+        "body": "Court lines are 2px orange strokes at 30% opacity, masked so they fade toward the text, shown only in header bands and only from 640px up.",
+        "section": "components"
+      }
+    ],
+    "dos": [
+      "**Do** put the next game first on a season overview: teams, date, tip-off time and venue in the orange-wash card.",
+      "**Do** fill orange shapes with ink text and write orange text in orange-ink (#b4472a).",
+      "**Do** use tabular numerals for every score, record, rank, percentage and time.",
+      "**Do** show each team as a round two-letter monogram badge on badge clay (#efe8e1).",
+      "**Do** mark every element tied to a team with its data-team ID so the follow tint and star reach it on every page.",
+      "**Do** keep controls at least 40px tall and give the season tabs 48px.",
+      "**Do** put wide tables inside ScrollTable so the right-edge fade appears only while more columns are hidden.",
+      "**Do** use the dashed empty-state panel with a plain sentence saying when content will appear."
+    ],
+    "donts": [
+      "**Don't** use photos, stock imagery or league and team logos; the Shotclock mark is the only logo, and court linework is the only illustration.",
+      "**Don't** use gradients as decoration; gradients appear only as functional masks (the court-line fade and the table edge fade).",
+      "**Don't** add eyebrows or kickers above headings; uppercase text is reserved for table column heads.",
+      "**Don't** show live-game states such as Live, Q3 or a running clock; games are either scheduled or final, with \"Result pending\" for past games without a score.",
+      "**Don't** show player names, ages, rosters or player statistics.",
+      "**Don't** use win green or loss red outside outcomes, or the follow tint for anything but a followed team.",
+      "**Don't** set Shotclock orange (#e67145) as a text color.",
+      "**Don't** add shadows to cards, tables or rows."
+    ]
+  }
+}

@@ -1,0 +1,10 @@
+# Wait a day before installing newly published versions, to limit exposure to compromised releases.
+minimumReleaseAge: 1440
+
+minimumReleaseAgeExclude:
+  - '@next/*'
+  - next
+
+allowBuilds:
+  sharp: true
+  unrs-resolver: true

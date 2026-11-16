@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --color-ground: var(--ground);
+  --color-surface: var(--surface);
+  --color-wash: var(--wash);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-orange: var(--orange);
+  --color-orange-hover: var(--orange-hover);
+  --color-orange-ink: var(--orange-ink);
+  --color-orange-wash: var(--orange-wash);
+  --color-badge: var(--badge);
+  --color-win: var(--win);
+  --color-win-wash: var(--win-wash);
+  --color-loss: var(--loss);
+  --color-loss-wash: var(--loss-wash);
+  --color-follow: var(--follow);
+}
+
+:root {
+  /* Warm paper ground, white surfaces, near-black ink from the Shotclock mark. */
+  --ground: #faf8f5;
+  --surface: #ffffff;
+  --wash: #f4efe9;
+  --ink: #181310;
+  --muted: #655c55;
+  --line: #e8e1d9;
+  --line-strong: #d4cac0;
+  /* Shotclock orange fills carry ink text; orange-ink is the darker orange used for text and links (AA on white and ground). */
+  --orange: #e67145;
+  --orange-hover: #dc6538;
+  --orange-ink: #b4472a;
+  --orange-wash: #fdeee5;
+  --badge: #efe8e1;
+  --win: #1d6a35;
+  --win-wash: #e3f2e6;
+  --loss: #9c2c1f;
+  --loss-wash: #fbe8e4;
+  --follow: #fff2e9;
+  color-scheme: light;
+}
+
+@layer base {
+  html {
+    scrollbar-gutter: stable;
+    scrollbar-color: var(--line-strong) var(--ground);
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-feature-settings: "cv11", "ss01";
+    caret-color: var(--orange-ink);
+  }
+  ::selection {
+    background: var(--orange-wash);
+    color: var(--ink);
+  }
+  h1, h2, h3 {
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+  a {
+    text-underline-offset: 3px;
+  }
+  :focus-visible {
+    outline: 2px solid var(--orange-ink);
+    outline-offset: 2px;
+  }
+  table {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Horizontal rails (tabs, division chips) scroll without a visible bar on touch screens. */
+@utility scroll-rail {
+  overflow-x: auto;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* FollowStyles adds rules that tint elements whose data-team matches a followed team. */
+[data-team] {
+  transition: background-color 240ms cubic-bezier(0.16, 1, 0.3, 1);
+}
