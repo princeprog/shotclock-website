@@ -252,9 +252,140 @@ details[open] > .menu-panel {
   }
 }
 
+/* Scroll-linked motion. Only with full motion preference and view/scroll timeline support; otherwise the page is static. */
+@keyframes grow-x {
+  from {
+    scale: 0 1;
+  }
+}
+
+@keyframes parallax-y {
+  from {
+    translate: 0 -7%;
+  }
+  to {
+    translate: 0 7%;
+  }
+}
+
+@keyframes hero-photo-exit {
+  to {
+    translate: 0 8%;
+    scale: 1.12;
+    filter: brightness(0.55);
+  }
+}
+
+@keyframes hero-copy-exit {
+  to {
+    translate: 0 -72px;
+    opacity: 0;
+  }
+}
+
+@keyframes hero-card-exit {
+  to {
+    translate: 0 -140px;
+    opacity: 0;
+  }
+}
+
+@keyframes panel-grow {
+  from {
+    scale: 0.94;
+  }
+}
+
+@keyframes band-open {
+  from {
+    clip-path: inset(7% 5% round 48px);
+  }
+  to {
+    clip-path: inset(0 round 0);
+  }
+}
+
+/* Reading progress: a thin orange bar that fills as the page scrolls. */
+@utility scroll-progress {
+  display: none;
+  @supports (animation-timeline: scroll()) {
+    display: block;
+    animation: grow-x linear both;
+    animation-timeline: scroll(root block);
+  }
+}
+
+@utility hero-scope {
+  view-timeline: --hero block;
+}
+
+@utility hero-exit-photo {
+  transform-origin: 50% 100%;
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      animation: hero-photo-exit linear both;
+      animation-timeline: --hero;
+      animation-range: exit 0% exit 100%;
+    }
+  }
+}
+
+@utility hero-exit-copy {
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      animation: hero-copy-exit linear both;
+      animation-timeline: --hero;
+      animation-range: exit 0% exit 75%;
+    }
+  }
+}
+
+@utility hero-exit-card {
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      animation: hero-card-exit linear both;
+      animation-timeline: --hero;
+      animation-range: exit 0% exit 80%;
+    }
+  }
+}
+
+/* Photos drift inside their frames; the static 1.16 zoom keeps edges covered. */
+@utility parallax {
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      transform: scale(1.16);
+      animation: parallax-y linear both;
+      animation-timeline: view();
+      animation-range: cover;
+    }
+  }
+}
+
+@utility panel-grow {
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      animation: panel-grow cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 90%;
+    }
+  }
+}
+
+@utility band-open {
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      animation: band-open cubic-bezier(0.16, 1, 0.3, 1) both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 45%;
+    }
+  }
+}
+
 /* FollowStyles adds rules that tint elements whose data-team (or data-team-away) matches a followed team. */
 [data-team] {
   transition: background-color 240ms cubic-bezier(0.16, 1, 0.3, 1);
 }
+
 
 

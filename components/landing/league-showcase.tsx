@@ -33,7 +33,7 @@ export function LeagueShowcase({ leagues, total, signupUrl }: { leagues: Directo
   const enter = filtered ? 'pop-in' : 'reveal'
 
   return (
-    <section aria-labelledby="leagues-title" className="mt-20 rounded-[28px] bg-wash px-4 py-10 sm:mt-28 sm:px-8 sm:py-14">
+    <section aria-labelledby="leagues-title" className="panel-grow mt-20 rounded-[28px] bg-wash px-4 py-10 sm:mt-28 sm:px-8 sm:py-14">
       <div className="reveal text-center">
         <Tag tone="white">Live on Shotclock</Tag>
         <h2 id="leagues-title" className="mx-auto mt-4 max-w-xl text-[1.875rem] 2xl:max-w-3xl leading-[1.15] font-semibold tracking-[-0.02em] text-ink sm:text-[2.5rem] 2xl:text-[3.25rem]">Leagues already running every game here</h2>
@@ -54,8 +54,8 @@ export function LeagueShowcase({ leagues, total, signupUrl }: { leagues: Directo
             <ul key={filter} className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {shown.map((league, index) => (
                 <li key={league.slug} style={{ '--i': index } as CSSProperties} className={cn(enter, 'group relative flex flex-col rounded-2xl bg-surface p-2.5')}>
-                  <div className="relative aspect-[16/10] overflow-hidden rounded-xl bg-wash">
-                    <Image src={covers[index % covers.length]} alt="" fill placeholder="blur" quality={85} sizes="(min-width: 1024px) 32vw, (min-width: 640px) 50vw, 100vw" className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]" />
+                  <div className="relative aspect-[16/10] overflow-clip rounded-xl bg-wash">
+                    <Image src={covers[index % covers.length]} alt="" fill placeholder="blur" quality={85} sizes="(min-width: 1024px) 32vw, (min-width: 640px) 50vw, 100vw" className="parallax object-cover transition-[scale] duration-500 ease-out group-hover:scale-[1.04]" />
                     <span className={cn('absolute top-2.5 left-2.5 inline-flex h-7 items-center rounded-full px-3 text-xs font-semibold', league.season.status === 'active' ? 'bg-win-wash text-win' : 'bg-surface text-muted')}>{league.season.status === 'active' ? 'In season' : 'Completed'}</span>
                   </div>
                   <div className="flex flex-1 flex-col px-1.5 pt-3.5 pb-1.5">

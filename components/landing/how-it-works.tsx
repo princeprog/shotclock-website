@@ -48,8 +48,10 @@ const slides: Slide[] = [
 
 function Photo({ src, alt, label, sizes, className }: { src: StaticImageData; alt: string; label: string; sizes: string; className: string }) {
   return (
-    <div className={`relative overflow-hidden rounded-2xl bg-wash ${className}`}>
-      <Image src={src} alt={alt} fill placeholder="blur" quality={85} sizes={sizes} className="step-photo object-cover" />
+    <div className={`relative overflow-clip rounded-2xl bg-wash ${className}`}>
+      <div className="parallax absolute inset-0">
+        <Image src={src} alt={alt} fill placeholder="blur" quality={85} sizes={sizes} className="step-photo object-cover" />
+      </div>
       <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-1/3 bg-linear-to-t from-black/50 to-transparent" />
       <span className="absolute bottom-3 left-3.5 text-[0.8125rem] font-medium text-white">{label}</span>
     </div>

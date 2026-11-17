@@ -72,7 +72,7 @@ function NextGameCard({ game }: { game: UpcomingGame | undefined }) {
       ] as const
   const href = ready ? seasonHref(ready.league.slug, ready.season.slug, 'schedule', { division: ready.division.id }) : signupUrl
   return (
-    <aside aria-labelledby="hero-next-game" className="w-full rounded-[22px] bg-white/15 p-2.5 ring-1 ring-white/25 backdrop-blur-xl sm:w-[21rem] 2xl:w-[24rem]">
+    <aside aria-labelledby="hero-next-game" className="hero-exit-card w-full rounded-[22px] bg-white/15 p-2.5 ring-1 ring-white/25 backdrop-blur-xl sm:w-[21rem] 2xl:w-[24rem]">
       <div className="px-2.5 pt-1.5 pb-2.5">
         <h2 id="hero-next-game" className="text-[1.0625rem] font-semibold text-white">{ready ? 'Upcoming game' : 'Your league, published'}</h2>
         <p className="truncate text-[0.8125rem] text-white/80">{ready ? `${ready.league.name} · ${ready.division.name}` : 'Everything families check, in one place'}</p>
@@ -126,10 +126,13 @@ export default async function LandingPage() {
   return (
     <>
     <main className="bg-surface pb-20">
+      <div aria-hidden="true" className="scroll-progress fixed inset-x-0 top-0 z-50 h-[3px] origin-left bg-orange" />
       <div className="mx-auto max-w-[120rem] px-2.5 pt-2.5 sm:px-4 sm:pt-4">
-        <section aria-labelledby="hero-title" className="relative">
+        <section aria-labelledby="hero-title" className="hero-scope relative">
           <div className="absolute inset-0 overflow-hidden rounded-[24px] bg-ink sm:rounded-[32px]">
-            <Image src={heroPhoto} alt="" fill preload placeholder="blur" quality={85} sizes="(min-width: 1920px) 1888px, 100vw" className="hero-settle object-cover object-[62%_center]" />
+            <div className="hero-exit-photo absolute inset-0">
+              <Image src={heroPhoto} alt="" fill preload placeholder="blur" quality={85} sizes="(min-width: 1920px) 1888px, 100vw" className="hero-settle object-cover object-[62%_center]" />
+            </div>
             <div aria-hidden="true" className="absolute inset-0 bg-linear-to-r from-black/65 via-black/25 to-black/0" />
             <div aria-hidden="true" className="absolute inset-0 bg-black/35 lg:hidden" />
             <div aria-hidden="true" className="absolute inset-x-0 top-0 h-32 bg-linear-to-b from-black/35 to-transparent" />
@@ -137,7 +140,7 @@ export default async function LandingPage() {
           </div>
           <HeroNav />
           <div className="relative grid gap-8 px-5 pt-16 pb-6 sm:px-8 sm:pt-24 sm:pb-10 lg:min-h-[38rem] xl:min-h-[44rem] xl:px-16 2xl:min-h-[50rem] 2xl:px-20 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end lg:px-12 lg:pt-24 lg:pb-12">
-            <div className="flex max-w-xl flex-col lg:self-stretch 2xl:max-w-3xl">
+            <div className="hero-exit-copy flex max-w-xl flex-col lg:self-stretch 2xl:max-w-3xl">
               <h1 id="hero-title" className="focus-in text-[2.5rem] leading-[1.06] font-semibold tracking-[-0.025em] text-white [--blur:10px] [--d:160ms] [--rise:28px] sm:text-[3.5rem] lg:text-[4rem] xl:text-[4.75rem] 2xl:text-[5.5rem]">Built to run every game of your league</h1>
               <p className="focus-in mt-4 max-w-md text-base text-white/85 [--d:280ms] sm:text-lg 2xl:max-w-lg 2xl:text-xl">Teams, schedules, scores and standings in one place, with a public page families can check from the bleachers.</p>
               <div className="focus-in mt-7 flex flex-wrap gap-3 [--d:380ms]">
@@ -174,8 +177,8 @@ export default async function LandingPage() {
           </div>
           <ul className="mt-8 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
             {familyPages.map((item, index) => (
-              <li key={item.tag} style={{ '--i': index } as CSSProperties} className="reveal group relative isolate flex aspect-[3/4] flex-col justify-end overflow-hidden rounded-2xl bg-ink p-3 text-white sm:aspect-[4/5] sm:p-4">
-                <Image src={item.photo} alt={item.alt} fill placeholder="blur" quality={85} sizes="(min-width: 1024px) 24vw, 50vw" className="-z-10 object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]" />
+              <li key={item.tag} style={{ '--i': index } as CSSProperties} className="reveal group relative isolate flex aspect-[3/4] flex-col justify-end overflow-clip rounded-2xl bg-ink p-3 text-white sm:aspect-[4/5] sm:p-4">
+                <Image src={item.photo} alt={item.alt} fill placeholder="blur" quality={85} sizes="(min-width: 1024px) 24vw, 50vw" className="parallax -z-10 object-cover transition-[scale] duration-500 ease-out group-hover:scale-[1.04]" />
                 <div aria-hidden="true" className="absolute inset-0 -z-10 bg-linear-to-t from-black/80 via-black/15 to-transparent" />
                 <span aria-hidden="true" className="absolute top-2.5 right-2.5 grid size-8 place-items-center rounded-full bg-orange text-ink transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 sm:size-9"><ArrowUpRightIcon className="size-4" /></span>
                 <Tag tone="dark" className="h-7 self-start px-3 text-xs">{item.tag}</Tag>
@@ -187,7 +190,7 @@ export default async function LandingPage() {
       </div>
 
       <div className="mx-auto mt-20 max-w-[120rem] px-2.5 sm:mt-28 sm:px-4">
-      <section aria-labelledby="cta-title" className="relative overflow-hidden rounded-[24px] bg-ink px-6 py-16 text-center text-white sm:rounded-[32px] sm:py-20">
+      <section aria-labelledby="cta-title" className="band-open relative overflow-hidden rounded-[24px] bg-ink px-6 py-16 text-center text-white sm:rounded-[32px] sm:py-20">
         {balls.map((position, index) => (
           <Image key={position} src={ballPhoto} alt="" aria-hidden="true" style={{ '--drift': index % 2 ? -1 : 1 } as CSSProperties} className={`ball-drift pointer-events-none absolute h-auto ${position}`} sizes="160px" />
         ))}
@@ -210,8 +213,8 @@ export default async function LandingPage() {
         </div>
         <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:items-center lg:gap-14">
           <div className="reveal relative pb-10 sm:pr-16">
-            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-wash">
-              <Image src={huddlePhoto} alt="A coach talking to his team in a huddle during a timeout" fill placeholder="blur" quality={85} sizes="(min-width: 1024px) 45vw, 100vw" className="object-cover" />
+            <div className="relative aspect-[4/3] overflow-clip rounded-2xl bg-wash">
+              <Image src={huddlePhoto} alt="A coach talking to his team in a huddle during a timeout" fill placeholder="blur" quality={85} sizes="(min-width: 1024px) 45vw, 100vw" className="parallax object-cover" />
             </div>
             <div className="absolute right-0 bottom-0 w-[min(17rem,80%)] rounded-2xl bg-surface p-4 shadow-[0_12px_32px_rgb(17_17_17/0.12)]">
               <ShotclockMark className="size-7" />
@@ -220,7 +223,7 @@ export default async function LandingPage() {
           </div>
           <div className="divide-y divide-line border-y border-line">
             {questions.map((item, index) => (
-              <details key={item.q} open={index === 0} className="faq-item group">
+              <details key={item.q} open={index === 0} style={{ '--i': index } as CSSProperties} className="faq-item reveal group">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-base font-semibold text-ink [&::-webkit-details-marker]:hidden">
                   {item.q}
                   <span className="grid size-8 shrink-0 place-items-center rounded-full border border-line-strong transition-colors group-open:border-orange group-open:bg-orange"><PlusIcon aria-hidden="true" className="size-4 transition-transform duration-200 group-open:rotate-45" /></span>
