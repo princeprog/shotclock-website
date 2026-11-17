@@ -63,7 +63,7 @@ export function HowItWorks({ signupUrl }: { signupUrl: string }) {
   const arrow = 'grid size-10 place-items-center rounded-full border border-line-strong text-ink transition-colors hover:border-ink hover:bg-ink hover:text-white'
 
   return (
-    <section id="how-it-works" aria-labelledby="how-title" className="mt-16 scroll-mt-6 sm:mt-20 lg:mt-36">
+    <section id="how-it-works" aria-labelledby="how-title" className="mt-16 scroll-mt-6 sm:mt-20 lg:mt-24">
       <div className="grid gap-5 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)] lg:items-start lg:gap-12">
         <div className="flex items-center justify-between gap-4">
           <Tag>How Shotclock works</Tag>

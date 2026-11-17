@@ -32,7 +32,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         <a href="#content" className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-lg focus:bg-surface focus:px-4 focus:py-2 focus:font-semibold">Skip to content</a>
         <HideOnLanding><SiteHeader /></HideOnLanding>
         <div id="content" className="flex-1">{children}</div>
-        <SiteFooter />
+        <HideOnLanding><SiteFooter /></HideOnLanding>
       </body>
     </html>
   )
