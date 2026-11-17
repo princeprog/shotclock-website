@@ -37,7 +37,7 @@ async function safely<T>(load: () => Promise<T>, fallback: T): Promise<T> {
 
 function HeroNav() {
   return (
-    <div className="relative z-30 flex items-center gap-3 px-5 pt-5 sm:px-8 sm:pt-6 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:px-12">
+    <div className="relative z-30 flex items-center gap-3 px-5 pt-5 sm:px-8 sm:pt-6 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:px-12 xl:px-16 2xl:px-20">
       <Link href="/" className="flex items-center gap-2.5 rounded-lg text-lg font-semibold tracking-[-0.02em] text-white">
         <ShotclockMark className="size-8" />Shotclock
       </Link>
@@ -71,7 +71,7 @@ function NextGameCard({ game }: { game: UpcomingGame | undefined }) {
       ] as const
   const href = ready ? seasonHref(ready.league.slug, ready.season.slug, 'schedule', { division: ready.division.id }) : signupUrl
   return (
-    <aside aria-labelledby="hero-next-game" className="w-full rounded-[22px] bg-white/15 p-2.5 ring-1 ring-white/25 backdrop-blur-xl sm:w-[21rem]">
+    <aside aria-labelledby="hero-next-game" className="w-full rounded-[22px] bg-white/15 p-2.5 ring-1 ring-white/25 backdrop-blur-xl sm:w-[21rem] 2xl:w-[24rem]">
       <div className="px-2.5 pt-1.5 pb-2.5">
         <h2 id="hero-next-game" className="text-[1.0625rem] font-semibold text-white">{ready ? 'Upcoming game' : 'Your league, published'}</h2>
         <p className="truncate text-[0.8125rem] text-white/80">{ready ? `${ready.league.name} · ${ready.division.name}` : 'Everything families check, in one place'}</p>
@@ -125,7 +125,7 @@ export default async function LandingPage() {
   return (
     <>
     <main className="bg-surface pb-20">
-      <div className="mx-auto max-w-[90rem] px-2.5 pt-2.5 sm:px-4 sm:pt-4">
+      <div className="mx-auto max-w-[120rem] px-2.5 pt-2.5 sm:px-4 sm:pt-4">
         <section aria-labelledby="hero-title" className="relative">
           <div className="absolute inset-0 overflow-hidden rounded-[24px] bg-ink sm:rounded-[32px]">
             <Image src={heroPhoto} alt="" fill preload placeholder="blur" sizes="(min-width: 1440px) 1408px, 100vw" className="object-cover object-[62%_center]" />
@@ -135,10 +135,10 @@ export default async function LandingPage() {
             <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-2/5 bg-linear-to-t from-black/55 to-transparent" />
           </div>
           <HeroNav />
-          <div className="relative grid gap-8 px-5 pt-16 pb-6 sm:px-8 sm:pt-24 sm:pb-10 lg:min-h-[38rem] lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end lg:px-12 lg:pt-24 lg:pb-12">
-            <div className="flex max-w-xl flex-col lg:self-stretch">
-              <h1 id="hero-title" className="text-[2.5rem] leading-[1.06] font-semibold tracking-[-0.025em] text-white sm:text-[3.5rem] lg:text-[4rem]">Built to run every game of your league</h1>
-              <p className="mt-4 max-w-md text-base text-white/85 sm:text-lg">Teams, schedules, scores and standings in one place, with a public page families can check from the bleachers.</p>
+          <div className="relative grid gap-8 px-5 pt-16 pb-6 sm:px-8 sm:pt-24 sm:pb-10 lg:min-h-[38rem] xl:min-h-[44rem] xl:px-16 2xl:min-h-[50rem] 2xl:px-20 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end lg:px-12 lg:pt-24 lg:pb-12">
+            <div className="flex max-w-xl flex-col lg:self-stretch 2xl:max-w-3xl">
+              <h1 id="hero-title" className="text-[2.5rem] leading-[1.06] font-semibold tracking-[-0.025em] text-white sm:text-[3.5rem] lg:text-[4rem] xl:text-[4.75rem] 2xl:text-[5.5rem]">Built to run every game of your league</h1>
+              <p className="mt-4 max-w-md text-base text-white/85 sm:text-lg 2xl:max-w-lg 2xl:text-xl">Teams, schedules, scores and standings in one place, with a public page families can check from the bleachers.</p>
               <div className="mt-7 flex flex-wrap gap-3">
                 <PillButton href={signupUrl}>Get started today</PillButton>
                 <Link href="/leagues" className="inline-flex h-12 items-center rounded-full bg-white/15 px-5 text-[0.9375rem] font-semibold text-white ring-1 ring-white/30 backdrop-blur transition-colors hover:bg-white/25">Find a league</Link>
@@ -159,7 +159,7 @@ export default async function LandingPage() {
         </section>
       </div>
 
-      <div className="mx-auto max-w-[90rem] px-7.5 sm:px-12 lg:px-16">
+      <div className="mx-auto max-w-[120rem] px-7.5 sm:px-12 lg:px-16 xl:px-20 2xl:px-24">
         <HowItWorks signupUrl={signupUrl} />
         <LeagueShowcase leagues={directory.items.slice(0, 6)} total={directory.total} signupUrl={signupUrl} />
 
@@ -167,7 +167,7 @@ export default async function LandingPage() {
           <div className="flex flex-wrap items-end justify-between gap-5">
             <div>
               <Tag>For families</Tag>
-              <h2 id="families-title" className="mt-4 max-w-md text-[1.875rem] leading-[1.15] font-semibold tracking-[-0.02em] text-ink sm:text-[2.5rem]">Everything families look for, on any phone</h2>
+              <h2 id="families-title" className="mt-4 max-w-md text-[1.875rem] 2xl:max-w-2xl leading-[1.15] font-semibold tracking-[-0.02em] text-ink sm:text-[2.5rem] 2xl:text-[3.25rem]">Everything families look for, on any phone</h2>
             </div>
             <PillButton href="/leagues" size="sm">Browse leagues</PillButton>
           </div>
@@ -185,14 +185,14 @@ export default async function LandingPage() {
         </section>
       </div>
 
-      <div className="mx-auto mt-20 max-w-[90rem] px-2.5 sm:mt-28 sm:px-4">
+      <div className="mx-auto mt-20 max-w-[120rem] px-2.5 sm:mt-28 sm:px-4">
       <section aria-labelledby="cta-title" className="relative overflow-hidden rounded-[24px] bg-ink px-6 py-16 text-center text-white sm:rounded-[32px] sm:py-20">
         {balls.map((position) => (
           <Image key={position} src={ballPhoto} alt="" aria-hidden="true" className={`pointer-events-none absolute h-auto ${position}`} sizes="128px" />
         ))}
         <div className="relative">
           <Tag tone="dark">Get started today</Tag>
-          <h2 id="cta-title" className="mx-auto mt-4 max-w-xl text-[1.875rem] leading-[1.15] font-semibold tracking-[-0.02em] sm:text-[2.5rem]">Ready for tip-off? Set up your league today</h2>
+          <h2 id="cta-title" className="mx-auto mt-4 max-w-xl text-[1.875rem] 2xl:max-w-3xl leading-[1.15] font-semibold tracking-[-0.02em] sm:text-[2.5rem] 2xl:text-[3.25rem]">Ready for tip-off? Set up your league today</h2>
           <p className="mx-auto mt-3 max-w-md text-white/80">Create an account, add your teams and publish your first schedule.</p>
           <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
             <PillButton href={signupUrl} size="sm">Sign up</PillButton>
@@ -202,10 +202,10 @@ export default async function LandingPage() {
       </section>
       </div>
 
-      <section id="faq" aria-labelledby="faq-title" className="mx-auto mt-20 max-w-[90rem] scroll-mt-6 px-7.5 sm:mt-28 sm:px-12 lg:px-16">
+      <section id="faq" aria-labelledby="faq-title" className="mx-auto mt-20 max-w-[120rem] scroll-mt-6 px-7.5 sm:mt-28 sm:px-12 lg:px-16 xl:px-20 2xl:px-24">
         <div className="text-center">
           <Tag>FAQ</Tag>
-          <h2 id="faq-title" className="mx-auto mt-4 max-w-lg text-[1.875rem] leading-[1.15] font-semibold tracking-[-0.02em] text-ink sm:text-[2.5rem]">Questions organizers ask before they start</h2>
+          <h2 id="faq-title" className="mx-auto mt-4 max-w-lg text-[1.875rem] 2xl:max-w-3xl leading-[1.15] font-semibold tracking-[-0.02em] text-ink sm:text-[2.5rem] 2xl:text-[3.25rem]">Questions organizers ask before they start</h2>
         </div>
         <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:items-center lg:gap-14">
           <div className="relative pb-10 sm:pr-16">
@@ -232,8 +232,8 @@ export default async function LandingPage() {
       </section>
     </main>
     <footer className="bg-surface">
-      <div className="mx-auto max-w-[90rem] px-2.5 sm:px-4">
-      <div className="flex flex-col gap-3 border-t border-line px-5 py-8 text-sm text-muted sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-12">
+      <div className="mx-auto max-w-[120rem] px-2.5 sm:px-4">
+      <div className="flex flex-col gap-3 border-t border-line px-5 py-8 text-sm text-muted sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-12 xl:px-16 2xl:px-20">
         <p className="flex items-center gap-2"><ShotclockMark className="size-5" />Basketball league management for organizers and the families who follow along.</p>
         <p className="flex gap-5">
           <Link href="/leagues" className="font-medium text-ink hover:underline">Find a league</Link>
@@ -246,3 +246,4 @@ export default async function LandingPage() {
     </>
   )
 }
+

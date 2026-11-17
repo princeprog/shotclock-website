@@ -33,7 +33,7 @@ export function LeagueShowcase({ leagues, total, signupUrl }: { leagues: Directo
     <section aria-labelledby="leagues-title" className="mt-20 rounded-[28px] bg-wash px-4 py-10 sm:mt-28 sm:px-8 sm:py-14">
       <div className="text-center">
         <Tag tone="white">Live on Shotclock</Tag>
-        <h2 id="leagues-title" className="mx-auto mt-4 max-w-xl text-[1.875rem] leading-[1.15] font-semibold tracking-[-0.02em] text-ink sm:text-[2.5rem]">Leagues already running every game here</h2>
+        <h2 id="leagues-title" className="mx-auto mt-4 max-w-xl text-[1.875rem] 2xl:max-w-3xl leading-[1.15] font-semibold tracking-[-0.02em] text-ink sm:text-[2.5rem] 2xl:text-[3.25rem]">Leagues already running every game here</h2>
       </div>
       {leagues.length ? (
         <>
@@ -92,3 +92,4 @@ export function LeagueShowcase({ leagues, total, signupUrl }: { leagues: Directo
     </section>
   )
 }
+

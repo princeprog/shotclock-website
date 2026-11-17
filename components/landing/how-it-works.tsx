@@ -72,7 +72,7 @@ export function HowItWorks({ signupUrl }: { signupUrl: string }) {
             <button type="button" onClick={() => go(1)} aria-label="Next step" className={arrow}><ArrowRightIcon aria-hidden="true" className="size-4" /></button>
           </div>
         </div>
-        <h2 id="how-title" className="text-[1.875rem] leading-[1.15] font-semibold tracking-[-0.02em] text-ink sm:text-[2.5rem]">Everything you need to run a season, in four steps</h2>
+        <h2 id="how-title" className="text-[1.875rem] leading-[1.15] font-semibold tracking-[-0.02em] text-ink sm:text-[2.5rem] 2xl:text-[3.25rem]">Everything you need to run a season, in four steps</h2>
       </div>
 
       <p className="sr-only" aria-live="polite">Step {index + 1} of {slides.length}: {slide.title}</p>
@@ -100,3 +100,4 @@ export function HowItWorks({ signupUrl }: { signupUrl: string }) {
     </section>
   )
 }
+
