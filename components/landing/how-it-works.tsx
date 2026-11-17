@@ -49,7 +49,7 @@ const slides: Slide[] = [
 function Photo({ src, alt, label, sizes, className }: { src: StaticImageData; alt: string; label: string; sizes: string; className: string }) {
   return (
     <div className={`relative overflow-hidden rounded-2xl bg-wash ${className}`}>
-      <Image src={src} alt={alt} fill placeholder="blur" sizes={sizes} className="object-cover" />
+      <Image src={src} alt={alt} fill placeholder="blur" quality={85} sizes={sizes} className="object-cover" />
       <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-1/3 bg-linear-to-t from-black/50 to-transparent" />
       <span className="absolute bottom-3 left-3.5 text-[0.8125rem] font-medium text-white">{label}</span>
     </div>
@@ -77,7 +77,7 @@ export function HowItWorks({ signupUrl }: { signupUrl: string }) {
 
       <p className="sr-only" aria-live="polite">Step {index + 1} of {slides.length}: {slide.title}</p>
       <div key={index} className="slide-in mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,0.8fr)] lg:items-center lg:gap-10">
-        <Photo src={slide.photo} alt={slide.alt} label={slide.label} sizes="(min-width: 1024px) 420px, (min-width: 640px) 50vw, 100vw" className="aspect-[4/3]" />
+        <Photo src={slide.photo} alt={slide.alt} label={slide.label} sizes="(min-width: 1024px) 36vw, (min-width: 640px) 50vw, 100vw" className="aspect-[4/3]" />
         <div>
           <p className="text-sm font-medium text-muted tabular">Step {index + 1} · {slide.step}</p>
           <h3 className="mt-1.5 text-xl font-semibold tracking-[-0.015em] text-ink sm:text-2xl">{slide.title}</h3>
@@ -93,11 +93,12 @@ export function HowItWorks({ signupUrl }: { signupUrl: string }) {
         </div>
         <div className="hidden items-end gap-4 lg:flex">
           <p className="pb-1 text-sm text-muted tabular"><span className="font-semibold text-ink">{index + 1}</span> / {slides.length}</p>
-          <Photo src={slide.side} alt={slide.sideAlt} label={slide.sideLabel} sizes="300px" className="aspect-[5/4] flex-1" />
+          <Photo src={slide.side} alt={slide.sideAlt} label={slide.sideLabel} sizes="(min-width: 1024px) 26vw, 100vw" className="aspect-[5/4] flex-1" />
         </div>
       </div>
       <p className="mt-4 text-sm text-muted tabular lg:hidden"><span className="font-semibold text-ink">{index + 1}</span> / {slides.length}</p>
     </section>
   )
 }
+
 

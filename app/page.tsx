@@ -86,7 +86,7 @@ function NextGameCard({ game }: { game: UpcomingGame | undefined }) {
           ))}
         </dl>
         <div className="relative mt-3.5 h-24 overflow-hidden rounded-xl">
-          <Image src={youthPhoto} alt="" fill sizes="320px" placeholder="blur" className="object-cover" />
+          <Image src={youthPhoto} alt="" fill sizes="400px" placeholder="blur" quality={85} className="object-cover" />
           <a href={href} className="absolute right-2 bottom-2 inline-flex h-8 items-center rounded-full bg-orange px-3.5 text-[0.8125rem] font-semibold text-ink transition-colors hover:bg-orange-hover">{ready ? 'View schedule' : 'Get started'}</a>
         </div>
       </div>
@@ -128,7 +128,7 @@ export default async function LandingPage() {
       <div className="mx-auto max-w-[120rem] px-2.5 pt-2.5 sm:px-4 sm:pt-4">
         <section aria-labelledby="hero-title" className="relative">
           <div className="absolute inset-0 overflow-hidden rounded-[24px] bg-ink sm:rounded-[32px]">
-            <Image src={heroPhoto} alt="" fill preload placeholder="blur" sizes="(min-width: 1440px) 1408px, 100vw" className="object-cover object-[62%_center]" />
+            <Image src={heroPhoto} alt="" fill preload placeholder="blur" quality={85} sizes="(min-width: 1920px) 1888px, 100vw" className="object-cover object-[62%_center]" />
             <div aria-hidden="true" className="absolute inset-0 bg-linear-to-r from-black/65 via-black/25 to-black/0" />
             <div aria-hidden="true" className="absolute inset-0 bg-black/35 lg:hidden" />
             <div aria-hidden="true" className="absolute inset-x-0 top-0 h-32 bg-linear-to-b from-black/35 to-transparent" />
@@ -174,7 +174,7 @@ export default async function LandingPage() {
           <ul className="mt-8 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
             {familyPages.map((item) => (
               <li key={item.tag} className="group relative isolate flex aspect-[3/4] flex-col justify-end overflow-hidden rounded-2xl bg-ink p-3 text-white sm:aspect-[4/5] sm:p-4">
-                <Image src={item.photo} alt={item.alt} fill placeholder="blur" sizes="(min-width: 1024px) 300px, 50vw" className="-z-10 object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]" />
+                <Image src={item.photo} alt={item.alt} fill placeholder="blur" quality={85} sizes="(min-width: 1024px) 24vw, 50vw" className="-z-10 object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]" />
                 <div aria-hidden="true" className="absolute inset-0 -z-10 bg-linear-to-t from-black/80 via-black/15 to-transparent" />
                 <span aria-hidden="true" className="absolute top-2.5 right-2.5 grid size-8 place-items-center rounded-full bg-orange text-ink transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 sm:size-9"><ArrowUpRightIcon className="size-4" /></span>
                 <Tag tone="dark" className="h-7 self-start px-3 text-xs">{item.tag}</Tag>
@@ -188,7 +188,7 @@ export default async function LandingPage() {
       <div className="mx-auto mt-20 max-w-[120rem] px-2.5 sm:mt-28 sm:px-4">
       <section aria-labelledby="cta-title" className="relative overflow-hidden rounded-[24px] bg-ink px-6 py-16 text-center text-white sm:rounded-[32px] sm:py-20">
         {balls.map((position) => (
-          <Image key={position} src={ballPhoto} alt="" aria-hidden="true" className={`pointer-events-none absolute h-auto ${position}`} sizes="128px" />
+          <Image key={position} src={ballPhoto} alt="" aria-hidden="true" className={`pointer-events-none absolute h-auto ${position}`} sizes="160px" />
         ))}
         <div className="relative">
           <Tag tone="dark">Get started today</Tag>
@@ -210,7 +210,7 @@ export default async function LandingPage() {
         <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:items-center lg:gap-14">
           <div className="relative pb-10 sm:pr-16">
             <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-wash">
-              <Image src={huddlePhoto} alt="A coach talking to his team in a huddle during a timeout" fill placeholder="blur" sizes="(min-width: 1024px) 560px, 100vw" className="object-cover" />
+              <Image src={huddlePhoto} alt="A coach talking to his team in a huddle during a timeout" fill placeholder="blur" quality={85} sizes="(min-width: 1024px) 45vw, 100vw" className="object-cover" />
             </div>
             <div className="absolute right-0 bottom-0 w-[min(17rem,80%)] rounded-2xl bg-surface p-4 shadow-[0_12px_32px_rgb(17_17_17/0.12)]">
               <ShotclockMark className="size-7" />
@@ -246,4 +246,5 @@ export default async function LandingPage() {
     </>
   )
 }
+
 

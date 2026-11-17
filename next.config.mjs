@@ -13,6 +13,8 @@ const securityHeaders = [
 const nextConfig = {
   devIndicators: false,
   poweredByHeader: false,
+  // Landing photos are served at 85; everything else keeps the default 75.
+  images: { qualities: [75, 85] },
   // The Content-Security-Policy is set per request in proxy.ts because it carries a nonce.
   async headers() {
     return [{ source: '/:path*', headers: securityHeaders }]

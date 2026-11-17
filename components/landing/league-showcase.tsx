@@ -52,7 +52,7 @@ export function LeagueShowcase({ leagues, total, signupUrl }: { leagues: Directo
               {shown.map((league, index) => (
                 <li key={league.slug} className="group relative flex flex-col rounded-2xl bg-surface p-2.5">
                   <div className="relative aspect-[16/10] overflow-hidden rounded-xl bg-wash">
-                    <Image src={covers[index % covers.length]} alt="" fill placeholder="blur" sizes="(min-width: 1024px) 380px, (min-width: 640px) 50vw, 100vw" className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]" />
+                    <Image src={covers[index % covers.length]} alt="" fill placeholder="blur" quality={85} sizes="(min-width: 1024px) 32vw, (min-width: 640px) 50vw, 100vw" className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]" />
                     <span className={cn('absolute top-2.5 left-2.5 inline-flex h-7 items-center rounded-full px-3 text-xs font-semibold', league.season.status === 'active' ? 'bg-win-wash text-win' : 'bg-surface text-muted')}>{league.season.status === 'active' ? 'In season' : 'Completed'}</span>
                   </div>
                   <div className="flex flex-1 flex-col px-1.5 pt-3.5 pb-1.5">
@@ -92,4 +92,5 @@ export function LeagueShowcase({ leagues, total, signupUrl }: { leagues: Directo
     </section>
   )
 }
+
 
