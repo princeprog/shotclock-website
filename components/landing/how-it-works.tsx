@@ -49,7 +49,7 @@ const slides: Slide[] = [
 function Photo({ src, alt, label, sizes, className }: { src: StaticImageData; alt: string; label: string; sizes: string; className: string }) {
   return (
     <div className={`relative overflow-hidden rounded-2xl bg-wash ${className}`}>
-      <Image src={src} alt={alt} fill placeholder="blur" quality={85} sizes={sizes} className="object-cover" />
+      <Image src={src} alt={alt} fill placeholder="blur" quality={85} sizes={sizes} className="step-photo object-cover" />
       <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-1/3 bg-linear-to-t from-black/50 to-transparent" />
       <span className="absolute bottom-3 left-3.5 text-[0.8125rem] font-medium text-white">{label}</span>
     </div>
@@ -58,13 +58,17 @@ function Photo({ src, alt, label, sizes, className }: { src: StaticImageData; al
 
 export function HowItWorks({ signupUrl }: { signupUrl: string }) {
   const [index, setIndex] = useState(0)
+  const [dir, setDir] = useState<'next' | 'prev'>()
   const slide = slides[index]
-  const go = (step: number) => setIndex((current) => (current + step + slides.length) % slides.length)
+  const go = (step: number) => {
+    setDir(step > 0 ? 'next' : 'prev')
+    setIndex((current) => (current + step + slides.length) % slides.length)
+  }
   const arrow = 'grid size-10 place-items-center rounded-full border border-line-strong text-ink transition-colors hover:border-ink hover:bg-ink hover:text-white'
 
   return (
-    <section id="how-it-works" aria-labelledby="how-title" className="mt-16 scroll-mt-6 sm:mt-20 lg:mt-24">
-      <div className="grid gap-5 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)] lg:items-start lg:gap-12">
+    <section id="how-it-works" aria-labelledby="how-title" data-dir={dir} className="mt-16 scroll-mt-6 sm:mt-20 lg:mt-24">
+      <div className="reveal grid gap-5 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)] lg:items-start lg:gap-12">
         <div className="flex items-center justify-between gap-4">
           <Tag>How Shotclock works</Tag>
           <div className="flex gap-2">
@@ -76,9 +80,10 @@ export function HowItWorks({ signupUrl }: { signupUrl: string }) {
       </div>
 
       <p className="sr-only" aria-live="polite">Step {index + 1} of {slides.length}: {slide.title}</p>
-      <div key={index} className="slide-in mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,0.8fr)] lg:items-center lg:gap-10">
+      <div className="reveal mt-8">
+      <div key={index} className="grid gap-6 sm:grid-cols-2 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_minmax(0,0.8fr)] lg:items-center lg:gap-10">
         <Photo src={slide.photo} alt={slide.alt} label={slide.label} sizes="(min-width: 1024px) 36vw, (min-width: 640px) 50vw, 100vw" className="aspect-[4/3]" />
-        <div>
+        <div className="step-copy">
           <p className="text-sm font-medium text-muted tabular">Step {index + 1} · {slide.step}</p>
           <h3 className="mt-1.5 text-xl font-semibold tracking-[-0.015em] text-ink sm:text-2xl">{slide.title}</h3>
           <p className="mt-3 text-[0.9375rem] text-muted">{slide.text}</p>
@@ -95,6 +100,7 @@ export function HowItWorks({ signupUrl }: { signupUrl: string }) {
           <p className="pb-1 text-sm text-muted tabular"><span className="font-semibold text-ink">{index + 1}</span> / {slides.length}</p>
           <Photo src={slide.side} alt={slide.sideAlt} label={slide.sideLabel} sizes="(min-width: 1024px) 26vw, 100vw" className="aspect-[5/4] flex-1" />
         </div>
+      </div>
       </div>
       <p className="mt-4 text-sm text-muted tabular lg:hidden"><span className="font-semibold text-ink">{index + 1}</span> / {slides.length}</p>
     </section>

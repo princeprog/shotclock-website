@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import type { Metadata } from 'next'
+import type { CSSProperties } from 'react'
 import { ArrowUpRightIcon, PlusIcon } from 'lucide-react'
 import { getDirectory, getUpcoming, type DirectoryLeague, type UpcomingGame } from '@/lib/api'
 import { HowItWorks } from '@/components/landing/how-it-works'
@@ -37,13 +38,13 @@ async function safely<T>(load: () => Promise<T>, fallback: T): Promise<T> {
 
 function HeroNav() {
   return (
-    <div className="relative z-30 flex items-center gap-3 px-5 pt-5 sm:px-8 sm:pt-6 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:px-12 xl:px-16 2xl:px-20">
+    <div className="focus-in relative z-30 flex items-center gap-3 px-5 pt-5 [--blur:0px] [--d:80ms] [--rise:-8px] sm:px-8 sm:pt-6 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:px-12 xl:px-16 2xl:px-20">
       <Link href="/" className="flex items-center gap-2.5 rounded-lg text-lg font-semibold tracking-[-0.02em] text-white">
         <ShotclockMark className="size-8" />Shotclock
       </Link>
       <nav aria-label="Main" className="hidden items-center gap-7 lg:flex">
         {siteLinks.map((link) => (
-          <Link key={link.href} href={link.href} className="text-sm font-medium text-white/85 transition-colors hover:text-white">{link.label}</Link>
+          <Link key={link.href} href={link.href} className="relative text-sm font-medium text-white/85 transition-colors after:absolute after:inset-x-0 after:-bottom-1 after:h-px after:origin-left after:scale-x-0 after:bg-white after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-white hover:after:scale-x-100">{link.label}</Link>
         ))}
       </nav>
       <div className="ml-auto flex items-center gap-2 lg:justify-self-end">
@@ -128,7 +129,7 @@ export default async function LandingPage() {
       <div className="mx-auto max-w-[120rem] px-2.5 pt-2.5 sm:px-4 sm:pt-4">
         <section aria-labelledby="hero-title" className="relative">
           <div className="absolute inset-0 overflow-hidden rounded-[24px] bg-ink sm:rounded-[32px]">
-            <Image src={heroPhoto} alt="" fill preload placeholder="blur" quality={85} sizes="(min-width: 1920px) 1888px, 100vw" className="object-cover object-[62%_center]" />
+            <Image src={heroPhoto} alt="" fill preload placeholder="blur" quality={85} sizes="(min-width: 1920px) 1888px, 100vw" className="hero-settle object-cover object-[62%_center]" />
             <div aria-hidden="true" className="absolute inset-0 bg-linear-to-r from-black/65 via-black/25 to-black/0" />
             <div aria-hidden="true" className="absolute inset-0 bg-black/35 lg:hidden" />
             <div aria-hidden="true" className="absolute inset-x-0 top-0 h-32 bg-linear-to-b from-black/35 to-transparent" />
@@ -137,13 +138,13 @@ export default async function LandingPage() {
           <HeroNav />
           <div className="relative grid gap-8 px-5 pt-16 pb-6 sm:px-8 sm:pt-24 sm:pb-10 lg:min-h-[38rem] xl:min-h-[44rem] xl:px-16 2xl:min-h-[50rem] 2xl:px-20 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end lg:px-12 lg:pt-24 lg:pb-12">
             <div className="flex max-w-xl flex-col lg:self-stretch 2xl:max-w-3xl">
-              <h1 id="hero-title" className="text-[2.5rem] leading-[1.06] font-semibold tracking-[-0.025em] text-white sm:text-[3.5rem] lg:text-[4rem] xl:text-[4.75rem] 2xl:text-[5.5rem]">Built to run every game of your league</h1>
-              <p className="mt-4 max-w-md text-base text-white/85 sm:text-lg 2xl:max-w-lg 2xl:text-xl">Teams, schedules, scores and standings in one place, with a public page families can check from the bleachers.</p>
-              <div className="mt-7 flex flex-wrap gap-3">
+              <h1 id="hero-title" className="focus-in text-[2.5rem] leading-[1.06] font-semibold tracking-[-0.025em] text-white [--blur:10px] [--d:160ms] [--rise:28px] sm:text-[3.5rem] lg:text-[4rem] xl:text-[4.75rem] 2xl:text-[5.5rem]">Built to run every game of your league</h1>
+              <p className="focus-in mt-4 max-w-md text-base text-white/85 [--d:280ms] sm:text-lg 2xl:max-w-lg 2xl:text-xl">Teams, schedules, scores and standings in one place, with a public page families can check from the bleachers.</p>
+              <div className="focus-in mt-7 flex flex-wrap gap-3 [--d:380ms]">
                 <PillButton href={signupUrl}>Get started today</PillButton>
                 <Link href="/leagues" className="inline-flex h-12 items-center rounded-full bg-white/15 px-5 text-[0.9375rem] font-semibold text-white ring-1 ring-white/30 backdrop-blur transition-colors hover:bg-white/25">Find a league</Link>
               </div>
-              <div className="mt-10 flex items-center gap-3 lg:mt-auto lg:pt-16">
+              <div className="focus-in mt-10 flex items-center gap-3 [--d:480ms] lg:mt-auto lg:pt-16">
                 <div className="flex -space-x-2.5">
                   {[organizerPhoto, huddlePhoto, fansPhoto].map((photo, index) => (
                     <span key={index} className="relative size-10 overflow-hidden rounded-full ring-2 ring-white/90"><Image src={photo} alt="" fill sizes="40px" className="object-cover" /></span>
@@ -152,7 +153,7 @@ export default async function LandingPage() {
                 <p className="max-w-[16rem] text-sm leading-snug text-white/90">For organizers, coaches and the families who follow every game.</p>
               </div>
             </div>
-            <div>
+            <div className="focus-in [--blur:8px] [--d:560ms] [--rise:40px]">
               <NextGameCard game={upcoming[0]} />
             </div>
           </div>
@@ -164,7 +165,7 @@ export default async function LandingPage() {
         <LeagueShowcase leagues={directory.items.slice(0, 6)} total={directory.total} signupUrl={signupUrl} />
 
         <section id="for-families" aria-labelledby="families-title" className="mt-20 scroll-mt-6 sm:mt-28">
-          <div className="flex flex-wrap items-end justify-between gap-5">
+          <div className="reveal flex flex-wrap items-end justify-between gap-5">
             <div>
               <Tag>For families</Tag>
               <h2 id="families-title" className="mt-4 max-w-md text-[1.875rem] 2xl:max-w-2xl leading-[1.15] font-semibold tracking-[-0.02em] text-ink sm:text-[2.5rem] 2xl:text-[3.25rem]">Everything families look for, on any phone</h2>
@@ -172,8 +173,8 @@ export default async function LandingPage() {
             <PillButton href="/leagues" size="sm">Browse leagues</PillButton>
           </div>
           <ul className="mt-8 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-            {familyPages.map((item) => (
-              <li key={item.tag} className="group relative isolate flex aspect-[3/4] flex-col justify-end overflow-hidden rounded-2xl bg-ink p-3 text-white sm:aspect-[4/5] sm:p-4">
+            {familyPages.map((item, index) => (
+              <li key={item.tag} style={{ '--i': index } as CSSProperties} className="reveal group relative isolate flex aspect-[3/4] flex-col justify-end overflow-hidden rounded-2xl bg-ink p-3 text-white sm:aspect-[4/5] sm:p-4">
                 <Image src={item.photo} alt={item.alt} fill placeholder="blur" quality={85} sizes="(min-width: 1024px) 24vw, 50vw" className="-z-10 object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]" />
                 <div aria-hidden="true" className="absolute inset-0 -z-10 bg-linear-to-t from-black/80 via-black/15 to-transparent" />
                 <span aria-hidden="true" className="absolute top-2.5 right-2.5 grid size-8 place-items-center rounded-full bg-orange text-ink transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 sm:size-9"><ArrowUpRightIcon className="size-4" /></span>
@@ -187,10 +188,10 @@ export default async function LandingPage() {
 
       <div className="mx-auto mt-20 max-w-[120rem] px-2.5 sm:mt-28 sm:px-4">
       <section aria-labelledby="cta-title" className="relative overflow-hidden rounded-[24px] bg-ink px-6 py-16 text-center text-white sm:rounded-[32px] sm:py-20">
-        {balls.map((position) => (
-          <Image key={position} src={ballPhoto} alt="" aria-hidden="true" className={`pointer-events-none absolute h-auto ${position}`} sizes="160px" />
+        {balls.map((position, index) => (
+          <Image key={position} src={ballPhoto} alt="" aria-hidden="true" style={{ '--drift': index % 2 ? -1 : 1 } as CSSProperties} className={`ball-drift pointer-events-none absolute h-auto ${position}`} sizes="160px" />
         ))}
-        <div className="relative">
+        <div className="reveal relative">
           <Tag tone="dark">Get started today</Tag>
           <h2 id="cta-title" className="mx-auto mt-4 max-w-xl text-[1.875rem] 2xl:max-w-3xl leading-[1.15] font-semibold tracking-[-0.02em] sm:text-[2.5rem] 2xl:text-[3.25rem]">Ready for tip-off? Set up your league today</h2>
           <p className="mx-auto mt-3 max-w-md text-white/80">Create an account, add your teams and publish your first schedule.</p>
@@ -203,12 +204,12 @@ export default async function LandingPage() {
       </div>
 
       <section id="faq" aria-labelledby="faq-title" className="mx-auto mt-20 max-w-[120rem] scroll-mt-6 px-7.5 sm:mt-28 sm:px-12 lg:px-16 xl:px-20 2xl:px-24">
-        <div className="text-center">
+        <div className="reveal text-center">
           <Tag>FAQ</Tag>
           <h2 id="faq-title" className="mx-auto mt-4 max-w-lg text-[1.875rem] 2xl:max-w-3xl leading-[1.15] font-semibold tracking-[-0.02em] text-ink sm:text-[2.5rem] 2xl:text-[3.25rem]">Questions organizers ask before they start</h2>
         </div>
         <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:items-center lg:gap-14">
-          <div className="relative pb-10 sm:pr-16">
+          <div className="reveal relative pb-10 sm:pr-16">
             <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-wash">
               <Image src={huddlePhoto} alt="A coach talking to his team in a huddle during a timeout" fill placeholder="blur" quality={85} sizes="(min-width: 1024px) 45vw, 100vw" className="object-cover" />
             </div>
@@ -219,7 +220,7 @@ export default async function LandingPage() {
           </div>
           <div className="divide-y divide-line border-y border-line">
             {questions.map((item, index) => (
-              <details key={item.q} open={index === 0} className="group">
+              <details key={item.q} open={index === 0} className="faq-item group">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-base font-semibold text-ink [&::-webkit-details-marker]:hidden">
                   {item.q}
                   <span className="grid size-8 shrink-0 place-items-center rounded-full border border-line-strong transition-colors group-open:border-orange group-open:bg-orange"><PlusIcon aria-hidden="true" className="size-4 transition-transform duration-200 group-open:rotate-45" /></span>

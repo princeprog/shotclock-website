@@ -93,20 +93,162 @@
     display: none;
   }
 }
-
-/* The landing page's step carousel: each new step settles in from the right. */
-@utility slide-in {
-  animation: slide-in 420ms cubic-bezier(0.16, 1, 0.3, 1);
-  @media (prefers-reduced-motion: reduce) {
-    animation: none;
+/* Landing motion. One authored moment: the hero pulls into focus like a camera at tip-off (photo settles from a
+   slight zoom and blur, then headline, copy, actions and the game card focus in). Everything else is feedback,
+   continuity or a light scroll reveal. Content is visible by default; reduced motion keeps short fades only. */
+@keyframes hero-settle {
+  from {
+    transform: scale(1.08);
+    filter: blur(8px) brightness(0.8);
   }
 }
 
-@keyframes slide-in {
+@keyframes focus-in {
   from {
     opacity: 0;
-    transform: translateX(16px);
-    filter: blur(4px);
+    transform: translateY(var(--rise, 20px));
+    filter: blur(var(--blur, 6px));
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes wipe-next {
+  from {
+    clip-path: inset(0 0 0 100%);
+    transform: scale(1.08);
+  }
+}
+
+@keyframes wipe-prev {
+  from {
+    clip-path: inset(0 100% 0 0);
+    transform: scale(1.08);
+  }
+}
+
+@keyframes slide-next {
+  from {
+    opacity: 0;
+    transform: translateX(28px);
+  }
+}
+
+@keyframes slide-prev {
+  from {
+    opacity: 0;
+    transform: translateX(-28px);
+  }
+}
+
+@keyframes ball-drift {
+  from {
+    transform: translateY(calc(var(--drift, 1) * 48px)) rotate(calc(var(--drift, 1) * -40deg));
+  }
+  to {
+    transform: translateY(calc(var(--drift, 1) * -48px)) rotate(calc(var(--drift, 1) * 50deg));
+  }
+}
+
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.96);
+  }
+}
+
+@utility hero-settle {
+  animation: hero-settle 1600ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  @media (prefers-reduced-motion: reduce) {
+    animation: fade-in 300ms ease-out backwards;
+  }
+}
+
+@utility focus-in {
+  animation: focus-in 850ms cubic-bezier(0.16, 1, 0.3, 1) var(--d, 0ms) backwards;
+  @media (prefers-reduced-motion: reduce) {
+    animation: fade-in 300ms ease-out backwards;
+  }
+}
+
+/* Scroll-linked reveal; --i staggers siblings that enter together. Browsers without view timelines show content as is. */
+@utility reveal {
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      --rise: 32px;
+      --blur: 4px;
+      animation: focus-in backwards cubic-bezier(0.16, 1, 0.3, 1);
+      animation-timeline: view();
+      animation-range: entry calc(var(--i, 0) * 7%) entry calc(70% + var(--i, 0) * 7%);
+    }
+  }
+}
+
+@utility pop-in {
+  --rise: 14px;
+  --blur: 3px;
+  animation: focus-in 480ms cubic-bezier(0.16, 1, 0.3, 1) calc(min(var(--i, 0), 6) * 60ms) backwards;
+  @media (prefers-reduced-motion: reduce) {
+    animation: fade-in 200ms ease-out backwards;
+  }
+}
+
+@utility ball-drift {
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      animation: ball-drift linear backwards;
+      animation-timeline: view();
+      animation-range: cover;
+    }
+  }
+}
+
+/* How it works: photos wipe in from the side you moved toward; copy slides the same way. */
+[data-dir='next'] .step-photo {
+  animation: wipe-next 700ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+[data-dir='prev'] .step-photo {
+  animation: wipe-prev 700ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+[data-dir='next'] .step-copy {
+  animation: slide-next 520ms cubic-bezier(0.16, 1, 0.3, 1) 60ms backwards;
+}
+[data-dir='prev'] .step-copy {
+  animation: slide-prev 520ms cubic-bezier(0.16, 1, 0.3, 1) 60ms backwards;
+}
+
+/* FAQ answers open and close by height where the browser supports it; elsewhere they toggle instantly. */
+.faq-item {
+  interpolate-size: allow-keywords;
+}
+.faq-item::details-content {
+  block-size: 0;
+  overflow-y: clip;
+  transition: block-size 340ms cubic-bezier(0.16, 1, 0.3, 1), content-visibility 340ms allow-discrete;
+}
+.faq-item[open]::details-content {
+  block-size: auto;
+}
+
+details[open] > .menu-panel {
+  transform-origin: top right;
+  animation: menu-in 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-dir] .step-photo,
+  [data-dir] .step-copy {
+    animation: fade-in 200ms ease-out backwards;
+  }
+  .faq-item::details-content {
+    transition: none;
+  }
+  details[open] > .menu-panel {
+    animation: fade-in 150ms ease-out;
   }
 }
 
@@ -114,3 +256,5 @@
 [data-team] {
   transition: background-color 240ms cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+

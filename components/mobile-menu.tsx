@@ -19,7 +19,7 @@ export function MobileMenu({ links, loginUrl, tone = 'light' }: { links: { href:
         <MenuIcon aria-hidden="true" className="size-5 group-open:hidden" />
         <XIcon aria-hidden="true" className="hidden size-5 group-open:block" />
       </summary>
-      <nav aria-label="Mobile" onClick={close} className="absolute top-12 right-0 z-40 w-60 rounded-[14px] bg-surface p-2 shadow-[0_12px_32px_rgb(17_17_17/0.12)]">
+      <nav aria-label="Mobile" onClick={close} className="menu-panel absolute top-12 right-0 z-40 w-60 rounded-[14px] bg-surface p-2 shadow-[0_12px_32px_rgb(17_17_17/0.12)]">
         {links.map((link) => (
           <Link key={link.href} href={link.href} className="block rounded-lg px-3 py-2.5 text-[0.9375rem] font-semibold text-ink hover:bg-wash">{link.label}</Link>
         ))}

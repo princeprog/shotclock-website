@@ -18,7 +18,7 @@ export function Tag({ children, tone = 'light', className }: { children: ReactNo
 export function PillButton({ href, children, tone = 'orange', size = 'md', className }: { href: string; children: ReactNode; tone?: 'orange' | 'white' | 'ink'; size?: 'sm' | 'md'; className?: string }) {
   return (
     <a href={href} className={cn(
-      'group inline-flex shrink-0 items-center gap-2.5 rounded-full font-semibold transition-colors',
+      'group inline-flex shrink-0 items-center gap-2.5 rounded-full font-semibold transition-[background-color,transform] duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] active:scale-[0.97]',
       size === 'md' ? 'h-12 pr-1.5 pl-5 text-[0.9375rem]' : 'h-10 pr-1 pl-4 text-sm',
       tone === 'orange' && 'bg-orange text-ink hover:bg-orange-hover',
       tone === 'white' && 'bg-surface text-ink hover:bg-wash',
