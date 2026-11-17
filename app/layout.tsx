@@ -4,6 +4,7 @@ import { connection } from 'next/server'
 import './globals.css'
 import { SiteFooter } from '@/components/site-footer'
 import { SiteHeader } from '@/components/site-header'
+import { HideOnLanding } from '@/components/site-chrome'
 import { FollowStyles } from '@/components/follow'
 import { siteUrl } from '@/lib/site'
 
@@ -29,7 +30,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
       <body className="flex min-h-dvh flex-col antialiased">
         <FollowStyles />
         <a href="#content" className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-lg focus:bg-surface focus:px-4 focus:py-2 focus:font-semibold">Skip to content</a>
-        <SiteHeader />
+        <HideOnLanding><SiteHeader /></HideOnLanding>
         <div id="content" className="flex-1">{children}</div>
         <SiteFooter />
       </body>

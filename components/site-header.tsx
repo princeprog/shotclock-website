@@ -4,7 +4,7 @@ import { MobileMenu } from '@/components/mobile-menu'
 import { ShotclockLogo } from '@/components/shotclock-logo'
 import { loginUrl, signupUrl } from '@/lib/site'
 
-const links = [
+export const siteLinks = [
   { href: '/#how-it-works', label: 'How it works' },
   { href: '/#for-families', label: 'For families' },
   { href: '/leagues', label: 'Leagues' },
@@ -17,7 +17,7 @@ export function SiteHeader() {
       <div className="mx-auto flex h-16 max-w-6xl items-center gap-2 px-4 sm:px-6">
         <ShotclockLogo />
         <nav aria-label="Main" className="ml-6 hidden items-center gap-1 lg:flex">
-          {links.map((link) => (
+          {siteLinks.map((link) => (
             <Link key={link.href} href={link.href} className="rounded-lg px-3 py-1.5 text-[0.9375rem] font-semibold text-muted transition-colors hover:text-ink">{link.label}</Link>
           ))}
         </nav>
@@ -27,7 +27,7 @@ export function SiteHeader() {
           </Link>
           <a href={loginUrl} className="hidden h-10 items-center rounded-xl bg-surface px-4 text-sm font-semibold text-ink transition-colors hover:bg-wash sm:inline-flex">Log in</a>
           <a href={signupUrl} className="inline-flex h-10 shrink-0 items-center rounded-xl bg-ink px-4 text-sm font-semibold text-white transition-colors hover:bg-black">Sign up</a>
-          <MobileMenu links={links} loginUrl={loginUrl} />
+          <MobileMenu links={siteLinks} loginUrl={loginUrl} />
         </div>
       </div>
     </header>

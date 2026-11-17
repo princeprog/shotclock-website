@@ -1,18 +1,23 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import type { Metadata } from 'next'
-import { ArrowRightIcon, ArrowUpRightIcon, CalendarDaysIcon, ClockIcon, MapPinIcon, PlusIcon } from 'lucide-react'
+import { ArrowUpRightIcon, PlusIcon } from 'lucide-react'
 import { getDirectory, getUpcoming, type DirectoryLeague, type UpcomingGame } from '@/lib/api'
 import { HowItWorks } from '@/components/landing/how-it-works'
 import { LeagueShowcase } from '@/components/landing/league-showcase'
-import { TeamBadge } from '@/components/team-badge'
+import { PillButton, Tag } from '@/components/landing/tag'
+import { MobileMenu } from '@/components/mobile-menu'
+import { ShotclockMark } from '@/components/shotclock-logo'
+import { siteLinks } from '@/components/site-header'
 import { When } from '@/components/when'
 import { seasonHref } from '@/lib/routes'
 import { loginUrl, signupUrl } from '@/lib/site'
-import heroPhoto from '@/assets/landing/hero.webp'
+import heroPhoto from '@/assets/landing/hero-day.webp'
+import ballPhoto from '@/assets/landing/ball.webp'
 import fansPhoto from '@/assets/landing/fans.webp'
 import gymPhoto from '@/assets/landing/gym.webp'
 import huddlePhoto from '@/assets/landing/huddle.webp'
+import organizerPhoto from '@/assets/landing/organizer.webp'
 import outdoorPhoto from '@/assets/landing/outdoor.webp'
 import youthPhoto from '@/assets/landing/youth.webp'
 
@@ -30,65 +35,70 @@ async function safely<T>(load: () => Promise<T>, fallback: T): Promise<T> {
   }
 }
 
-function NextGameCard({ game }: { game: UpcomingGame | undefined }) {
-  const rows = game?.scheduledAt
-    ? [
-        { icon: CalendarDaysIcon, label: 'Date', value: <When iso={game.scheduledAt} timeZone={game.league.timeZone} show="day" /> },
-        { icon: ClockIcon, label: 'Time', value: <When iso={game.scheduledAt} timeZone={game.league.timeZone} show="time" /> },
-        { icon: MapPinIcon, label: 'Venue', value: game.venue?.name ?? 'To be announced' },
-      ]
-    : null
+function HeroNav() {
   return (
-    <aside aria-labelledby="hero-next-game" className="w-full rounded-[22px] bg-white/12 p-3 ring-1 ring-white/20 backdrop-blur-xl lg:max-w-[22rem] lg:self-end">
-      <div className="px-2 pt-1 pb-3">
-        <h2 id="hero-next-game" className="text-lg font-bold text-white">{rows ? 'Next game on Shotclock' : 'Your league, published'}</h2>
-        <p className="text-sm text-white/75">{rows ? `${game!.league.name} · ${game!.division.name}` : 'Schedules, scores and standings on one page.'}</p>
+    <div className="relative z-30 flex items-center gap-3 px-5 pt-5 sm:px-8 sm:pt-6 lg:px-12">
+      <Link href="/" className="flex items-center gap-2.5 rounded-lg text-lg font-semibold tracking-[-0.02em] text-white">
+        <ShotclockMark className="size-8" />Shotclock
+      </Link>
+      <nav aria-label="Main" className="mx-auto hidden items-center gap-7 lg:flex">
+        {siteLinks.map((link) => (
+          <Link key={link.href} href={link.href} className="text-sm font-medium text-white/85 transition-colors hover:text-white">{link.label}</Link>
+        ))}
+      </nav>
+      <div className="ml-auto flex items-center gap-2 lg:ml-0">
+        <a href={loginUrl} className="hidden h-10 items-center rounded-full px-4 text-sm font-semibold text-white transition-colors hover:bg-white/10 sm:inline-flex">Log in</a>
+        <PillButton href={signupUrl} tone="white" size="sm">Sign up</PillButton>
+        <MobileMenu links={siteLinks} loginUrl={loginUrl} tone="dark" />
       </div>
-      <div className="rounded-2xl bg-surface p-4 text-ink">
-        {game && rows ? (
-          <>
-            <div className="space-y-1.5">
-              {[game.home, game.away].map((side) => (
-                <p key={side.id} className="flex items-center gap-2.5 text-[0.9375rem] font-bold">
-                  <TeamBadge name={side.name} abbreviation={side.abbreviation} size="sm" /><span className="truncate">{side.name}</span>
-                </p>
-              ))}
+    </div>
+  )
+}
+
+function NextGameCard({ game }: { game: UpcomingGame | undefined }) {
+  const ready = game?.scheduledAt ? game : undefined
+  const rows = ready
+    ? [
+        ['Match', <span key="m" className="leading-snug">{ready.home.name} vs {ready.away.name}</span>],
+        ['Date', <When key="d" iso={ready.scheduledAt!} timeZone={ready.league.timeZone} show="day" />],
+        ['Time', <When key="t" iso={ready.scheduledAt!} timeZone={ready.league.timeZone} show="time" />],
+        ['Venue', ready.venue?.name ?? 'To be announced'],
+      ] as const
+    : [
+        ['Teams', 'Rosters and divisions'],
+        ['Schedule', 'Generated in minutes'],
+        ['Scores', 'Standings update on save'],
+      ] as const
+  const href = ready ? seasonHref(ready.league.slug, ready.season.slug, 'schedule', { division: ready.division.id }) : signupUrl
+  return (
+    <aside aria-labelledby="hero-next-game" className="w-full rounded-[22px] bg-white/15 p-2.5 ring-1 ring-white/25 backdrop-blur-xl sm:w-[21rem]">
+      <div className="px-2.5 pt-1.5 pb-2.5">
+        <h2 id="hero-next-game" className="text-[1.0625rem] font-semibold text-white">{ready ? 'Upcoming game' : 'Your league, published'}</h2>
+        <p className="truncate text-[0.8125rem] text-white/80">{ready ? `${ready.league.name} · ${ready.division.name}` : 'Everything families check, in one place'}</p>
+      </div>
+      <div className="rounded-2xl bg-surface p-3.5 text-ink">
+        <dl className="grid grid-cols-[4.5rem_minmax(0,1fr)] gap-x-3 gap-y-2 text-[0.8125rem]">
+          {rows.map(([label, value]) => (
+            <div key={label} className="contents">
+              <dt className="text-muted">{label}:</dt>
+              <dd className="font-medium tabular">{value}</dd>
             </div>
-            <dl className="mt-4 space-y-2 border-t border-line pt-3 text-sm">
-              {rows.map(({ icon: Icon, label, value }) => (
-                <div key={label} className="flex items-center gap-2.5">
-                  <Icon aria-hidden="true" className="size-4 text-muted" />
-                  <dt className="w-12 text-muted">{label}</dt>
-                  <dd className="min-w-0 truncate font-semibold tabular">{value}</dd>
-                </div>
-              ))}
-            </dl>
-            <Link href={seasonHref(game.league.slug, game.season.slug, 'schedule', { division: game.division.id })} className="mt-4 flex h-11 items-center justify-center gap-1.5 rounded-xl bg-ink text-sm font-semibold text-white transition-colors hover:bg-black">
-              View schedule<ArrowRightIcon aria-hidden="true" className="size-4" />
-            </Link>
-          </>
-        ) : (
-          <>
-            <ul className="space-y-2 text-sm">
-              {['Generate a full season schedule', 'Enter final scores after each game', 'Standings update on their own'].map((item) => (
-                <li key={item} className="flex items-center gap-2.5 font-semibold"><span className="grid size-6 place-items-center rounded-full bg-wash"><PlusIcon aria-hidden="true" className="size-3.5" /></span>{item}</li>
-              ))}
-            </ul>
-            <a href={signupUrl} className="mt-4 flex h-11 items-center justify-center gap-1.5 rounded-xl bg-ink text-sm font-semibold text-white transition-colors hover:bg-black">
-              Create your league<ArrowRightIcon aria-hidden="true" className="size-4" />
-            </a>
-          </>
-        )}
+          ))}
+        </dl>
+        <div className="relative mt-3.5 h-24 overflow-hidden rounded-xl">
+          <Image src={youthPhoto} alt="" fill sizes="320px" placeholder="blur" className="object-cover" />
+          <a href={href} className="absolute right-2 bottom-2 inline-flex h-8 items-center rounded-full bg-orange px-3.5 text-[0.8125rem] font-semibold text-ink transition-colors hover:bg-orange-hover">{ready ? 'View schedule' : 'Get started'}</a>
+        </div>
       </div>
     </aside>
   )
 }
 
 const familyPages = [
-  { title: 'Schedules', text: 'Every game time, court and venue, in the league’s own time zone.', photo: gymPhoto, alt: 'A basketball resting on an empty gym floor' },
-  { title: 'Results and standings', text: 'Final scores and a standings table that follows your tiebreakers.', photo: youthPhoto, alt: 'A young player dribbling past a defender' },
-  { title: 'Team stats', text: 'Points per game, margins, streaks and home and away records.', photo: outdoorPhoto, alt: 'A player shooting a jump shot on an outdoor court at sunset' },
-  { title: 'Follow your team', text: 'Fans star one team and see its games highlighted on every page.', photo: fansPhoto, alt: 'Families cheering in the bleachers at a youth game' },
+  { tag: 'Schedules', title: 'Game times, courts and venues', photo: gymPhoto, alt: 'A basketball resting on an empty gym floor' },
+  { tag: 'Standings', title: 'Results and a table that follows your tiebreakers', photo: youthPhoto, alt: 'A young player dribbling past a defender' },
+  { tag: 'Team stats', title: 'Points per game, margins and streaks', photo: outdoorPhoto, alt: 'A player shooting a jump shot on an outdoor court at sunset' },
+  { tag: 'Follow', title: 'Star a team and see its games highlighted', photo: fansPhoto, alt: 'Families cheering in the bleachers at a youth game' },
 ]
 
 const questions = [
@@ -99,6 +109,13 @@ const questions = [
   { q: 'How quickly do scores show up?', a: 'As soon as you save a final score, the public league page refreshes, so families see the result on their next page load.' },
 ]
 
+const balls = [
+  'top-[-2.5rem] left-[-1.5rem] w-24 rotate-12 sm:w-28',
+  'bottom-6 left-[6%] hidden w-12 -rotate-12 sm:block',
+  'top-8 right-[8%] hidden w-10 rotate-45 md:block',
+  'right-[-1.5rem] bottom-[-2rem] w-24 -rotate-6 sm:w-32',
+]
+
 export default async function LandingPage() {
   const [upcoming, directory] = await Promise.all([
     safely(() => getUpcoming(1), [] as UpcomingGame[]),
@@ -106,73 +123,105 @@ export default async function LandingPage() {
   ])
 
   return (
-    <main className="mx-auto max-w-6xl px-4 sm:px-6">
-      <section aria-labelledby="hero-title" className="relative mt-4 overflow-hidden rounded-[28px] bg-ink sm:mt-6">
-        <Image src={heroPhoto} alt="" fill preload placeholder="blur" sizes="(min-width: 1152px) 1104px, 100vw" className="object-cover object-[68%_center]" />
-        <div aria-hidden="true" className="absolute inset-0 bg-linear-to-r from-black/85 via-black/55 to-black/10" />
-        <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-black/60 to-transparent" />
-        <div className="relative grid gap-10 px-6 pt-14 pb-6 sm:px-10 sm:pt-20 sm:pb-10 lg:min-h-[40rem] lg:grid-cols-[minmax(0,1fr)_auto] lg:px-12 lg:pt-24 lg:pb-12">
-          <div className="flex max-w-2xl flex-col">
-            <h1 id="hero-title" className="text-[2.75rem] leading-[1.02] font-extrabold tracking-[-0.035em] text-white sm:text-6xl lg:text-[4.5rem]">Run your league from tip-off to title</h1>
-            <p className="mt-5 max-w-xl text-lg text-white/85">Teams, rosters, schedules, scores and standings in one place, with a public league page families can check from the bleachers.</p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <a href={signupUrl} className="group inline-flex h-13 items-center gap-3 rounded-xl bg-orange pr-2 pl-5 text-base font-bold text-ink transition-colors hover:bg-orange-hover">
-                Create your league
-                <span className="grid size-9 place-items-center rounded-lg bg-ink text-white"><ArrowRightIcon aria-hidden="true" className="size-4 transition-transform group-hover:translate-x-0.5" /></span>
-              </a>
-              <Link href="/leagues" className="inline-flex h-13 items-center rounded-xl bg-white/10 px-5 text-base font-semibold text-white ring-1 ring-white/30 backdrop-blur transition-colors hover:bg-white/20">Find a league</Link>
-            </div>
-            <p className="mt-auto pt-12 text-sm text-white/75">Already organizing on Shotclock? <a href={loginUrl} className="font-semibold text-white underline decoration-white/40 hover:decoration-white">Log in</a></p>
+    <main className="bg-surface pb-20">
+      <div className="mx-auto max-w-[90rem] px-2.5 pt-2.5 sm:px-4 sm:pt-4">
+        <section aria-labelledby="hero-title" className="relative">
+          <div className="absolute inset-0 overflow-hidden rounded-[24px] bg-ink sm:rounded-[32px]">
+            <Image src={heroPhoto} alt="" fill preload placeholder="blur" sizes="(min-width: 1440px) 1408px, 100vw" className="object-cover object-[62%_center]" />
+            <div aria-hidden="true" className="absolute inset-0 bg-linear-to-r from-black/65 via-black/25 to-black/0" />
+            <div aria-hidden="true" className="absolute inset-0 bg-black/35 lg:hidden" />
+            <div aria-hidden="true" className="absolute inset-x-0 top-0 h-32 bg-linear-to-b from-black/35 to-transparent" />
+            <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-2/5 bg-linear-to-t from-black/55 to-transparent" />
           </div>
-          <NextGameCard game={upcoming[0]} />
+          <HeroNav />
+          <div className="relative grid gap-8 px-5 pt-16 pb-6 sm:px-8 sm:pt-24 sm:pb-10 lg:min-h-[38rem] lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end lg:px-12 lg:pt-24 lg:pb-12">
+            <div className="flex max-w-xl flex-col lg:self-stretch">
+              <h1 id="hero-title" className="text-[2.5rem] leading-[1.06] font-semibold tracking-[-0.025em] text-white sm:text-[3.5rem] lg:text-[4rem]">Built to run every game of your league</h1>
+              <p className="mt-4 max-w-md text-base text-white/85 sm:text-lg">Teams, schedules, scores and standings in one place, with a public page families can check from the bleachers.</p>
+              <div className="mt-7 flex flex-wrap gap-3">
+                <PillButton href={signupUrl}>Get started today</PillButton>
+                <Link href="/leagues" className="inline-flex h-12 items-center rounded-full bg-white/15 px-5 text-[0.9375rem] font-semibold text-white ring-1 ring-white/30 backdrop-blur transition-colors hover:bg-white/25">Find a league</Link>
+              </div>
+              <div className="mt-10 flex items-center gap-3 lg:mt-auto lg:pt-16">
+                <div className="flex -space-x-2.5">
+                  {[organizerPhoto, huddlePhoto, fansPhoto].map((photo, index) => (
+                    <span key={index} className="relative size-10 overflow-hidden rounded-full ring-2 ring-white/90"><Image src={photo} alt="" fill sizes="40px" className="object-cover" /></span>
+                  ))}
+                </div>
+                <p className="max-w-[16rem] text-sm leading-snug text-white/90">For organizers, coaches and the families who follow every game.</p>
+              </div>
+            </div>
+            <div className="lg:translate-y-24">
+              <NextGameCard game={upcoming[0]} />
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div className="mx-auto max-w-7xl px-4 sm:px-8">
+        <HowItWorks signupUrl={signupUrl} />
+        <LeagueShowcase leagues={directory.items.slice(0, 6)} total={directory.total} signupUrl={signupUrl} />
+
+        <section id="for-families" aria-labelledby="families-title" className="mt-20 scroll-mt-6 sm:mt-28">
+          <div className="flex flex-wrap items-end justify-between gap-5">
+            <div>
+              <Tag>For families</Tag>
+              <h2 id="families-title" className="mt-4 max-w-md text-[1.875rem] leading-[1.15] font-semibold tracking-[-0.02em] text-ink sm:text-[2.5rem]">Everything families look for, on any phone</h2>
+            </div>
+            <PillButton href="/leagues" size="sm">Browse leagues</PillButton>
+          </div>
+          <ul className="mt-8 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+            {familyPages.map((item) => (
+              <li key={item.tag} className="group relative isolate flex aspect-[3/4] flex-col justify-end overflow-hidden rounded-2xl bg-ink p-3 text-white sm:aspect-[4/5] sm:p-4">
+                <Image src={item.photo} alt={item.alt} fill placeholder="blur" sizes="(min-width: 1024px) 300px, 50vw" className="-z-10 object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]" />
+                <div aria-hidden="true" className="absolute inset-0 -z-10 bg-linear-to-t from-black/80 via-black/15 to-transparent" />
+                <span aria-hidden="true" className="absolute top-2.5 right-2.5 grid size-8 place-items-center rounded-full bg-orange text-ink transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 sm:size-9"><ArrowUpRightIcon className="size-4" /></span>
+                <Tag tone="dark" className="h-7 self-start px-3 text-xs">{item.tag}</Tag>
+                <h3 className="mt-2 text-sm leading-snug font-semibold sm:text-base"><Link href="/leagues" className="after:absolute after:inset-0">{item.title}</Link></h3>
+              </li>
+            ))}
+          </ul>
+        </section>
+      </div>
+
+      <section aria-labelledby="cta-title" className="relative mt-20 overflow-hidden bg-ink px-6 py-16 text-center text-white sm:mt-28 sm:py-20">
+        {balls.map((position) => (
+          <Image key={position} src={ballPhoto} alt="" aria-hidden="true" className={`pointer-events-none absolute h-auto ${position}`} sizes="128px" />
+        ))}
+        <div className="relative">
+          <Tag tone="dark">Get started today</Tag>
+          <h2 id="cta-title" className="mx-auto mt-4 max-w-xl text-[1.875rem] leading-[1.15] font-semibold tracking-[-0.02em] sm:text-[2.5rem]">Ready for tip-off? Set up your league today</h2>
+          <p className="mx-auto mt-3 max-w-md text-white/80">Create an account, add your teams and publish your first schedule.</p>
+          <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
+            <PillButton href={signupUrl} size="sm">Sign up</PillButton>
+            <a href={loginUrl} className="inline-flex h-10 items-center px-3 text-sm font-semibold underline decoration-white/40 underline-offset-4 hover:decoration-white">Log in to your account</a>
+          </div>
         </div>
       </section>
 
-      <HowItWorks signupUrl={signupUrl} />
-
-      <LeagueShowcase leagues={directory.items.slice(0, 6)} total={directory.total} signupUrl={signupUrl} />
-
-      <section id="for-families" aria-labelledby="families-title" className="tile mt-16 scroll-mt-20 p-6 sm:p-10">
-        <div className="flex flex-wrap items-end justify-between gap-4">
-          <h2 id="families-title" className="max-w-lg text-3xl leading-[1.12] font-extrabold tracking-[-0.03em] text-ink sm:text-[2.5rem]">Everything families look for, on any phone</h2>
-          <Link href="/leagues" className="inline-flex h-11 items-center gap-1.5 rounded-xl bg-wash px-4 text-sm font-semibold text-ink transition-colors hover:bg-line">Browse leagues<ArrowRightIcon aria-hidden="true" className="size-4" /></Link>
+      <section id="faq" aria-labelledby="faq-title" className="mx-auto mt-20 max-w-7xl scroll-mt-6 px-4 sm:mt-28 sm:px-8">
+        <div className="text-center">
+          <Tag>FAQ</Tag>
+          <h2 id="faq-title" className="mx-auto mt-4 max-w-lg text-[1.875rem] leading-[1.15] font-semibold tracking-[-0.02em] text-ink sm:text-[2.5rem]">Questions organizers ask before they start</h2>
         </div>
-        <ul className="mt-8 grid gap-3.5 sm:grid-cols-2 lg:grid-cols-4">
-          {familyPages.map((item) => (
-            <li key={item.title} className="group relative isolate flex aspect-[4/3] flex-col justify-end overflow-hidden rounded-2xl bg-ink p-4 text-white sm:aspect-[4/5]">
-              <Image src={item.photo} alt={item.alt} fill placeholder="blur" sizes="(min-width: 1024px) 260px, (min-width: 640px) 50vw, 100vw" className="-z-10 object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]" />
-              <div aria-hidden="true" className="absolute inset-0 -z-10 bg-linear-to-t from-black/85 via-black/30 to-transparent" />
-              <span aria-hidden="true" className="absolute top-3 right-3 grid size-9 place-items-center rounded-full bg-orange text-ink transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"><ArrowUpRightIcon className="size-4" /></span>
-              <h3 className="text-lg font-bold"><Link href="/leagues" className="after:absolute after:inset-0">{item.title}</Link></h3>
-              <p className="mt-1 text-sm text-white/80">{item.text}</p>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section aria-labelledby="cta-title" className="mt-16 rounded-[28px] bg-orange px-6 py-14 text-center text-ink sm:py-16">
-        <h2 id="cta-title" className="mx-auto max-w-2xl text-3xl leading-[1.12] font-extrabold tracking-[-0.03em] sm:text-[2.5rem]">Ready for tip-off? Set up your league today.</h2>
-        <p className="mx-auto mt-4 max-w-xl text-lg">Create an account, add your teams and publish your first schedule.</p>
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-          <a href={signupUrl} className="inline-flex h-13 items-center gap-2 rounded-xl bg-ink px-6 text-base font-bold text-white transition-colors hover:bg-black">Sign up<ArrowRightIcon aria-hidden="true" className="size-4" /></a>
-          <a href={loginUrl} className="inline-flex h-13 items-center rounded-xl px-5 text-base font-semibold text-ink underline decoration-ink/30 underline-offset-4 hover:decoration-ink">Log in to your account</a>
-        </div>
-      </section>
-
-      <section id="faq" aria-labelledby="faq-title" className="tile mt-16 grid scroll-mt-20 gap-8 p-6 sm:p-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-12">
-        <div className="relative min-h-72 overflow-hidden rounded-2xl bg-ink">
-          <Image src={huddlePhoto} alt="A coach talking to his team in a huddle during a timeout" fill placeholder="blur" sizes="(min-width: 1024px) 480px, 100vw" className="object-cover" />
-        </div>
-        <div>
-          <h2 id="faq-title" className="text-3xl leading-[1.12] font-extrabold tracking-[-0.03em] text-ink sm:text-[2.5rem]">Questions organizers ask</h2>
-          <div className="mt-6 divide-y divide-line border-y border-line">
+        <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:items-center lg:gap-14">
+          <div className="relative pb-10 sm:pr-16">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-wash">
+              <Image src={huddlePhoto} alt="A coach talking to his team in a huddle during a timeout" fill placeholder="blur" sizes="(min-width: 1024px) 560px, 100vw" className="object-cover" />
+            </div>
+            <div className="absolute right-0 bottom-0 w-[min(17rem,80%)] rounded-2xl bg-surface p-4 shadow-[0_12px_32px_rgb(17_17_17/0.12)]">
+              <ShotclockMark className="size-7" />
+              <p className="mt-2.5 text-sm leading-relaxed text-ink">Every score you save shows up on your public league page, with standings recalculated for you.</p>
+            </div>
+          </div>
+          <div className="divide-y divide-line border-y border-line">
             {questions.map((item, index) => (
               <details key={item.q} open={index === 0} className="group">
-                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-[1.0625rem] font-bold text-ink [&::-webkit-details-marker]:hidden">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-base font-semibold text-ink [&::-webkit-details-marker]:hidden">
                   {item.q}
-                  <PlusIcon aria-hidden="true" className="size-5 shrink-0 text-muted transition-transform duration-200 group-open:rotate-45" />
+                  <span className="grid size-8 shrink-0 place-items-center rounded-full border border-line-strong transition-colors group-open:border-orange group-open:bg-orange"><PlusIcon aria-hidden="true" className="size-4 transition-transform duration-200 group-open:rotate-45" /></span>
                 </summary>
-                <p className="-mt-1 pb-5 text-muted">{item.a}</p>
+                <p className="-mt-1 pr-12 pb-5 text-[0.9375rem] text-muted">{item.a}</p>
               </details>
             ))}
           </div>
