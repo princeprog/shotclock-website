@@ -19,6 +19,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }
   return [
     { url: siteUrl, changeFrequency: 'daily', priority: 1 },
+    { url: `${siteUrl}/leagues`, changeFrequency: 'daily', priority: 0.9 },
     ...leagues.flatMap((league) => ['', 'schedule', 'standings', 'stats', 'teams'].map((tab) => ({
       url: `${siteUrl}${seasonHref(league.slug, league.season.slug, tab)}`,
       changeFrequency: 'daily' as const,
