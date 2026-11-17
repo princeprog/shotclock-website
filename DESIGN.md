@@ -237,7 +237,7 @@ components:
 
 Every answer a parent comes for sits in its own white compartment on a cool grey tray: the next game, the latest result, what is coming up, who leads, and where the team ranks. The tray (#eef0f3 ground) does the separating, so tiles need no borders, no shadows and no rules between them. The result reads like a clean, standard sports website: dense enough to scan a table in one glance, calm enough that the single orange tile is the first thing the eye lands on.
 
-The system is Operate mode. The user chose it on the decision page from a safer-register round (card "Bento", kind grounded, seed `seed:a13390fd4c110ecb`), and the decision comp at `.impeccable/mocks/decision/grounded-bento.png` is the reference composition. It replaces the earlier warm paper world with court-line header bands and 12–16px corners; none of that survives. Personality lives in small details: the drawn follow star, the whole-row warm tint for your team, tight Inter Tight headlines and tabular numbers. The site declines themed costumes: no scoreboards, no programmes, no broadcast graphics, no photography.
+The system is Operate mode. The user chose it on the decision page from a safer-register round (card "Bento", kind grounded, seed `seed:a13390fd4c110ecb`), and the decision comp at `.impeccable/mocks/decision/grounded-bento.png` is the reference composition. It replaces the earlier warm paper world with court-line header bands and 12–16px corners; none of that survives. Personality lives in small details: the drawn follow star, the whole-row warm tint for your team, tight Inter Tight headlines and tabular numbers. The site declines themed costumes: no scoreboards, no programmes, no broadcast graphics, and no photography on league pages. The organizer landing page at `/` is the one Persuade surface and the one place photos appear (see Landing page).
 
 The build departs from the comp in one known, reported place: a muted meta line (location · organizer · season dates) sits under the league title row. It stays.
 
@@ -277,7 +277,7 @@ A near-monochrome cool palette with one warm voice: Shotclock orange, rationed t
 - **Badge Grey** (badge): the fill of the round team monogram badges.
 
 ### Named Rules
-**The One Orange Tile Rule.** Each page carries at most one orange-filled tile, and it holds the next game: the division's or your team's on the season overview, and on the directory only when a followed team plays this week. Its text is ink. If a second element wants orange fill, it is wrong.
+**The One Orange Tile Rule.** Each page carries at most one orange-filled tile, and it holds the next game: the division's or your team's on the season overview, and on the directory only when a followed team plays this week. Its text is ink. If a second element wants orange fill, it is wrong. The landing page is the exception: orange marks its calls to action (pill buttons, arrow badges, the open FAQ toggle), always with ink text.
 
 **The Ember Ink Restraint Rule.** Ember Ink is for the follow star, the sort indicator, in-body links and focus. Tile header links ("Schedule", "Full table", "All results") are muted and turn ink with an underline on hover.
 
@@ -319,6 +319,12 @@ Content is a bento of tiles with 14px gaps. The season overview is a four-column
 
 The directory opens with a hero tile (display heading and search, side by side from 1024px), then the followed next-game tile when it applies, then "Coming up this week" as a horizontal rail of 288px tiles, then league tiles in 1, 2 then 3 columns. Sections on the ground are 32px apart.
 
+### Landing page
+
+`/` is the organizer landing page (user, 2026-11-17: follow the supplied sports-club reference closely, in the Shotclock theme, with basketball photos). The directory moved to `/leagues`. Unlike league pages it is one white page with its own footer; the shared header and footer are hidden and its navigation (links centered on a three-column grid) sits inside the hero. Every band shares one frame that fills the screen up to 120rem (1920px): the hero, ink band and footer rule sit 10px/16px from the edges, and all section content aligns with the hero text 30px, 48px, 64px, 80px and 96px from the page edge at phone, 640px, 1024px, 1280px and 1536px widths. From 1280px the hero grows taller (44rem, then 50rem), its headline steps up to 4.75rem then 5.5rem, the game card widens to 24rem and section headings reach 3.25rem. Sections: a full-width daylight photo hero with 32px corners (24px on phones), white nav links, a white Sign up pill, a 4rem semibold headline (2.5rem on phones), an orange "Get started today" pill, an avatar row and a frosted "Upcoming game" panel with label rows and a photo strip at the hero's bottom right; "How Shotclock works" with a tag pill, round arrow buttons, a main photo, step copy, a side photo and a counter; real published leagues in a grey (wash) 28px panel with centered heading, filter pills and photo-topped cards (a dashed "Your league here" card fills the row when fewer than three leagues exist); four portrait family cards with tag pills and orange arrow badges; a full-width ink band with basketball cutouts; and a centered FAQ with a photo, an overlapping white note and round plus toggles.
+
+Landing type is semibold (600) at -0.02em to -0.025em: section headings 2.5rem (1.875rem on phones), card titles 1rem. Section tags are 32px outlined pills, the one place labels sit above headings. Buttons are full pills with a round arrow disc (`PillButton`: orange with an ink disc, white with an ink disc, or ink with an orange disc). Photos are AI-generated basketball scenes in `assets/landing/` (WebP, `next/image`, blur placeholders); they show generic people and places, cover league cards only as decoration, and never appear on league pages. No testimonials, customer counts or ratings appear, because none exist. Below 1024px the hero gets an extra 35% black wash so the headline stays readable over the photo. Motion (all in `app/globals.css`, ease `cubic-bezier(0.16, 1, 0.3, 1)`): the one authored moment is the hero pulling into focus like a camera at tip-off, with the photo settling from 1.08 scale, 8px blur and 80% brightness over 1.6s while nav, headline, copy, actions, avatar row and game card focus in from blur and a short rise between 80ms and 560ms (`hero-settle`, `focus-in`). Supporting motion: scroll-linked `reveal` on section headings and photo cards (view timeline, siblings staggered by `--i`, visible as-is without support); carousel photos wipe in from the side you moved toward with copy sliding the same way (`data-dir`); league cards cascade in after a filter change (`pop-in`); FAQ answers open by height (`::details-content` with `interpolate-size`); basketballs in the ink band drift and turn with scroll; pill buttons press to 0.97; hero links grow an underline; the phone menu scales in from its corner. Reduced motion keeps short fades only. Entrances use `backwards` fill so no filter lingers on the hero card's frosted glass. Scroll-linked motion (view and scroll timelines, full-motion preference only, static elsewhere): a 3px orange reading-progress bar across the top; the hero hands off as it leaves (photo drifts down 8% and darkens, copy lifts 72px and fades, the game card rises 140px), all on the hero's named `--hero` view timeline; framed photos drift from -7% to 7% inside a 1.16 zoom (`parallax`, frames use `overflow: clip` so the page stays their scroll container); the leagues panel grows from 0.94; the ink band opens from an inset rounded clip; FAQ rows reveal in sequence.
+
 Inside tiles, padding is 20px (24px from 640px). Rows and tables run edge to edge inside their tile with matching inset, and the row tint fills the full width. Wide tables scroll inside the tile with a sticky team column and a right-edge fade that shows only while columns are hidden.
 
 ## Elevation & Depth
@@ -340,7 +346,7 @@ Soft rectangles nested by size: tiles at 18px, mini-tiles, buttons, search field
 ### Buttons
 Solid, compact and ink-led.
 - **Shape:** gently rounded (12px).
-- **Primary:** ink fill, white text, Control type at 700 for Search (52px tall in the directory hero) and 600 for "For organizers" (40px in the header). Search and every primary action use it.
+- **Primary:** ink fill, white text, Control type at 700 for Search (52px tall in the directory hero) and 600 for "Sign up" (40px in the header). Search and every primary action use it.
 - **Hover / Focus:** fill deepens to pure black over a short colour transition; focus shows the 2px Ember Ink outline offset 2px.
 - **Secondary:** white fill with ink text, padded 10px 16px, wash fill on hover (pagination, header search shortcut on phones).
 
@@ -367,7 +373,7 @@ Solid, compact and ink-led.
 
 ### Navigation
 - **Season tabs:** a white track with 4px padding and 12px corners holding 36px segments with 9px corners. The active tab is an ink pill with white text; inactive tabs are muted and gain a wash fill and ink text on hover. Tabs carry the selected division across pages. The schedule's Upcoming / Results switch uses the same control.
-- **Site header:** 64px, sticky, translucent ground; the Shotclock logo, a muted "Leagues" link, the search field and the ink "For organizers" button.
+- **Site header:** 64px, sticky, translucent ground; the Shotclock logo, muted links (How it works, For families, Leagues, FAQ) from 1024px, then a white search icon button (to the directory search), a white "Log in" button from 640px and the ink "Sign up" button. Log in and Sign up open the admin app's `/login` and `/register`. Below 1024px a white menu button opens a 14px-corner white panel with the links (and Log in on phones) under a soft `0 12px 32px` shadow; it closes after a tap.
 - **Footer:** muted text with the small Shotclock mark and an ink link underlined in Firm Line, turning ink on hover.
 
 ### Tables
@@ -392,7 +398,7 @@ One team per league, saved in the browser. Any element tagged with a team (`data
 - **Do** let wide tables scroll inside their tile with a right-edge fade; the page itself never scrolls sideways.
 
 ### Don't:
-- **Don't** use photos or any imagery standing in for photos.
+- **Don't** use photos or any imagery standing in for photos outside the landing page.
 - **Don't** draw court lines, court markings or any basketball-themed decoration.
 - **Don't** use Unicode glyphs or emoji as icons; icons are drawn SVG.
 - **Don't** put eyebrows or kickers above headings; a tile is named by its Label heading alone.

@@ -1,117 +1,254 @@
+import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowRightIcon, SearchIcon } from 'lucide-react'
 import type { Metadata } from 'next'
+import type { CSSProperties } from 'react'
+import { ArrowUpRightIcon, PlusIcon } from 'lucide-react'
 import { getDirectory, getUpcoming, type DirectoryLeague, type UpcomingGame } from '@/lib/api'
-import { EmptyState } from '@/components/empty-state'
-import { FollowMark } from '@/components/follow-mark'
-import { FollowedNextGame } from '@/components/followed-next-game'
-import { SectionHeading } from '@/components/section-heading'
-import { StatusPill } from '@/components/status-pill'
-import { TeamBadge } from '@/components/team-badge'
+import { HowItWorks } from '@/components/landing/how-it-works'
+import { LeagueShowcase } from '@/components/landing/league-showcase'
+import { PillButton, Tag } from '@/components/landing/tag'
+import { MobileMenu } from '@/components/mobile-menu'
+import { ShotclockMark } from '@/components/shotclock-logo'
+import { siteLinks } from '@/components/site-header'
 import { When } from '@/components/when'
-import { adminUrl } from '@/lib/site'
 import { seasonHref } from '@/lib/routes'
+import { loginUrl, signupUrl } from '@/lib/site'
+import heroPhoto from '@/assets/landing/hero-day.webp'
+import ballPhoto from '@/assets/landing/ball.webp'
+import fansPhoto from '@/assets/landing/fans.webp'
+import gymPhoto from '@/assets/landing/gym.webp'
+import huddlePhoto from '@/assets/landing/huddle.webp'
+import organizerPhoto from '@/assets/landing/organizer.webp'
+import outdoorPhoto from '@/assets/landing/outdoor.webp'
+import youthPhoto from '@/assets/landing/youth.webp'
 
-type Props = { searchParams: Promise<{ q?: string | string[]; page?: string | string[] }> }
-
-export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
-  const q = (await searchParams).q
-  return typeof q === 'string' && q.trim() ? { title: `Search: ${q.trim()}`, robots: { index: false } } : {}
+export const metadata: Metadata = {
+  title: { absolute: 'Shotclock: basketball league management for organizers' },
+  description: 'Run your basketball league in one place: teams, rosters, schedules, scores and standings, with a public league page families can follow from any phone.',
 }
 
-function LeagueTile({ league }: { league: DirectoryLeague }) {
-  return (
-    <li className="group tile relative flex flex-col p-5 transition-shadow hover:shadow-[0_6px_20px_rgb(17_17_17/0.07)]">
-      <div className="flex items-start justify-between gap-3">
-        <h3 className="text-lg leading-snug font-extrabold text-ink">
-          <Link href={seasonHref(league.slug, league.season.slug)} className="after:absolute after:inset-0 after:rounded-[18px]">{league.name}</Link>
-        </h3>
-        <StatusPill status={league.season.status} className="shrink-0" />
-      </div>
-      <p className="mt-1 text-sm text-muted">{[league.location, league.organization].filter(Boolean).join(' · ')}</p>
-      <p className="mt-4 text-[0.9375rem] font-semibold text-ink">{league.season.name}</p>
-      <p className="mt-0.5 text-sm text-muted tabular">{league.teamCount} {league.teamCount === 1 ? 'team' : 'teams'} · {league.divisionCount} {league.divisionCount === 1 ? 'division' : 'divisions'}</p>
-      <p className="mt-auto flex items-center justify-end pt-4 text-sm">
-        <span className="inline-flex items-center gap-1 font-semibold text-ink">View<ArrowRightIcon aria-hidden="true" className="size-4 transition-transform group-hover:translate-x-0.5" /></span></p>
-    </li>
-  )
+// The landing page still renders when the API is down; its live sections fall back to sign-up prompts.
+async function safely<T>(load: () => Promise<T>, fallback: T): Promise<T> {
+  try {
+    return await load()
+  } catch {
+    return fallback
+  }
 }
 
-function UpcomingTile({ game }: { game: UpcomingGame }) {
+function HeroNav() {
   return (
-    <li className="tile relative w-72 shrink-0 p-4">
-      <p className="truncate text-[0.8125rem] font-semibold text-muted">
-        <Link href={seasonHref(game.league.slug, game.season.slug, 'schedule', { division: game.division.id })} className="after:absolute after:inset-0 after:rounded-[18px]">{game.league.name}</Link>
-      </p>
-      <p className="mt-0.5 text-sm font-semibold text-ink tabular">{game.scheduledAt && <When iso={game.scheduledAt} timeZone={game.league.timeZone} />}</p>
-      <div className="mt-3 space-y-1">
-        {[game.home, game.away].map((side) => (
-          <p key={side.id} data-team={side.teamId} className="-mx-2 flex items-center gap-2.5 rounded-lg px-2 py-1 text-[0.9375rem] font-semibold text-ink">
-            <TeamBadge name={side.name} abbreviation={side.abbreviation} size="sm" /><span className="truncate">{side.name}</span><FollowMark teamId={side.teamId} />
-          </p>
+    <div className="focus-in relative z-30 flex items-center gap-3 px-5 pt-5 [--blur:0px] [--d:80ms] [--rise:-8px] sm:px-8 sm:pt-6 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:px-12 xl:px-16 2xl:px-20">
+      <Link href="/" className="flex items-center gap-2.5 rounded-lg text-lg font-semibold tracking-[-0.02em] text-white">
+        <ShotclockMark className="size-8" />Shotclock
+      </Link>
+      <nav aria-label="Main" className="hidden items-center gap-7 lg:flex">
+        {siteLinks.map((link) => (
+          <Link key={link.href} href={link.href} className="relative text-sm font-medium text-white/85 transition-colors after:absolute after:inset-x-0 after:-bottom-1 after:h-px after:origin-left after:scale-x-0 after:bg-white after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.16,1,0.3,1)] hover:text-white hover:after:scale-x-100">{link.label}</Link>
         ))}
+      </nav>
+      <div className="ml-auto flex items-center gap-2 lg:justify-self-end">
+        <a href={loginUrl} className="hidden h-10 items-center rounded-full px-4 text-sm font-semibold text-white transition-colors hover:bg-white/10 sm:inline-flex">Log in</a>
+        <PillButton href={signupUrl} tone="white" size="sm">Sign up</PillButton>
+        <MobileMenu links={siteLinks} loginUrl={loginUrl} tone="dark" />
       </div>
-      <p className="mt-2 truncate text-sm text-muted">{game.division.name}{game.venue ? ` · ${game.venue.name}` : ''}</p>
-    </li>
+    </div>
   )
 }
 
-export default async function DirectoryPage({ searchParams }: Props) {
-  const params = await searchParams
-  const q = typeof params.q === 'string' ? params.q.trim().slice(0, 80) : ''
-  const page = Math.max(1, Math.min(10000, Number.parseInt(typeof params.page === 'string' ? params.page : '1', 10) || 1))
-  const [directory, upcoming] = await Promise.all([getDirectory(q || undefined, page), !q && page === 1 ? getUpcoming(8) : Promise.resolve([])])
-  const pageHref = (target: number) => `/?${new URLSearchParams({ ...(q ? { q } : {}), ...(target > 1 ? { page: String(target) } : {}) })}`
+function NextGameCard({ game }: { game: UpcomingGame | undefined }) {
+  const ready = game?.scheduledAt ? game : undefined
+  const rows = ready
+    ? [
+        ['Match', <span key="m" className="leading-snug">{ready.home.name} vs {ready.away.name}</span>],
+        ['Date', <When key="d" iso={ready.scheduledAt!} timeZone={ready.league.timeZone} show="day" />],
+        ['Time', <When key="t" iso={ready.scheduledAt!} timeZone={ready.league.timeZone} show="time" />],
+        ['Venue', ready.venue?.name ?? 'To be announced'],
+      ] as const
+    : [
+        ['Teams', 'Rosters and divisions'],
+        ['Schedule', 'Generated in minutes'],
+        ['Scores', 'Standings update on save'],
+      ] as const
+  const href = ready ? seasonHref(ready.league.slug, ready.season.slug, 'schedule', { division: ready.division.id }) : signupUrl
   return (
-    <main className="mx-auto max-w-6xl px-4 sm:px-6">
-      <section className="tile mt-4 grid gap-6 p-6 sm:mt-6 sm:p-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,28rem)] lg:items-end">
-        <div>
-          <h1 className="text-[2.5rem] leading-[1.02] font-extrabold tracking-[-0.035em] text-ink sm:text-6xl">Find your league</h1>
-          <p className="mt-4 max-w-xl text-lg text-muted">Game times, final scores and standings, published by your league organizers.</p>
+    <aside aria-labelledby="hero-next-game" className="hero-exit-card w-full rounded-[22px] bg-white/15 p-2.5 ring-1 ring-white/25 backdrop-blur-xl sm:w-[21rem] 2xl:w-[24rem]">
+      <div className="px-2.5 pt-1.5 pb-2.5">
+        <h2 id="hero-next-game" className="text-[1.0625rem] font-semibold text-white">{ready ? 'Upcoming game' : 'Your league, published'}</h2>
+        <p className="truncate text-[0.8125rem] text-white/80">{ready ? `${ready.league.name} · ${ready.division.name}` : 'Everything families check, in one place'}</p>
+      </div>
+      <div className="rounded-2xl bg-surface p-3.5 text-ink">
+        <dl className="grid grid-cols-[4.5rem_minmax(0,1fr)] gap-x-3 gap-y-2 text-[0.8125rem]">
+          {rows.map(([label, value]) => (
+            <div key={label} className="contents">
+              <dt className="text-muted">{label}:</dt>
+              <dd className="font-medium tabular">{value}</dd>
+            </div>
+          ))}
+        </dl>
+        <div className="relative mt-3.5 h-24 overflow-hidden rounded-xl">
+          <Image src={youthPhoto} alt="" fill sizes="400px" placeholder="blur" quality={85} className="object-cover" />
+          <a href={href} className="absolute right-2 bottom-2 inline-flex h-8 items-center rounded-full bg-orange px-3.5 text-[0.8125rem] font-semibold text-ink transition-colors hover:bg-orange-hover">{ready ? 'View schedule' : 'Get started'}</a>
         </div>
-        <form action="/" role="search" className="flex gap-2">
-          <label htmlFor="league-search" className="sr-only">Search leagues or teams</label>
-          <div className="relative flex-1">
-            <SearchIcon aria-hidden="true" className="pointer-events-none absolute top-1/2 left-4 size-5 -translate-y-1/2 text-muted" />
-            <input id="league-search" name="q" type="search" defaultValue={q} maxLength={80} placeholder="League, team or city" className="h-13 w-full rounded-xl bg-wash pr-4 pl-12 text-base text-ink placeholder:text-muted" />
+      </div>
+    </aside>
+  )
+}
+
+const familyPages = [
+  { tag: 'Schedules', title: 'Game times, courts and venues', photo: gymPhoto, alt: 'A basketball resting on an empty gym floor' },
+  { tag: 'Standings', title: 'Results and a table that follows your tiebreakers', photo: youthPhoto, alt: 'A young player dribbling past a defender' },
+  { tag: 'Team stats', title: 'Points per game, margins and streaks', photo: outdoorPhoto, alt: 'A player shooting a jump shot on an outdoor court at sunset' },
+  { tag: 'Follow', title: 'Star a team and see its games highlighted', photo: fansPhoto, alt: 'Families cheering in the bleachers at a youth game' },
+]
+
+const questions = [
+  { q: 'Who can see my league?', a: 'Only leagues you choose to publish appear on the public website, and only their active and completed seasons. Draft seasons stay private, and player names, birth dates and rosters are never shown.' },
+  { q: 'Do families need an account?', a: 'No. Anyone can open your league page to check schedules, results, standings and team stats without signing in. Only organizers need a Shotclock account.' },
+  { q: 'Can I run more than one league?', a: 'Yes. An organization can hold several leagues, each with its own seasons and divisions, and one account can manage more than one organization.' },
+  { q: 'How are standings calculated?', a: 'Standings come from final scores of regular-season games and use the same tiebreakers you see in the admin app. Forfeits count in win and loss records but not in scoring averages.' },
+  { q: 'How quickly do scores show up?', a: 'As soon as you save a final score, the public league page refreshes, so families see the result on their next page load.' },
+]
+
+const balls = [
+  'top-[-2.5rem] left-[-1.5rem] w-24 rotate-12 sm:w-28',
+  'bottom-6 left-[6%] hidden w-12 -rotate-12 sm:block',
+  'top-8 right-[8%] hidden w-10 rotate-45 md:block',
+  'right-[-1.5rem] bottom-[-2rem] w-24 -rotate-6 sm:w-32',
+]
+
+export default async function LandingPage() {
+  const [upcoming, directory] = await Promise.all([
+    safely(() => getUpcoming(1), [] as UpcomingGame[]),
+    safely(() => getDirectory(undefined, 1), { items: [] as DirectoryLeague[], page: 1, pageSize: 0, total: 0, totalPages: 0 }),
+  ])
+
+  return (
+    <>
+    <main className="bg-surface pb-20">
+      <div aria-hidden="true" className="scroll-progress fixed inset-x-0 top-0 z-50 h-[3px] origin-left bg-orange" />
+      <div className="mx-auto max-w-[120rem] px-2.5 pt-2.5 sm:px-4 sm:pt-4">
+        <section aria-labelledby="hero-title" className="hero-scope relative">
+          <div className="absolute inset-0 overflow-hidden rounded-[24px] bg-ink sm:rounded-[32px]">
+            <div className="hero-exit-photo absolute inset-0">
+              <Image src={heroPhoto} alt="" fill preload placeholder="blur" quality={85} sizes="(min-width: 1920px) 1888px, 100vw" className="hero-settle object-cover object-[62%_center]" />
+            </div>
+            <div aria-hidden="true" className="absolute inset-0 bg-linear-to-r from-black/65 via-black/25 to-black/0" />
+            <div aria-hidden="true" className="absolute inset-0 bg-black/35 lg:hidden" />
+            <div aria-hidden="true" className="absolute inset-x-0 top-0 h-32 bg-linear-to-b from-black/35 to-transparent" />
+            <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-2/5 bg-linear-to-t from-black/55 to-transparent" />
           </div>
-          <button type="submit" className="h-13 rounded-xl bg-ink px-5 text-base font-bold text-white transition-colors hover:bg-black">Search</button>
-        </form>
-      </section>
-
-      <FollowedNextGame games={upcoming} />
-
-      {upcoming.length > 0 && (
-        <section aria-labelledby="coming-up" className="mt-8">
-          <SectionHeading id="coming-up" title="Coming up this week" />
-          <ul className="scroll-rail -mx-4 flex gap-3.5 px-4 pb-1 sm:mx-0 sm:px-0">{upcoming.map((game) => <UpcomingTile key={game.id} game={game} />)}</ul>
+          <HeroNav />
+          <div className="relative grid gap-8 px-5 pt-16 pb-6 sm:px-8 sm:pt-24 sm:pb-10 lg:min-h-[38rem] xl:min-h-[44rem] xl:px-16 2xl:min-h-[50rem] 2xl:px-20 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end lg:px-12 lg:pt-24 lg:pb-12">
+            <div className="hero-exit-copy flex max-w-xl flex-col lg:self-stretch 2xl:max-w-3xl">
+              <h1 id="hero-title" className="focus-in text-[2.5rem] leading-[1.06] font-semibold tracking-[-0.025em] text-white [--blur:10px] [--d:160ms] [--rise:28px] sm:text-[3.5rem] lg:text-[4rem] xl:text-[4.75rem] 2xl:text-[5.5rem]">Built to run every game of your league</h1>
+              <p className="focus-in mt-4 max-w-md text-base text-white/85 [--d:280ms] sm:text-lg 2xl:max-w-lg 2xl:text-xl">Teams, schedules, scores and standings in one place, with a public page families can check from the bleachers.</p>
+              <div className="focus-in mt-7 flex flex-wrap gap-3 [--d:380ms]">
+                <PillButton href={signupUrl}>Get started today</PillButton>
+                <Link href="/leagues" className="inline-flex h-12 items-center rounded-full bg-white/15 px-5 text-[0.9375rem] font-semibold text-white ring-1 ring-white/30 backdrop-blur transition-colors hover:bg-white/25">Find a league</Link>
+              </div>
+              <div className="focus-in mt-10 flex items-center gap-3 [--d:480ms] lg:mt-auto lg:pt-16">
+                <div className="flex -space-x-2.5">
+                  {[organizerPhoto, huddlePhoto, fansPhoto].map((photo, index) => (
+                    <span key={index} className="relative size-10 overflow-hidden rounded-full ring-2 ring-white/90"><Image src={photo} alt="" fill sizes="40px" className="object-cover" /></span>
+                  ))}
+                </div>
+                <p className="max-w-[16rem] text-sm leading-snug text-white/90">For organizers, coaches and the families who follow every game.</p>
+              </div>
+            </div>
+            <div className="focus-in [--blur:8px] [--d:560ms] [--rise:40px]">
+              <NextGameCard game={upcoming[0]} />
+            </div>
+          </div>
         </section>
-      )}
+      </div>
 
-      <section aria-labelledby="leagues" className="mt-8">
-        <SectionHeading id="leagues" title={q ? `Leagues matching “${q}”` : 'Leagues'}>
-          {q && <Link href="/" className="text-sm font-semibold text-orange-ink hover:underline">Clear search</Link>}
-        </SectionHeading>
-        {directory.items.length ? (
-          <>
-            <p className="mb-4 text-sm text-muted">{directory.total} {directory.total === 1 ? 'league' : 'leagues'}</p>
-            <ul className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3">{directory.items.map((league) => <LeagueTile key={league.slug} league={league} />)}</ul>
-            {directory.totalPages > 1 && (
-              <nav aria-label="Pages" className="mt-8 flex items-center justify-between gap-4 text-sm">
-                {page > 1 ? <Link href={pageHref(page - 1)} className="rounded-xl bg-surface px-4 py-2.5 font-semibold hover:bg-wash">Previous</Link> : <span />}
-                <span className="text-muted tabular">Page {page} of {directory.totalPages}</span>
-                {page < directory.totalPages ? <Link href={pageHref(page + 1)} className="rounded-xl bg-surface px-4 py-2.5 font-semibold hover:bg-wash">Next</Link> : <span />}
-              </nav>
-            )}
-          </>
-        ) : q ? (
-          <EmptyState title="No leagues found">Check the spelling, or search for a team or city instead.</EmptyState>
-        ) : (
-          <EmptyState title="No leagues are published yet">
-            Organizers can publish a league from <a href={adminUrl} className="font-semibold text-orange-ink underline">Shotclock</a> under Leagues → Website settings.
-          </EmptyState>
-        )}
+      <div className="mx-auto max-w-[120rem] px-7.5 sm:px-12 lg:px-16 xl:px-20 2xl:px-24">
+        <HowItWorks signupUrl={signupUrl} />
+        <LeagueShowcase leagues={directory.items.slice(0, 6)} total={directory.total} signupUrl={signupUrl} />
+
+        <section id="for-families" aria-labelledby="families-title" className="mt-20 scroll-mt-6 sm:mt-28">
+          <div className="reveal flex flex-wrap items-end justify-between gap-5">
+            <div>
+              <Tag>For families</Tag>
+              <h2 id="families-title" className="mt-4 max-w-md text-[1.875rem] 2xl:max-w-2xl leading-[1.15] font-semibold tracking-[-0.02em] text-ink sm:text-[2.5rem] 2xl:text-[3.25rem]">Everything families look for, on any phone</h2>
+            </div>
+            <PillButton href="/leagues" size="sm">Browse leagues</PillButton>
+          </div>
+          <ul className="mt-8 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+            {familyPages.map((item, index) => (
+              <li key={item.tag} style={{ '--i': index } as CSSProperties} className="reveal group relative isolate flex aspect-[3/4] flex-col justify-end overflow-clip rounded-2xl bg-ink p-3 text-white sm:aspect-[4/5] sm:p-4">
+                <Image src={item.photo} alt={item.alt} fill placeholder="blur" quality={85} sizes="(min-width: 1024px) 24vw, 50vw" className="parallax -z-10 object-cover transition-[scale] duration-500 ease-out group-hover:scale-[1.04]" />
+                <div aria-hidden="true" className="absolute inset-0 -z-10 bg-linear-to-t from-black/80 via-black/15 to-transparent" />
+                <span aria-hidden="true" className="absolute top-2.5 right-2.5 grid size-8 place-items-center rounded-full bg-orange text-ink transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 sm:size-9"><ArrowUpRightIcon className="size-4" /></span>
+                <Tag tone="dark" className="h-7 self-start px-3 text-xs">{item.tag}</Tag>
+                <h3 className="mt-2 text-sm leading-snug font-semibold sm:text-base"><Link href="/leagues" className="after:absolute after:inset-0">{item.title}</Link></h3>
+              </li>
+            ))}
+          </ul>
+        </section>
+      </div>
+
+      <div className="mx-auto mt-20 max-w-[120rem] px-2.5 sm:mt-28 sm:px-4">
+      <section aria-labelledby="cta-title" className="band-open relative overflow-hidden rounded-[24px] bg-ink px-6 py-16 text-center text-white sm:rounded-[32px] sm:py-20">
+        {balls.map((position, index) => (
+          <Image key={position} src={ballPhoto} alt="" aria-hidden="true" style={{ '--drift': index % 2 ? -1 : 1 } as CSSProperties} className={`ball-drift pointer-events-none absolute h-auto ${position}`} sizes="160px" />
+        ))}
+        <div className="reveal relative">
+          <Tag tone="dark">Get started today</Tag>
+          <h2 id="cta-title" className="mx-auto mt-4 max-w-xl text-[1.875rem] 2xl:max-w-3xl leading-[1.15] font-semibold tracking-[-0.02em] sm:text-[2.5rem] 2xl:text-[3.25rem]">Ready for tip-off? Set up your league today</h2>
+          <p className="mx-auto mt-3 max-w-md text-white/80">Create an account, add your teams and publish your first schedule.</p>
+          <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
+            <PillButton href={signupUrl} size="sm">Sign up</PillButton>
+            <a href={loginUrl} className="inline-flex h-10 items-center px-3 text-sm font-semibold underline decoration-white/40 underline-offset-4 hover:decoration-white">Log in to your account</a>
+          </div>
+        </div>
+      </section>
+      </div>
+
+      <section id="faq" aria-labelledby="faq-title" className="mx-auto mt-20 max-w-[120rem] scroll-mt-6 px-7.5 sm:mt-28 sm:px-12 lg:px-16 xl:px-20 2xl:px-24">
+        <div className="reveal text-center">
+          <Tag>FAQ</Tag>
+          <h2 id="faq-title" className="mx-auto mt-4 max-w-lg text-[1.875rem] 2xl:max-w-3xl leading-[1.15] font-semibold tracking-[-0.02em] text-ink sm:text-[2.5rem] 2xl:text-[3.25rem]">Questions organizers ask before they start</h2>
+        </div>
+        <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:items-center lg:gap-14">
+          <div className="reveal relative pb-10 sm:pr-16">
+            <div className="relative aspect-[4/3] overflow-clip rounded-2xl bg-wash">
+              <Image src={huddlePhoto} alt="A coach talking to his team in a huddle during a timeout" fill placeholder="blur" quality={85} sizes="(min-width: 1024px) 45vw, 100vw" className="parallax object-cover" />
+            </div>
+            <div className="absolute right-0 bottom-0 w-[min(17rem,80%)] rounded-2xl bg-surface p-4 shadow-[0_12px_32px_rgb(17_17_17/0.12)]">
+              <ShotclockMark className="size-7" />
+              <p className="mt-2.5 text-sm leading-relaxed text-ink">Every score you save shows up on your public league page, with standings recalculated for you.</p>
+            </div>
+          </div>
+          <div className="divide-y divide-line border-y border-line">
+            {questions.map((item, index) => (
+              <details key={item.q} open={index === 0} style={{ '--i': index } as CSSProperties} className="faq-item reveal group">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-base font-semibold text-ink [&::-webkit-details-marker]:hidden">
+                  {item.q}
+                  <span className="grid size-8 shrink-0 place-items-center rounded-full border border-line-strong transition-colors group-open:border-orange group-open:bg-orange"><PlusIcon aria-hidden="true" className="size-4 transition-transform duration-200 group-open:rotate-45" /></span>
+                </summary>
+                <p className="-mt-1 pr-12 pb-5 text-[0.9375rem] text-muted">{item.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
       </section>
     </main>
+    <footer className="bg-surface">
+      <div className="mx-auto max-w-[120rem] px-2.5 sm:px-4">
+      <div className="flex flex-col gap-3 border-t border-line px-5 py-8 text-sm text-muted sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:px-12 xl:px-16 2xl:px-20">
+        <p className="flex items-center gap-2"><ShotclockMark className="size-5" />Basketball league management for organizers and the families who follow along.</p>
+        <p className="flex gap-5">
+          <Link href="/leagues" className="font-medium text-ink hover:underline">Find a league</Link>
+          <a href={loginUrl} className="font-medium text-ink hover:underline">Log in</a>
+          <a href={signupUrl} className="font-medium text-ink hover:underline">Sign up</a>
+        </p>
+      </div>
+      </div>
+    </footer>
+    </>
   )
 }
+
+

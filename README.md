@@ -1,6 +1,6 @@
 # Shotclock website
 
-The public website for Shotclock leagues: a directory of published leagues and, for each season, the schedule, results, standings, team statistics and team pages. Organizers publish a league from the Shotclock admin app (Leagues → Website settings).
+The public website for Shotclock leagues: an organizer landing page at `/` with Log in and Sign up links to the admin app, a directory of published leagues at `/leagues` and, for each season, the schedule, results, standings, team statistics and team pages. Organizers publish a league from the Shotclock admin app (Leagues → Website settings).
 
 ## Run locally
 
