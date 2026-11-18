@@ -24,11 +24,12 @@ export function NextGame({ games, timeZone, league, season, className = '' }: { 
   }
   const stage = stageLabel(game.stage, game.round)
   const label = followed ? "Your team's next game" : 'Next game'
-  const name = (side: Game['home']) => (
+  // A playoff side still waiting for a semifinal has no team page yet.
+  const name = (side: Game['home']) => side.id ? (
     <Link href={teamHref(league, season, side.id)} className="hover:underline">
-      {side.name}{side.teamId === teamId && <StarIcon aria-label="Followed team" className="ml-1.5 inline size-[0.8em] fill-ink align-[-0.05em]" />}
+      {side.name}{!!teamId && side.teamId === teamId && <StarIcon aria-label="Followed team" className="ml-1.5 inline size-[0.8em] fill-ink align-[-0.05em]" />}
     </Link>
-  )
+  ) : <span>{side.name}</span>
   return (
     <section aria-labelledby="next-game" className={`rounded-[18px] bg-orange p-5 text-ink sm:p-6 ${className}`}>
       <h2 id="next-game" className="text-[0.8125rem] font-bold tracking-normal">{label}{stage && ` · ${stage}`}</h2>

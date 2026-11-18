@@ -24,8 +24,9 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
 function LatestResult({ game, timeZone, league, season }: { game?: Game; timeZone: Zone; league: string; season: string }) {
   if (!game) return <p className="mt-3 text-muted">No final scores yet. Results appear here as soon as they’re recorded.</p>
   const homeWon = (game.home.score ?? 0) > (game.away.score ?? 0)
+  // Final results always have both teams.
   const line = (side: Game['home'], won: boolean) => (
-    <Link href={teamHref(league, season, side.id)} data-team={side.teamId} className={cn('-mx-2 flex items-center gap-2 rounded-lg px-2 py-1 text-lg hover:underline', won ? 'font-extrabold text-ink' : 'text-muted')}>
+    <Link href={teamHref(league, season, side.id!)} data-team={side.teamId} className={cn('-mx-2 flex items-center gap-2 rounded-lg px-2 py-1 text-lg hover:underline', won ? 'font-extrabold text-ink' : 'text-muted')}>
       <span className="truncate">{side.name}</span><FollowMark teamId={side.teamId} />
       <span className="ml-auto pl-4 text-[1.375rem] tabular">{side.score}</span>
     </Link>

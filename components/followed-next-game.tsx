@@ -10,9 +10,9 @@ import { When } from '@/components/when'
 // On the directory, the orange tile leads with a followed team's next game this week. Nothing renders when no followed team plays.
 export function FollowedNextGame({ games }: { games: UpcomingGame[] }) {
   const followed = useFollowedTeams()
-  const game = games.find((item) => followed.includes(item.home.teamId) || followed.includes(item.away.teamId))
+  const game = games.find((item) => followed.includes(item.home.teamId ?? '') || followed.includes(item.away.teamId ?? ''))
   if (!game?.scheduledAt) return null
-  const mine = followed.includes(game.home.teamId) ? game.home : game.away
+  const mine = followed.includes(game.home.teamId ?? '') ? game.home : game.away
   const name = (side: UpcomingGame['home']) => <>{side.name}{side.teamId === mine.teamId && <StarIcon aria-label="Followed team" className="ml-1.5 inline size-[0.8em] fill-ink align-[-0.05em]" />}</>
   return (
     <section aria-labelledby="your-next-game" className="relative mt-3.5 rounded-[18px] bg-orange p-5 text-ink sm:p-6">

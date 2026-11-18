@@ -7,10 +7,10 @@ import { When } from '@/components/when'
 import { cn } from '@/lib/utils'
 
 function TeamLine({ side, won, completed, forfeited, href }: { side: Side; won: boolean; completed: boolean; forfeited: boolean; href?: string }) {
-  const name = <span className={cn('truncate', completed && !won ? 'text-muted' : 'text-ink', won && 'font-bold')}>{side.name}</span>
+  const name = <span className={cn('truncate', (completed && !won) || !side.teamId ? 'text-muted' : 'text-ink', won && 'font-bold')}>{side.name}</span>
   return (
     <div className="flex min-w-0 items-center gap-2.5 py-1">
-      <TeamBadge name={side.name} abbreviation={side.abbreviation} size="sm" />
+      {side.teamId ? <TeamBadge name={side.name} abbreviation={side.abbreviation} size="sm" /> : <span aria-hidden="true" className="size-7 shrink-0 rounded-full border border-dashed border-line" />}
       {href ? <Link href={href} className="min-w-0 truncate hover:underline">{name}</Link> : name}
       <FollowMark teamId={side.teamId} />
       {forfeited && <span className="text-xs font-semibold text-loss">Forfeit</span>}
@@ -37,8 +37,8 @@ export function GameRow({ game, timeZone, showDay = true, teamHref, now }: { gam
         {stage && <p className={cn('text-xs sm:mt-0.5', game.stage === 'preliminary' ? 'text-muted' : 'font-bold text-ink')}>{stage}</p>}
       </div>
       <div className="min-w-0">
-        <TeamLine side={game.home} won={homeWon} completed={completed} forfeited={game.forfeit === 'home'} href={teamHref?.(game.home.id)} />
-        <TeamLine side={game.away} won={completed && !homeWon} completed={completed} forfeited={game.forfeit === 'away'} href={teamHref?.(game.away.id)} />
+        <TeamLine side={game.home} won={homeWon} completed={completed} forfeited={game.forfeit === 'home'} href={game.home.id ? teamHref?.(game.home.id) : undefined} />
+        <TeamLine side={game.away} won={completed && !homeWon} completed={completed} forfeited={game.forfeit === 'away'} href={game.away.id ? teamHref?.(game.away.id) : undefined} />
       </div>
       <div className="flex items-center justify-between gap-3 text-sm text-muted sm:flex-col sm:items-end sm:text-right">
         <p className="min-w-0 truncate">{game.venue ? game.venue.name : 'Venue to be announced'}</p>
