@@ -9,7 +9,8 @@ export type League = { slug: string; name: string; location: string | null; time
 export type Season = { slug: string; name: string; status: SeasonStatus; startDate: string | null; endDate: string | null }
 export type Division = { id: string; name: string; minAge: number | null; maxAge: number | null; teamCount: number }
 export type Team = { id: string; teamId: string; name: string; abbreviation: string | null }
-export type Side = Team & { score: number | null }
+// A playoff side waiting for a semifinal has no team yet; its name says which result it takes, such as "Lions / Rockets winner".
+export type Side = Omit<Team, 'id' | 'teamId'> & { id: string | null; teamId: string | null; score: number | null }
 export type Game = {
   id: string; scheduledAt: string | null; status: 'scheduled' | 'completed'; stage: string; round: number | null; durationMinutes: number | null
   venue: { name: string; address: string | null } | null; home: Side; away: Side; forfeit: 'home' | 'away' | null
