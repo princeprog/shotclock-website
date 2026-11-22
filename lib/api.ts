@@ -46,7 +46,11 @@ export type GamesResponse = { division: Division; games: Game[] }
 export type StandingsResponse = { division: Division; hasResults: boolean; rows: StandingRow[] }
 export type StatsResponse = { division: Division; hasResults: boolean; teams: TeamStats[]; leaders: { offense: Leader; defense: Leader; margin: Leader; winStreak: Leader } }
 export type TeamsResponse = { division: Division; hasResults: boolean; teams: (Team & { rank: number; wins: number; losses: number; pointDifference: number; streak: string | null })[] }
-export type TeamResponse = { division: Division; team: Team; standing: StandingRow; stats: TeamStats; games: Game[] }
+// A player's totals and per-game averages from final games with recorded stats.
+type StatLine = { points: number; rebounds: number; assists: number; steals: number; blocks: number; turnovers: number; fouls: number }
+export type PlayerStatLine = { player: { rosterId: string; name: string; jersey: number | null }; team: Team; games: number; totals: StatLine; perGame: StatLine }
+export type PlayerStatsResponse = { division: Division; players: PlayerStatLine[] }
+export type TeamResponse = { division: Division; team: Team; standing: StandingRow; stats: TeamStats; games: Game[]; players: PlayerStatLine[] }
 
 // Tagged responses are cached; 'live' responses change by the second and are never cached.
 async function get<T>(path: string, tags: string[] | 'live'): Promise<T> {
@@ -76,6 +80,7 @@ export const getGames = (league: string, season: string, params: { division?: st
   get<GamesResponse>(`${seasonPath(league, season)}/games${query(params)}`, leagueTag(league))
 export const getStandings = (league: string, season: string, division?: string) => get<StandingsResponse>(`${seasonPath(league, season)}/standings${query({ division })}`, leagueTag(league))
 export const getStats = (league: string, season: string, division?: string) => get<StatsResponse>(`${seasonPath(league, season)}/stats${query({ division })}`, leagueTag(league))
+export const getPlayerStats = (league: string, season: string, division?: string) => get<PlayerStatsResponse>(`${seasonPath(league, season)}/stats/players${query({ division })}`, leagueTag(league))
 export const getTeams = (league: string, season: string, division?: string) => get<TeamsResponse>(`${seasonPath(league, season)}/teams${query({ division })}`, leagueTag(league))
 export const getTeam = (league: string, season: string, team: string) => get<TeamResponse>(`${seasonPath(league, season)}/teams/${encodeURIComponent(team)}`, leagueTag(league))
 

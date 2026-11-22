@@ -7,6 +7,7 @@ import { requestTime } from '@/lib/clock'
 import { FollowButton } from '@/components/follow'
 import { FormGuide, Streak } from '@/components/form-guide'
 import { GameList } from '@/components/game-row'
+import { PlayerStatsTable } from '@/components/player-stats'
 import { TeamBadge } from '@/components/team-badge'
 import { TileHeader } from '@/components/tile-header'
 import { ordinal } from '@/lib/ordinal'
@@ -23,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function TeamPage({ params }: Props) {
   const { league: leagueSlug, season: seasonSlug, team: teamId } = await params
   const [{ league, season }, data] = await Promise.all([getSeason(leagueSlug, seasonSlug), getTeam(leagueSlug, seasonSlug, teamId)])
-  const { team, standing, stats, games, division } = data
+  const { team, standing, stats, games, division, players } = data
   const now = requestTime()
   const upcoming = games.filter((game) => game.status !== 'completed')
   const results = games.filter((game) => game.status === 'completed').reverse()
@@ -70,6 +71,7 @@ export default async function TeamPage({ params }: Props) {
           <GameList games={results} timeZone={league.timeZone} now={now} teamHref={(id) => teamHref(league.slug, season.slug, id)} gameHref={(id) => gameHref(league.slug, season.slug, id)} empty="No final scores yet." />
         </section>
       </div>
+      {players.length > 0 && <PlayerStatsTable players={players} league={league.slug} season={season.slug} title="Player stats" showTeam={false} />}
     </div>
   )
 }
