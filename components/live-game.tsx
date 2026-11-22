@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { AwardIcon } from 'lucide-react'
 import type { LiveGameState, LiveSide } from '@/lib/api'
 import { clockRemaining, describePlay, formatClock, periodLabel } from '@/lib/live'
 import { When } from '@/components/when'
@@ -63,8 +64,9 @@ export function LiveGame({ initial, teamHrefs }: { initial: LiveGameState; teamH
       </section>
       {game.status === 'scheduled' ? <p className="tile px-5 py-8 text-center text-muted">This game hasn’t started. The live score and player stats appear here when it begins.</p> : <>
         <div className="grid gap-3.5 lg:grid-cols-2">
-          <BoxScore side={game.home} />
-          <BoxScore side={game.away} />
+          {game.status === 'completed' && game.bestPlayer && <BestPlayer player={game.bestPlayer} />}
+          <BoxScore side={game.home} bestRosterId={game.bestPlayer?.rosterId} />
+          <BoxScore side={game.away} bestRosterId={game.bestPlayer?.rosterId} />
         </div>
         <section aria-labelledby="plays" className="tile overflow-hidden pt-4">
           <h2 id="plays" className="px-5 text-[0.8125rem] font-semibold text-muted">{game.status === 'live' ? 'Latest plays' : 'Last plays'}</h2>
@@ -92,7 +94,28 @@ function Score({ side, align = 'start', href, lost }: { side: LiveSide; align?: 
   )
 }
 
-function BoxScore({ side }: { side: LiveSide }) {
+// The winning team's best player, picked when the game finished.
+function BestPlayer({ player }: { player: NonNullable<LiveGameState['bestPlayer']> }) {
+  const stats = [['PTS', player.points], ['REB', player.rebounds], ['AST', player.assists], ['STL', player.steals], ['BLK', player.blocks]] as const
+  return (
+    <section aria-labelledby="best-player" className="tile flex flex-wrap items-center gap-x-6 gap-y-4 p-5 lg:col-span-2">
+      <span aria-hidden="true" className="flex size-12 shrink-0 items-center justify-center rounded-full bg-orange-wash text-orange-ink"><AwardIcon className="size-6" /></span>
+      <div className="flex min-w-0 flex-1 flex-col gap-0.5">
+        <h2 id="best-player" className="text-[0.8125rem] font-semibold text-muted">Best player</h2>
+        <p className="truncate text-lg font-bold text-ink">{player.name}{player.jersey !== null && <span className="ml-2 font-mono text-sm font-normal text-muted">#{player.jersey}</span>}</p>
+        <p className="truncate text-sm text-muted">{player.teamName}</p>
+      </div>
+      <dl className="flex gap-5">{stats.map(([label, value]) => (
+        <div key={label} className="flex flex-col-reverse items-center gap-0.5">
+          <dt className="text-xs font-semibold text-muted">{label}</dt>
+          <dd className="text-xl font-extrabold tabular text-ink">{value}</dd>
+        </div>
+      ))}</dl>
+    </section>
+  )
+}
+
+function BoxScore({ side, bestRosterId }: { side: LiveSide; bestRosterId?: string }) {
   return (
     <section aria-label={`${side.name} box score`} className="tile overflow-hidden pt-4">
       <h2 className="px-5 font-semibold text-ink">{side.name}</h2>
@@ -104,7 +127,7 @@ function BoxScore({ side }: { side: LiveSide }) {
           </tr></thead>
           <tbody className="divide-y divide-line">{side.players.map((player) => (
             <tr key={player.rosterId}>
-              <td className="max-w-0 truncate py-2 pl-5 text-ink"><span className="mr-2 font-mono text-xs text-muted">{player.jersey ?? '–'}</span>{player.name}</td>
+              <td className="max-w-0 truncate py-2 pl-5 text-ink"><span className="mr-2 font-mono text-xs text-muted">{player.jersey ?? '–'}</span>{player.name}{player.rosterId === bestRosterId && <><AwardIcon aria-hidden="true" className="ml-1.5 inline size-3.5 align-[-2px] text-orange" /><span className="sr-only"> (best player)</span></>}</td>
               {[player.points, player.rebounds, player.assists, player.steals, player.blocks, player.turnovers, player.fouls].map((value, index) => <td key={index} className={cn('py-2 text-right tabular last:pr-5', index === 0 ? 'font-semibold text-ink' : 'text-muted')}>{value}</td>)}
             </tr>
           ))}</tbody>

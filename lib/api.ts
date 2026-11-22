@@ -23,6 +23,7 @@ export type LiveGameState = {
   gameId: string; status: 'scheduled' | 'live' | 'completed'; version: number; stage: string; scheduledAt: string | null; venueName: string | null; timeZone: string | null
   format: { periodCount: number; periodMinutes: number; overtimeMinutes: number; bonusFouls: number }; period: number
   clock: { remainingMs: number; running: boolean; serverTime: string } | null; home: LiveSide; away: LiveSide; plays: LivePlay[]
+  bestPlayer: (LivePlayerLine & { seasonTeamId: string | null; teamName: string }) | null
 }
 export type Outcome = 'W' | 'L'
 export type StandingRow = {
