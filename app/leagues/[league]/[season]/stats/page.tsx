@@ -1,10 +1,11 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
-import { getStats, type Leader, type TeamStats } from '@/lib/api'
+import { getPlayerStats, getStats, type Leader, type TeamStats } from '@/lib/api'
 import { formatAverage, formatPct, formatSignedAverage } from '@/lib/format'
 import { EmptyState } from '@/components/empty-state'
 import { FollowMark } from '@/components/follow-mark'
 import { FormGuide, Streak } from '@/components/form-guide'
+import { PlayerLeaders, PlayerStatsTable } from '@/components/player-stats'
 import { ScrollTable } from '@/components/scroll-table'
 import { TeamBadge } from '@/components/team-badge'
 import { TileHeader } from '@/components/tile-header'
@@ -23,7 +24,7 @@ type Sort = keyof typeof SORTS
 const th = 'px-3 py-2.5 text-xs font-semibold uppercase tracking-[0.04em] text-muted'
 
 export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
-  return { title: (await loadSeason(params, searchParams)).title('Team stats') }
+  return { title: (await loadSeason(params, searchParams)).title('Stats') }
 }
 
 // Teams without the stat sort last; ties fall back to wins and name.
@@ -57,7 +58,7 @@ function LeaderTile({ label, leader, value, league, season }: { label: string; l
 export default async function StatsPage({ params, searchParams }: Props) {
   const { league, season, division, search } = await loadSeason(params, searchParams)
   if (!division) return <EmptyState title="No divisions yet">This season has no divisions to show.</EmptyState>
-  const stats = await getStats(league.slug, season.slug, division)
+  const [stats, playerStats] = await Promise.all([getStats(league.slug, season.slug, division), getPlayerStats(league.slug, season.slug, division)])
   if (!stats.teams.length) return <EmptyState title="No teams yet">Teams appear here once they register for this division.</EmptyState>
   const sort: Sort = typeof search.sort === 'string' && search.sort in SORTS ? search.sort as Sort : 'pct'
   const rows = sortRows(stats.teams, sort)
@@ -125,6 +126,10 @@ export default async function StatsPage({ params, searchParams }: Props) {
           Stats include every final game in the division, playoffs too. Forfeits count as wins and losses but are left out of points and averages. PPG is points scored per game, OPP is points allowed per game.
         </p>
       </section>
+      {playerStats.players.length > 0 && <>
+        <PlayerLeaders players={playerStats.players} league={league.slug} season={season.slug} title={`${stats.division.name} player leaders`} />
+        <PlayerStatsTable players={playerStats.players} league={league.slug} season={season.slug} title="Player stats" />
+      </>}
     </div>
   )
 }

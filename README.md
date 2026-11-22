@@ -10,7 +10,7 @@ The public website for Shotclock leagues: an organizer landing page at `/` with 
 
 ## How data stays fresh
 
-Pages fetch the API on the server and cache responses for up to five minutes with the tags `directory` and `league:<slug>`. After an organizer changes a published league, the API posts those tags to `/api/revalidate` with the shared secret, and the next visit loads fresh data. If the call fails, the five-minute limit still applies.
+Pages fetch the API on the server and cache responses for up to five minutes with the tags `directory` and `league:<slug>`. After an organizer changes a published league, the API posts those tags to `/api/revalidate` with the shared secret, and the next visit loads fresh data. If the call fails, the five-minute limit still applies. Game pages are never cached: a live game streams through `/api/live/[game]`, which forwards the API's Server-Sent Events with the site key.
 
 ## Checks
 

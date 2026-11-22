@@ -10,3 +10,4 @@ export function seasonHref(league: string, season: string, tab: Tab | string = '
 }
 
 export const teamHref = (league: string, season: string, team: string) => `/leagues/${league}/${season}/teams/${team}`
+export const gameHref = (league: string, season: string, game: string) => `/leagues/${league}/${season}/games/${game}`

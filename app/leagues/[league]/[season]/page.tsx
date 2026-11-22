@@ -5,13 +5,13 @@ import { formatAverage, type Zone } from '@/lib/format'
 import { requestTime } from '@/lib/clock'
 import { EmptyState } from '@/components/empty-state'
 import { FollowMark } from '@/components/follow-mark'
-import { MatchRow } from '@/components/game-row'
+import { LiveBadge, MatchRow } from '@/components/game-row'
 import { NextGame } from '@/components/next-game'
 import { StandingsTable } from '@/components/standings-table'
 import { TileHeader } from '@/components/tile-header'
 import { When } from '@/components/when'
 import { loadSeason, type SeasonParams, type SeasonSearch } from '@/lib/season-page'
-import { seasonHref, teamHref } from '@/lib/routes'
+import { gameHref, seasonHref, teamHref } from '@/lib/routes'
 import { cn } from '@/lib/utils'
 
 type Props = { params: SeasonParams; searchParams: SeasonSearch }
@@ -55,10 +55,18 @@ export default async function OverviewPage({ params, searchParams }: Props) {
   const now = requestTime()
   const upcoming = games.games.filter((game) => game.status === 'scheduled' && game.scheduledAt && Date.parse(game.scheduledAt) >= now)
   const recent = games.games.filter((game) => game.status === 'completed').reverse()
+  const live = games.games.filter((game) => game.status === 'live')
   const params2 = { division }
   const { offense, defense, winStreak } = stats.leaders
   return (
     <div className="grid gap-3.5 lg:grid-cols-4">
+      {live.length > 0 && <section aria-labelledby="live-now" className="tile p-5 sm:p-6 lg:col-span-4">
+        <h2 id="live-now" className="flex items-center gap-2 text-lg font-bold text-ink">Live now</h2>
+        <ul className="mt-2 divide-y divide-line">{live.map((game) => <li key={game.id} className="flex flex-wrap items-center justify-between gap-3 py-2.5">
+          <span className="min-w-0 font-semibold text-ink">{game.home.name} <span className="font-normal text-muted">vs</span> {game.away.name}</span>
+          <span className="flex items-center gap-3"><LiveBadge href={gameHref(league.slug, season.slug, game.id)} /><Link href={gameHref(league.slug, season.slug, game.id)} className="text-sm font-semibold text-ink hover:underline">Watch live</Link></span>
+        </li>)}</ul>
+      </section>}
       <NextGame className="lg:col-span-2" games={upcoming.slice(0, 50)} timeZone={league.timeZone} league={league.slug} season={season.slug} />
       <section aria-labelledby="latest" className="tile p-5 sm:p-6 lg:col-span-2">
         <TileHeader id="latest" title="Latest result" href={recent.length ? seasonHref(league.slug, season.slug, 'schedule', { ...params2, view: 'results' }) : undefined} linkLabel="All results" />

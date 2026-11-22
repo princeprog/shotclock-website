@@ -7,10 +7,11 @@ import { requestTime } from '@/lib/clock'
 import { FollowButton } from '@/components/follow'
 import { FormGuide, Streak } from '@/components/form-guide'
 import { GameList } from '@/components/game-row'
+import { PlayerStatsTable } from '@/components/player-stats'
 import { TeamBadge } from '@/components/team-badge'
 import { TileHeader } from '@/components/tile-header'
 import { ordinal } from '@/lib/ordinal'
-import { seasonHref, teamHref } from '@/lib/routes'
+import { gameHref, seasonHref, teamHref } from '@/lib/routes'
 
 type Props = { params: Promise<{ league: string; season: string; team: string }> }
 
@@ -23,9 +24,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function TeamPage({ params }: Props) {
   const { league: leagueSlug, season: seasonSlug, team: teamId } = await params
   const [{ league, season }, data] = await Promise.all([getSeason(leagueSlug, seasonSlug), getTeam(leagueSlug, seasonSlug, teamId)])
-  const { team, standing, stats, games, division } = data
+  const { team, standing, stats, games, division, players } = data
   const now = requestTime()
-  const upcoming = games.filter((game) => game.status === 'scheduled')
+  const upcoming = games.filter((game) => game.status !== 'completed')
   const results = games.filter((game) => game.status === 'completed').reverse()
   const ranked = standing.gamesPlayed > 0
   const facts: [string, React.ReactNode][] = [
@@ -63,13 +64,14 @@ export default async function TeamPage({ params }: Props) {
       <div className="grid gap-3.5 lg:grid-cols-2">
         <section aria-labelledby="team-upcoming" className="tile overflow-hidden pt-5">
           <TileHeader id="team-upcoming" title="Upcoming games" className="px-5" />
-          <GameList games={upcoming} timeZone={league.timeZone} now={now} teamHref={(id) => teamHref(league.slug, season.slug, id)} empty="No upcoming games are scheduled." />
+          <GameList games={upcoming} timeZone={league.timeZone} now={now} teamHref={(id) => teamHref(league.slug, season.slug, id)} gameHref={(id) => gameHref(league.slug, season.slug, id)} empty="No upcoming games are scheduled." />
         </section>
         <section aria-labelledby="team-results" className="tile overflow-hidden pt-5">
           <TileHeader id="team-results" title="Results" className="px-5" />
-          <GameList games={results} timeZone={league.timeZone} now={now} teamHref={(id) => teamHref(league.slug, season.slug, id)} empty="No final scores yet." />
+          <GameList games={results} timeZone={league.timeZone} now={now} teamHref={(id) => teamHref(league.slug, season.slug, id)} gameHref={(id) => gameHref(league.slug, season.slug, id)} empty="No final scores yet." />
         </section>
       </div>
+      {players.length > 0 && <PlayerStatsTable players={players} league={league.slug} season={season.slug} title="Player stats" showTeam={false} />}
     </div>
   )
 }
