@@ -7,7 +7,7 @@ import { EmptyState } from '@/components/empty-state'
 import { GameRow } from '@/components/game-row'
 import { TeamFilter } from '@/components/team-filter'
 import { loadSeason, type SeasonParams, type SeasonSearch } from '@/lib/season-page'
-import { seasonHref, teamHref } from '@/lib/routes'
+import { gameHref, seasonHref, teamHref } from '@/lib/routes'
 import { cn } from '@/lib/utils'
 
 type Props = { params: SeasonParams; searchParams: SeasonSearch }
@@ -60,7 +60,7 @@ export default async function SchedulePage({ params, searchParams }: Props) {
         <section key={group.key} aria-label={group.label} className="tile overflow-hidden pt-4">
           <h2 className="px-4 text-[0.8125rem] font-semibold tracking-normal text-muted sm:px-5">{group.label}</h2>
           <ul className="mt-1 divide-y divide-line">
-            {group.games.map((game) => <GameRow key={game.id} game={game} timeZone={league.timeZone} showDay={false} now={now} teamHref={(id) => teamHref(league.slug, season.slug, id)} />)}
+            {group.games.map((game) => <GameRow key={game.id} game={game} timeZone={league.timeZone} showDay={false} now={now} teamHref={(id) => teamHref(league.slug, season.slug, id)} gameHref={(id) => gameHref(league.slug, season.slug, id)} />)}
           </ul>
         </section>
       )) : (

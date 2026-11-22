@@ -19,12 +19,19 @@ function TeamLine({ side, won, completed, forfeited, href }: { side: Side; won: 
   )
 }
 
+// Links to a live game page. Lists are cached, so a live game shows the badge and the page shows the current score.
+export function LiveBadge({ href }: { href?: string }) {
+  const badge = <span className="inline-flex items-center gap-1.5 rounded-full bg-loss px-2.5 py-0.5 text-xs font-bold text-white"><span aria-hidden="true" className="size-1.5 animate-pulse rounded-full bg-white" />Live</span>
+  return href ? <Link href={href} aria-label="Watch live" className="rounded-full hover:opacity-90">{badge}</Link> : badge
+}
+
 // A full game row inside a tile: time, both teams with scores, venue and status. The whole row tints when either team is followed.
-export function GameRow({ game, timeZone, showDay = true, teamHref, now }: { game: Game; timeZone: Zone; showDay?: boolean; teamHref?: (teamId: string) => string; now: number }) {
+export function GameRow({ game, timeZone, showDay = true, teamHref, gameHref, now }: { game: Game; timeZone: Zone; showDay?: boolean; teamHref?: (teamId: string) => string; gameHref?: (gameId: string) => string; now: number }) {
   const completed = game.status === 'completed'
   const homeWon = completed && (game.home.score ?? 0) > (game.away.score ?? 0)
   const stage = stageLabel(game.stage, game.round)
-  const pending = !completed && game.scheduledAt !== null && new Date(game.scheduledAt).getTime() < now
+  const pending = game.status === 'scheduled' && game.scheduledAt !== null && new Date(game.scheduledAt).getTime() < now
+  const href = gameHref?.(game.id)
   return (
     <li data-team={game.home.teamId} data-team-away={game.away.teamId} className="grid gap-x-6 gap-y-2 px-4 py-3.5 sm:grid-cols-[7.5rem_minmax(0,1fr)_minmax(0,13rem)] sm:items-center sm:px-5">
       <div className="flex items-baseline justify-between gap-3 text-sm sm:block">
@@ -42,16 +49,17 @@ export function GameRow({ game, timeZone, showDay = true, teamHref, now }: { gam
       </div>
       <div className="flex items-center justify-between gap-3 text-sm text-muted sm:flex-col sm:items-end sm:text-right">
         <p className="min-w-0 truncate">{game.venue ? game.venue.name : 'Venue to be announced'}</p>
-        {completed ? <span className="rounded-full bg-wash px-2.5 py-0.5 text-xs font-bold text-ink">Final</span>
+        {game.status === 'live' ? <LiveBadge href={href} />
+          : completed ? (href ? <Link href={href} className="inline-flex items-center gap-2 text-xs hover:underline"><span className="rounded-full bg-wash px-2.5 py-0.5 font-bold text-ink">Final</span>Box score</Link> : <span className="rounded-full bg-wash px-2.5 py-0.5 text-xs font-bold text-ink">Final</span>)
           : pending ? <span className="text-xs">Result pending</span> : null}
       </div>
     </li>
   )
 }
 
-export function GameList({ games, timeZone, teamHref, now, empty }: { games: Game[]; timeZone: Zone; teamHref?: (teamId: string) => string; now: number; empty?: string }) {
+export function GameList({ games, timeZone, teamHref, gameHref, now, empty }: { games: Game[]; timeZone: Zone; teamHref?: (teamId: string) => string; gameHref?: (gameId: string) => string; now: number; empty?: string }) {
   if (!games.length) return empty ? <p className="px-5 py-8 text-center text-muted">{empty}</p> : null
-  return <ul className="divide-y divide-line">{games.map((game) => <GameRow key={game.id} game={game} timeZone={timeZone} teamHref={teamHref} now={now} />)}</ul>
+  return <ul className="divide-y divide-line">{games.map((game) => <GameRow key={game.id} game={game} timeZone={timeZone} teamHref={teamHref} gameHref={gameHref} now={now} />)}</ul>
 }
 
 // A compact one-line matchup, used in overview tiles. The row tints when either team is followed.
