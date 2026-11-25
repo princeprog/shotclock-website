@@ -68,6 +68,7 @@ export function formatSignedAverage(value: number | null) {
 }
 
 export function stageLabel(stage: string, round: number | null) {
+  if (stage === 'quarterfinal') return 'Quarterfinal'
   if (stage === 'semifinal') return 'Semifinal'
   if (stage === 'final') return 'Championship'
   if (stage === 'third_place') return 'Third place'

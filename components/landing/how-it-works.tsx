@@ -26,7 +26,7 @@ const slides: Slide[] = [
   {
     step: 'Schedule', title: 'Generate the whole season',
     text: 'Pick a single or double round robin, add playoffs, and set courts, blackout dates and team availability. Shotclock places every game and flags conflicts.',
-    points: ['Drag games to another day', 'Per-team daily limits', 'Optional top-four playoffs'],
+    points: ['Drag games to another day', 'Per-team daily limits', 'Optional top-four or top-eight playoffs'],
     photo: youthPhoto, alt: 'A young player dribbling past a defender', label: 'Game day',
     side: gymPhoto, sideAlt: 'A basketball resting on an empty gym floor', sideLabel: 'Courts',
   },
